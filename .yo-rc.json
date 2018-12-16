@@ -1,0 +1,36 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "io.zcw.zipmint",
+            "nativeLanguage": "en"
+        },
+        "jhipsterVersion": "5.7.1",
+        "applicationType": "monolith",
+        "baseName": "777",
+        "packageName": "io.zcw.zipmint",
+        "packageFolder": "io/zcw/zipmint",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "hazelcast",
+        "enableHibernateCache": true,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "h2Memory",
+        "prodDatabaseType": "postgresql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": "eureka",
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "NzljMTA4Njg3MTYxNGFlYzBlNWMyMmIzM2M3NTk2ODc0OGE0ZmYyZWU2ZDllYzczMTFlYmEwNzc3MDllNWVkYzQwNjY0MWJmOTI4Mzg5MzFkODJjMzhhNGNlMTNjODM2OGUyYTkwNjVlMTczN2QxMzg3Y2Q5NzhlZTVhZTMzMDk=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": ["cucumber", "protractor"],
+        "jhiPrefix": "jhi",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "en",
+        "languages": ["en", "zh-tw", "hi", "ru", "es"]
+    }
+}
