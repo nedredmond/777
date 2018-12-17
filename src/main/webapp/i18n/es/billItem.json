@@ -1,0 +1,27 @@
+{
+    "App": {
+        "billItem": {
+            "home": {
+                "title": "Bill Items",
+                "createLabel": "Crear nuevo Bill Item",
+                "createOrEditLabel": "Crear o editar Bill Item"
+            },
+            "created": "Un nuevo Bill Item ha sido creado con el identificador {{ param }}",
+            "updated": "Un Bill Item ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Bill Item ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Bill Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Bill Item"
+            },
+            "companyName": "Company Name",
+            "dueDate": "Due Date",
+            "paymentDate": "Payment Date",
+            "paymentAmount": "Payment Amount",
+            "autoPay": "Auto Pay",
+            "bills": "Bills",
+            "account": "Account"
+        }
+    }
+}

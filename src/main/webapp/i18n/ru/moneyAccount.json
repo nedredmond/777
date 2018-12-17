@@ -1,0 +1,26 @@
+{
+    "App": {
+        "moneyAccount": {
+            "home": {
+                "title": "Money Accounts",
+                "createLabel": "Создать новый Money Account",
+                "createOrEditLabel": "Создать или отредактировать Money Account"
+            },
+            "created": "Новый Money Account создан с идентификатором {{ param }}",
+            "updated": "Money Account обновлен с идентификатором {{ param }}",
+            "deleted": "Money Account удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Money Account {{ id }}?"
+            },
+            "detail": {
+                "title": "Money Account"
+            },
+            "type": "Type",
+            "accountTotal": "Account Total",
+            "signIn": "Sign In",
+            "pw": "Pw",
+            "userDetails": "User Details",
+            "transactions": "Transactions"
+        }
+    }
+}

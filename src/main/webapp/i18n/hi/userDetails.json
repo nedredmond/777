@@ -1,0 +1,23 @@
+{
+    "App": {
+        "userDetails": {
+            "home": {
+                "title": "UserDetails",
+                "createLabel": "नया User Details बनाएँ",
+                "createOrEditLabel": "User Details बनाएँ या संपादित करें"
+            },
+            "created": "एक नया User Details [identifier: {{ param }}] तैयार है",
+            "updated": "एक User Details [identifier: {{ param }}] का अद्यतन हुआ है",
+            "deleted": "User Details [identifier: {{ param }}] हटा दिया है",
+            "delete": {
+                "question": "User Details [id: {{ id }}] हटाने की पुष्टि करें"
+            },
+            "detail": {
+                "title": "User Details"
+            },
+            "netWorth": "Net Worth",
+            "totalCash": "Total Cash",
+            "accounts": "Accounts"
+        }
+    }
+}

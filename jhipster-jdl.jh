@@ -1,0 +1,82 @@
+entity UserDetails {
+    netWorth Long,
+    totalCash Long
+}
+
+entity MoneyAccount {
+	type AccountType,
+    accountTotal Long,
+    signIn String,
+    pw String
+}
+
+entity Transaction {
+    amount Long,
+    transactionType TransactionType,
+    dateTime LocalDate,
+    description String,
+    memo String,
+    category Category
+}
+
+entity Budget {
+	expectedTotal Long,
+    actualTotal Long,
+    startDate LocalDate,
+    endDate LocalDate
+}
+
+entity BudgetItem {
+	expectedSpending Long,
+    actualSpending Long,
+    category Category
+}
+
+entity Bills {
+	paymentTotal Long,
+}
+
+entity BillItem {
+	companyName String,
+    dueDate LocalDate,
+    paymentDate LocalDate,
+    paymentAmount Long,
+    autoPay Boolean,
+}
+
+enum TransactionType {
+	CREDIT, 
+    DEBIT
+}
+
+enum Category {
+	RENT, 
+    FOOD, 
+    INCOME, 
+    UTILITIES, 
+    SHOPPING, 
+    TRANSFER, 
+    AUTOMOTIVE, 
+    MISCELLANEOUS
+}
+
+enum AccountType {
+    CREDIT, 
+    CHECKING, 
+    SAVINGS,
+    LOAN
+}
+
+//relationship ManyToMany {}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	MoneyAccount{transactions} to Transaction,
+	UserDetails{accounts} to MoneyAccount,
+    Budget{budgetItems} to BudgetItem,
+    Bills{billItems} to BillItem
+}
+
+relationship ManyToOne {
+    BillItem{account} to MoneyAccount
+}

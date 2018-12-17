@@ -1,0 +1,45 @@
+{
+    "name": "MoneyAccount",
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "AccountType",
+            "fieldValues": "CREDIT,CHECKING,SAVINGS,LOAN"
+        },
+        {
+            "fieldName": "accountTotal",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "signIn",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pw",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "userDetails",
+            "otherEntityName": "userDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "transactions",
+            "otherEntityName": "transaction",
+            "otherEntityRelationshipName": "moneyAccount"
+        }
+    ],
+    "changelogDate": "20181217143607",
+    "entityTableName": "money_account",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,24 @@
+{
+    "App": {
+        "budgetItem": {
+            "home": {
+                "title": "Budget Items",
+                "createLabel": "Создать новый Budget Item",
+                "createOrEditLabel": "Создать или отредактировать Budget Item"
+            },
+            "created": "Новый Budget Item создан с идентификатором {{ param }}",
+            "updated": "Budget Item обновлен с идентификатором {{ param }}",
+            "deleted": "Budget Item удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Budget Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Budget Item"
+            },
+            "expectedSpending": "Expected Spending",
+            "actualSpending": "Actual Spending",
+            "category": "Category",
+            "budget": "Budget"
+        }
+    }
+}

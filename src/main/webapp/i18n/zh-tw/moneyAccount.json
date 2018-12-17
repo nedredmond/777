@@ -1,0 +1,26 @@
+{
+    "App": {
+        "moneyAccount": {
+            "home": {
+                "title": "Money Accounts",
+                "createLabel": "建立一筆新的 Money Account",
+                "createOrEditLabel": "建立或編輯 Money Account"
+            },
+            "created": "新的 Money Account 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 Money Account 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 Money Account 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 Money Account {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "Money Account"
+            },
+            "type": "Type",
+            "accountTotal": "Account Total",
+            "signIn": "Sign In",
+            "pw": "Pw",
+            "userDetails": "User Details",
+            "transactions": "Transactions"
+        }
+    }
+}

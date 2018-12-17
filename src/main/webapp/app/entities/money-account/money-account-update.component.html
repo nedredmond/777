@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-money-account-heading" jhiTranslate="App.moneyAccount.home.createOrEditLabel">Create or edit a Money Account</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!moneyAccount.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="moneyAccount.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.moneyAccount.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" [(ngModel)]="moneyAccount.type" id="field_type" >
+                        <option value="CREDIT">{{'App.AccountType.CREDIT' | translate}}</option>
+                        <option value="CHECKING">{{'App.AccountType.CHECKING' | translate}}</option>
+                        <option value="SAVINGS">{{'App.AccountType.SAVINGS' | translate}}</option>
+                        <option value="LOAN">{{'App.AccountType.LOAN' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.moneyAccount.accountTotal" for="field_accountTotal">Account Total</label>
+                    <input type="number" class="form-control" name="accountTotal" id="field_accountTotal"
+                        [(ngModel)]="moneyAccount.accountTotal" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.moneyAccount.signIn" for="field_signIn">Sign In</label>
+                    <input type="text" class="form-control" name="signIn" id="field_signIn"
+                        [(ngModel)]="moneyAccount.signIn" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.moneyAccount.pw" for="field_pw">Pw</label>
+                    <input type="text" class="form-control" name="pw" id="field_pw"
+                        [(ngModel)]="moneyAccount.pw" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.moneyAccount.userDetails" for="field_userDetails">User Details</label>
+                    <select class="form-control" id="field_userDetails" name="userDetails" [(ngModel)]="moneyAccount.userDetails" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userDetailsOption.id === moneyAccount.userDetails?.id ? moneyAccount.userDetails : userDetailsOption" *ngFor="let userDetailsOption of userdetails; trackBy: trackUserDetailsById">{{userDetailsOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

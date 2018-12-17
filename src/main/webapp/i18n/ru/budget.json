@@ -1,0 +1,25 @@
+{
+    "App": {
+        "budget": {
+            "home": {
+                "title": "Budgets",
+                "createLabel": "Создать новый Budget",
+                "createOrEditLabel": "Создать или отредактировать Budget"
+            },
+            "created": "Новый Budget создан с идентификатором {{ param }}",
+            "updated": "Budget обновлен с идентификатором {{ param }}",
+            "deleted": "Budget удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Budget {{ id }}?"
+            },
+            "detail": {
+                "title": "Budget"
+            },
+            "expectedTotal": "Expected Total",
+            "actualTotal": "Actual Total",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "budgetItems": "Budget Items"
+        }
+    }
+}

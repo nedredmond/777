@@ -1,0 +1,23 @@
+{
+    "App": {
+        "userDetails": {
+            "home": {
+                "title": "User Details",
+                "createLabel": "Crear nuevo User Details",
+                "createOrEditLabel": "Crear o editar User Details"
+            },
+            "created": "Un nuevo User Details ha sido creado con el identificador {{ param }}",
+            "updated": "Un User Details ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un User Details ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar User Details {{ id }}?"
+            },
+            "detail": {
+                "title": "User Details"
+            },
+            "netWorth": "Net Worth",
+            "totalCash": "Total Cash",
+            "accounts": "Accounts"
+        }
+    }
+}
