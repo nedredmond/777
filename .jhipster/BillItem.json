@@ -24,15 +24,15 @@
     ],
     "relationships": [
         {
-            "relationshipName": "bills",
-            "otherEntityName": "bills",
+            "relationshipName": "moneyAccount",
+            "otherEntityName": "moneyAccount",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
         {
+            "relationshipName": "bills",
+            "otherEntityName": "bills",
             "relationshipType": "many-to-one",
-            "relationshipName": "account",
-            "otherEntityName": "moneyAccount",
             "otherEntityField": "id"
         }
     ],

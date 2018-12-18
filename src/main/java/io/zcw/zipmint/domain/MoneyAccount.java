@@ -42,13 +42,16 @@ public class MoneyAccount implements Serializable {
     @Column(name = "pw")
     private String pw;
 
-    @ManyToOne
-    @JsonIgnoreProperties("accounts")
-    private UserDetails userDetails;
-
     @OneToMany(mappedBy = "moneyAccount")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Transaction> transactions = new HashSet<>();
+    @OneToMany(mappedBy = "moneyAccount")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<BillItem> billItems = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private User user;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -110,19 +113,6 @@ public class MoneyAccount implements Serializable {
         this.pw = pw;
     }
 
-    public UserDetails getUserDetails() {
-        return userDetails;
-    }
-
-    public MoneyAccount userDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
-        return this;
-    }
-
-    public void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
-    }
-
     public Set<Transaction> getTransactions() {
         return transactions;
     }
@@ -146,6 +136,44 @@ public class MoneyAccount implements Serializable {
 
     public void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public Set<BillItem> getBillItems() {
+        return billItems;
+    }
+
+    public MoneyAccount billItems(Set<BillItem> billItems) {
+        this.billItems = billItems;
+        return this;
+    }
+
+    public MoneyAccount addBillItems(BillItem billItem) {
+        this.billItems.add(billItem);
+        billItem.setMoneyAccount(this);
+        return this;
+    }
+
+    public MoneyAccount removeBillItems(BillItem billItem) {
+        this.billItems.remove(billItem);
+        billItem.setMoneyAccount(null);
+        return this;
+    }
+
+    public void setBillItems(Set<BillItem> billItems) {
+        this.billItems = billItems;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public MoneyAccount user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

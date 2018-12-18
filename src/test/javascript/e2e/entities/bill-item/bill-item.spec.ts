@@ -43,8 +43,8 @@ describe('BillItem e2e test', () => {
             billItemUpdatePage.setDueDateInput('2000-12-31'),
             billItemUpdatePage.setPaymentDateInput('2000-12-31'),
             billItemUpdatePage.setPaymentAmountInput('5'),
-            billItemUpdatePage.billsSelectLastOption(),
-            billItemUpdatePage.accountSelectLastOption()
+            billItemUpdatePage.moneyAccountSelectLastOption(),
+            billItemUpdatePage.billsSelectLastOption()
         ]);
         expect(await billItemUpdatePage.getCompanyNameInput()).to.eq('companyName');
         expect(await billItemUpdatePage.getDueDateInput()).to.eq('2000-12-31');

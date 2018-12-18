@@ -43,7 +43,7 @@ describe('MoneyAccount e2e test', () => {
             moneyAccountUpdatePage.setAccountTotalInput('5'),
             moneyAccountUpdatePage.setSignInInput('signIn'),
             moneyAccountUpdatePage.setPwInput('pw'),
-            moneyAccountUpdatePage.userDetailsSelectLastOption()
+            moneyAccountUpdatePage.userSelectLastOption()
         ]);
         expect(await moneyAccountUpdatePage.getAccountTotalInput()).to.eq('5');
         expect(await moneyAccountUpdatePage.getSignInInput()).to.eq('signIn');
