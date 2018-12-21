@@ -20,7 +20,6 @@ import { AppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
-import { NgxPlaidLinkModule } from 'ngx-plaid-link';
 
 @NgModule({
     imports: [
@@ -39,8 +38,7 @@ import { NgxPlaidLinkModule } from 'ngx-plaid-link';
         AppHomeModule,
         AppAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
-        AppEntityModule,
-        NgxPlaidLinkModule
+        AppEntityModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [
