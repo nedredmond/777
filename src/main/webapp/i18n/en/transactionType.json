@@ -1,9 +1,0 @@
-{
-    "App": {
-        "TransactionType": {
-            "null": "",
-            "CREDIT": "CREDIT",
-            "DEBIT": "DEBIT"
-        }
-    }
-}

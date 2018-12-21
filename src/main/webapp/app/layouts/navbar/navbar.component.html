@@ -18,11 +18,6 @@
                     </span>
                 </a>
             </li>
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <mr-ngx-plaid-link-button env="sandbox" publicKey="f815660c096befb9b5e508907c50f5" institution="" (Success)="onPlaidSuccess($event)"
-                                          (Exit)="onPlaidExit($event)" (Load)="onPlaidLoad($event)" (Event)="onPlaidEvent($event)" className="launch-plaid-link-button"
-                                          buttonText="Link Your Bank Account" (Click)="onPlaidClick($event)"></mr-ngx-plaid-link-button>
-            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
@@ -34,42 +29,6 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li>
-                        <a class="dropdown-item" routerLink="money-account" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.moneyAccount">Money Account</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="transaction" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.transaction">Transaction</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="budget" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.budget">Budget</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="budget-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.budgetItem">Budget Item</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="bills" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.bills">Bills</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="bill-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.billItem">Bill Item</span>
-                        </a>
-                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
@@ -153,7 +112,7 @@
                       Account
                     </span>
                   </span>
-                    <span *ngIf="getImageUrl()">
+                  <span *ngIf="getImageUrl()">
                       <img [src]="getImageUrl()" class="profile-image img-circle" alt="Avatar">
                   </span>
                 </a>
