@@ -41,11 +41,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="bills_id" type="bigint">
+            <column name="money_account_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="account_id" type="bigint">
+            <column name="bills_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
