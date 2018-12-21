@@ -4,6 +4,8 @@ import io.zcw.zipmint.domain.BillItem;
 import io.zcw.zipmint.repository.BillItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 
@@ -16,9 +18,9 @@ public class DataLoaderBillItem {
     @Autowired
     public DataLoaderBillItem(BillItemRepository billItemRepository){
         this.billItemRepository = billItemRepository;
-        LoadBillItems();
     }
 
+    @PostConstruct
     private void LoadBillItems(){
         BillItem billItem = new BillItem();
         billItem.setCompanyName("Utility Company");

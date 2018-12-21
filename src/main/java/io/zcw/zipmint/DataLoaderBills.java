@@ -6,7 +6,7 @@ import io.zcw.zipmint.repository.BillsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedHashSet;
+import javax.annotation.PostConstruct;
 
 @Component
 public class DataLoaderBills {
@@ -18,9 +18,9 @@ public class DataLoaderBills {
     public DataLoaderBills(BillsRepository billsRepository, DataLoaderBillItem dataLoaderBillItem){
         this.billsRepository = billsRepository;
         this.dataLoaderBillItem = dataLoaderBillItem;
-        LoadBills();
     }
 
+    @PostConstruct
     private void LoadBills(){
         Bills bills = new Bills();
         bills.setBillItems(dataLoaderBillItem.getBillItemSet());
