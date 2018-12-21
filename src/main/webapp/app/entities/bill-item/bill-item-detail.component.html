@@ -25,16 +25,16 @@
                 <dd>
                     <span>{{billItem.autoPay}}</span>
                 </dd>
+                <dt><span jhiTranslate="App.billItem.moneyAccount">Money Account</span></dt>
+                <dd>
+                    <div *ngIf="billItem.moneyAccount">
+                        <a [routerLink]="['/money-account', billItem.moneyAccount?.id, 'view']">{{billItem.moneyAccount?.id}}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="App.billItem.bills">Bills</span></dt>
                 <dd>
                     <div *ngIf="billItem.bills">
                         <a [routerLink]="['/bills', billItem.bills?.id, 'view']">{{billItem.bills?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="App.billItem.account">Account</span></dt>
-                <dd>
-                    <div *ngIf="billItem.account">
-                        <a [routerLink]="['/money-account', billItem.account?.id, 'view']">{{billItem.account?.id}}</a>
                     </div>
                 </dd>
             </dl>

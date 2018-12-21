@@ -19,7 +19,7 @@
             <th><span jhiTranslate="App.moneyAccount.accountTotal">Account Total</span></th>
             <th><span jhiTranslate="App.moneyAccount.signIn">Sign In</span></th>
             <th><span jhiTranslate="App.moneyAccount.pw">Pw</span></th>
-            <th><span jhiTranslate="App.moneyAccount.userDetails">User Details</span></th>
+            <th><span jhiTranslate="App.moneyAccount.user">User</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,9 +31,7 @@
                 <td>{{moneyAccount.signIn}}</td>
                 <td>{{moneyAccount.pw}}</td>
                 <td>
-                    <div *ngIf="moneyAccount.userDetails">
-                        <a [routerLink]="['../user-details', moneyAccount.userDetails?.id, 'view' ]" >{{moneyAccount.userDetails?.id}}</a>
-                    </div>
+                    {{moneyAccount.user?.id}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

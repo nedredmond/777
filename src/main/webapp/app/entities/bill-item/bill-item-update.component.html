@@ -46,17 +46,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.billItem.moneyAccount" for="field_moneyAccount">Money Account</label>
+                    <select class="form-control" id="field_moneyAccount" name="moneyAccount" [(ngModel)]="billItem.moneyAccount" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="moneyAccountOption.id === billItem.moneyAccount?.id ? billItem.moneyAccount : moneyAccountOption" *ngFor="let moneyAccountOption of moneyaccounts; trackBy: trackMoneyAccountById">{{moneyAccountOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="App.billItem.bills" for="field_bills">Bills</label>
                     <select class="form-control" id="field_bills" name="bills" [(ngModel)]="billItem.bills" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="billsOption.id === billItem.bills?.id ? billItem.bills : billsOption" *ngFor="let billsOption of bills; trackBy: trackBillsById">{{billsOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="App.billItem.account" for="field_account">Account</label>
-                    <select class="form-control" id="field_account" name="account" [(ngModel)]="billItem.account" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="moneyAccountOption.id === billItem.account?.id ? billItem.account : moneyAccountOption" *ngFor="let moneyAccountOption of moneyaccounts; trackBy: trackMoneyAccountById">{{moneyAccountOption.id}}</option>
                     </select>
                 </div>
             </div>

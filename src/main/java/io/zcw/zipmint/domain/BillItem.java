@@ -42,11 +42,11 @@ public class BillItem implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("billItems")
-    private Bills bills;
+    private MoneyAccount moneyAccount;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
-    private MoneyAccount account;
+    @JsonIgnoreProperties("billItems")
+    private Bills bills;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -122,6 +122,19 @@ public class BillItem implements Serializable {
         this.autoPay = autoPay;
     }
 
+    public MoneyAccount getMoneyAccount() {
+        return moneyAccount;
+    }
+
+    public BillItem moneyAccount(MoneyAccount moneyAccount) {
+        this.moneyAccount = moneyAccount;
+        return this;
+    }
+
+    public void setMoneyAccount(MoneyAccount moneyAccount) {
+        this.moneyAccount = moneyAccount;
+    }
+
     public Bills getBills() {
         return bills;
     }
@@ -133,19 +146,6 @@ public class BillItem implements Serializable {
 
     public void setBills(Bills bills) {
         this.bills = bills;
-    }
-
-    public MoneyAccount getAccount() {
-        return account;
-    }
-
-    public BillItem account(MoneyAccount moneyAccount) {
-        this.account = moneyAccount;
-        return this;
-    }
-
-    public void setAccount(MoneyAccount moneyAccount) {
-        this.account = moneyAccount;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

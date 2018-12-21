@@ -20,8 +20,8 @@
             <th><span jhiTranslate="App.billItem.paymentDate">Payment Date</span></th>
             <th><span jhiTranslate="App.billItem.paymentAmount">Payment Amount</span></th>
             <th><span jhiTranslate="App.billItem.autoPay">Auto Pay</span></th>
+            <th><span jhiTranslate="App.billItem.moneyAccount">Money Account</span></th>
             <th><span jhiTranslate="App.billItem.bills">Bills</span></th>
-            <th><span jhiTranslate="App.billItem.account">Account</span></th>
             <th></th>
             </tr>
             </thead>
@@ -34,13 +34,13 @@
                 <td>{{billItem.paymentAmount}}</td>
                 <td>{{billItem.autoPay}}</td>
                 <td>
-                    <div *ngIf="billItem.bills">
-                        <a [routerLink]="['../bills', billItem.bills?.id, 'view' ]" >{{billItem.bills?.id}}</a>
+                    <div *ngIf="billItem.moneyAccount">
+                        <a [routerLink]="['../money-account', billItem.moneyAccount?.id, 'view' ]" >{{billItem.moneyAccount?.id}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="billItem.account">
-                        <a [routerLink]="['../money-account', billItem.account?.id, 'view' ]" >{{billItem.account?.id}}</a>
+                    <div *ngIf="billItem.bills">
+                        <a [routerLink]="['../bills', billItem.bills?.id, 'view' ]" >{{billItem.bills?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

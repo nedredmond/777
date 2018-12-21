@@ -20,8 +20,8 @@
             "paymentDate": "Payment Date",
             "paymentAmount": "Payment Amount",
             "autoPay": "Auto Pay",
-            "bills": "Bills",
-            "account": "Account"
+            "moneyAccount": "Money Account",
+            "bills": "Bills"
         }
     }
 }
