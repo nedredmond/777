@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-transaction-heading" jhiTranslate="App.transaction.home.createOrEditLabel">Create or edit a Transaction</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!transaction.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="transaction.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.transaction.amount" for="field_amount">Amount</label>
+                    <input type="number" class="form-control" name="amount" id="field_amount"
+                        [(ngModel)]="transaction.amount" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.transaction.transactionType" for="field_transactionType">Transaction Type</label>
+                    <select class="form-control" name="transactionType" [(ngModel)]="transaction.transactionType" id="field_transactionType" >
+                        <option value="CREDIT">{{'App.TransactionType.CREDIT' | translate}}</option>
+                        <option value="DEBIT">{{'App.TransactionType.DEBIT' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.transaction.dateTime" for="field_dateTime">Date Time</label>
+                    <div class="input-group">
+                        <input id="field_dateTime" type="text" class="form-control" name="dateTime" ngbDatepicker  #dateTimeDp="ngbDatepicker" [(ngModel)]="transaction.dateTime"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateTimeDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.transaction.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="transaction.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.transaction.memo" for="field_memo">Memo</label>
+                    <input type="text" class="form-control" name="memo" id="field_memo"
+                        [(ngModel)]="transaction.memo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.transaction.category" for="field_category">Category</label>
+                    <select class="form-control" name="category" [(ngModel)]="transaction.category" id="field_category" >
+                        <option value="RENT">{{'App.Category.RENT' | translate}}</option>
+                        <option value="FOOD">{{'App.Category.FOOD' | translate}}</option>
+                        <option value="INCOME">{{'App.Category.INCOME' | translate}}</option>
+                        <option value="UTILITIES">{{'App.Category.UTILITIES' | translate}}</option>
+                        <option value="SHOPPING">{{'App.Category.SHOPPING' | translate}}</option>
+                        <option value="TRANSFER">{{'App.Category.TRANSFER' | translate}}</option>
+                        <option value="AUTOMOTIVE">{{'App.Category.AUTOMOTIVE' | translate}}</option>
+                        <option value="MISCELLANEOUS">{{'App.Category.MISCELLANEOUS' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.transaction.moneyAccount" for="field_moneyAccount">Money Account</label>
+                    <select class="form-control" id="field_moneyAccount" name="moneyAccount" [(ngModel)]="transaction.moneyAccount" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="moneyAccountOption.id === transaction.moneyAccount?.id ? transaction.moneyAccount : moneyAccountOption" *ngFor="let moneyAccountOption of moneyaccounts; trackBy: trackMoneyAccountById">{{moneyAccountOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

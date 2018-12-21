@@ -1,0 +1,11 @@
+{
+    "App": {
+        "AccountType": {
+            "null": "",
+            "CREDIT": "CREDIT",
+            "CHECKING": "CHECKING",
+            "SAVINGS": "SAVINGS",
+            "LOAN": "LOAN"
+        }
+    }
+}

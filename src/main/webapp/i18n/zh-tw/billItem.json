@@ -1,0 +1,27 @@
+{
+    "App": {
+        "billItem": {
+            "home": {
+                "title": "Bill Items",
+                "createLabel": "建立一筆新的 Bill Item",
+                "createOrEditLabel": "建立或編輯 Bill Item"
+            },
+            "created": "新的 Bill Item 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 Bill Item 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 Bill Item 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 Bill Item {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "Bill Item"
+            },
+            "companyName": "Company Name",
+            "dueDate": "Due Date",
+            "paymentDate": "Payment Date",
+            "paymentAmount": "Payment Amount",
+            "autoPay": "Auto Pay",
+            "bills": "Bills",
+            "account": "Account"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "name": "Budget",
+    "fields": [
+        {
+            "fieldName": "expectedTotal",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "actualTotal",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "budgetItems",
+            "otherEntityName": "budgetItem",
+            "otherEntityRelationshipName": "budget"
+        }
+    ],
+    "changelogDate": "20181217143609",
+    "entityTableName": "budget",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

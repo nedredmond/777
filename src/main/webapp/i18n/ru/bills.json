@@ -1,0 +1,22 @@
+{
+    "App": {
+        "bills": {
+            "home": {
+                "title": "Bills",
+                "createLabel": "Создать новый Bills",
+                "createOrEditLabel": "Создать или отредактировать Bills"
+            },
+            "created": "Новый Bills создан с идентификатором {{ param }}",
+            "updated": "Bills обновлен с идентификатором {{ param }}",
+            "deleted": "Bills удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Bills {{ id }}?"
+            },
+            "detail": {
+                "title": "Bills"
+            },
+            "paymentTotal": "Payment Total",
+            "billItems": "Bill Items"
+        }
+    }
+}

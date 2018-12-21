@@ -1,0 +1,30 @@
+{
+    "name": "UserDetails",
+    "fields": [
+        {
+            "fieldName": "netWorth",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "totalCash",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "accounts",
+            "otherEntityName": "moneyAccount",
+            "otherEntityRelationshipName": "userDetails"
+        }
+    ],
+    "changelogDate": "20181217143606",
+    "entityTableName": "user_details",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

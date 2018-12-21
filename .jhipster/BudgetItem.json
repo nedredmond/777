@@ -1,0 +1,35 @@
+{
+    "name": "BudgetItem",
+    "fields": [
+        {
+            "fieldName": "expectedSpending",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "actualSpending",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "category",
+            "fieldType": "Category",
+            "fieldValues": "RENT,FOOD,INCOME,UTILITIES,SHOPPING,TRANSFER,AUTOMOTIVE,MISCELLANEOUS"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "budget",
+            "otherEntityName": "budget",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181217143610",
+    "entityTableName": "budget_item",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

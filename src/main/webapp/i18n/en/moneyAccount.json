@@ -1,0 +1,26 @@
+{
+    "App": {
+        "moneyAccount": {
+            "home": {
+                "title": "Money Accounts",
+                "createLabel": "Create a new Money Account",
+                "createOrEditLabel": "Create or edit a Money Account"
+            },
+            "created": "A new Money Account is created with identifier {{ param }}",
+            "updated": "A Money Account is updated with identifier {{ param }}",
+            "deleted": "A Money Account is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Money Account {{ id }}?"
+            },
+            "detail": {
+                "title": "Money Account"
+            },
+            "type": "Type",
+            "accountTotal": "Account Total",
+            "signIn": "Sign In",
+            "pw": "Pw",
+            "userDetails": "User Details",
+            "transactions": "Transactions"
+        }
+    }
+}
