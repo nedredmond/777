@@ -97,6 +97,14 @@ public class TransactionService {
         return new ResponseEntity<>(sortByAmount(transactionRepository.findAll()), HttpStatus.OK);
     }
 
+    public ResponseEntity<Iterable<Transaction>> searchTransaction(String searchQuery){
+        Iterable<Transaction> transactions = transactionRepository.findAll()
+            .stream()
+            .filter(item -> item.toString().toUpperCase().contains(searchQuery.toUpperCase()))
+            .collect(Collectors.toList());
+        return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
+
     private List<Transaction> sortByDate(List<Transaction> transactionList) {
         transactionList.sort(Comparator.comparing(o -> o.getDateTime()));
         return transactionList;

@@ -137,4 +137,11 @@ public class TransactionResource {
         log.debug("REST request to sort Transactions by Amount");
         return transactionService.getSortedByAmount();
     }
+
+    @GetMapping("/transactions/{searchQuery}")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSearchResults(@PathVariable String searchQuery) {
+        log.debug("REST request to filter by search query");
+        return transactionService.searchTransaction(searchQuery);
+    }
 }
