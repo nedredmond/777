@@ -49,6 +49,27 @@ export class TransactionService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    sortByDescription(req?: any): Observable<HttpResponse<any>> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ITransaction[]>(this.resourceUrl + '/by_desc', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    sortByCategory(req?: any): Observable<HttpResponse<any>> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ITransaction[]>(this.resourceUrl + '/by_cat', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    sortByAmount(req?: any): Observable<HttpResponse<any>> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ITransaction[]>(this.resourceUrl + '/by_amount', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
     protected convertDateFromClient(transaction: ITransaction): ITransaction {
         const copy: ITransaction = Object.assign({}, transaction, {
             dateTime: transaction.dateTime != null && transaction.dateTime.isValid() ? transaction.dateTime.format(DATE_FORMAT) : null

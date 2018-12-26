@@ -4,6 +4,7 @@ import io.zcw.zipmint.Application;
 
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.repository.TransactionRepository;
+import io.zcw.zipmint.service.TransactionService;
 import io.zcw.zipmint.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -66,6 +67,9 @@ public class TransactionResourceIntTest {
     private TransactionRepository transactionRepository;
 
     @Autowired
+    private TransactionService transactionService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -87,7 +91,7 @@ public class TransactionResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TransactionResource transactionResource = new TransactionResource(transactionRepository);
+        final TransactionResource transactionResource = new TransactionResource(transactionService);
         this.restTransactionMockMvc = MockMvcBuilders.standaloneSetup(transactionResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
