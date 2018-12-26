@@ -15,12 +15,12 @@
             "detail": {
                 "title": "Transaction"
             },
-            "amount": "Amount",
             "transactionType": "Transaction Type",
             "dateTime": "Date Time",
             "description": "Description",
             "memo": "Memo",
             "category": "Category",
+            "amount": "Amount",
             "moneyAccount": "Money Account"
         }
     }

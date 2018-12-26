@@ -1,10 +1,15 @@
 {
-    "name": "Transaction",
-    "fields": [
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
         {
-            "fieldName": "amount",
-            "fieldType": "Long"
-        },
+            "relationshipName": "moneyAccount",
+            "otherEntityName": "moneyAccount",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
         {
             "fieldName": "transactionType",
             "fieldType": "TransactionType",
@@ -26,23 +31,17 @@
             "fieldName": "category",
             "fieldType": "Category",
             "fieldValues": "RENT,FOOD,INCOME,UTILITIES,SHOPPING,TRANSFER,AUTOMOTIVE,MISCELLANEOUS"
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipName": "moneyAccount",
-            "otherEntityName": "moneyAccount",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "fieldName": "amount",
+            "fieldType": "Double"
         }
     ],
     "changelogDate": "20181217143608",
-    "entityTableName": "transaction",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "transaction",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }
