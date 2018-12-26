@@ -44,9 +44,6 @@ import io.zcw.zipmint.domain.enumeration.Category;
 @SpringBootTest(classes = Application.class)
 public class TransactionResourceIntTest {
 
-    private static final Long DEFAULT_AMOUNT = 1L;
-    private static final Long UPDATED_AMOUNT = 2L;
-
     private static final TransactionType DEFAULT_TRANSACTION_TYPE = TransactionType.CREDIT;
     private static final TransactionType UPDATED_TRANSACTION_TYPE = TransactionType.DEBIT;
 
@@ -61,6 +58,9 @@ public class TransactionResourceIntTest {
 
     private static final Category DEFAULT_CATEGORY = Category.RENT;
     private static final Category UPDATED_CATEGORY = Category.FOOD;
+
+    private static final Double DEFAULT_AMOUNT = 1D;
+    private static final Double UPDATED_AMOUNT = 2D;
 
     @Autowired
     private TransactionRepository transactionRepository;
@@ -104,12 +104,12 @@ public class TransactionResourceIntTest {
      */
     public static Transaction createEntity(EntityManager em) {
         Transaction transaction = new Transaction()
-            .amount(DEFAULT_AMOUNT)
             .transactionType(DEFAULT_TRANSACTION_TYPE)
             .dateTime(DEFAULT_DATE_TIME)
             .description(DEFAULT_DESCRIPTION)
             .memo(DEFAULT_MEMO)
-            .category(DEFAULT_CATEGORY);
+            .category(DEFAULT_CATEGORY)
+            .amount(DEFAULT_AMOUNT);
         return transaction;
     }
 
@@ -133,12 +133,12 @@ public class TransactionResourceIntTest {
         List<Transaction> transactionList = transactionRepository.findAll();
         assertThat(transactionList).hasSize(databaseSizeBeforeCreate + 1);
         Transaction testTransaction = transactionList.get(transactionList.size() - 1);
-        assertThat(testTransaction.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testTransaction.getTransactionType()).isEqualTo(DEFAULT_TRANSACTION_TYPE);
         assertThat(testTransaction.getDateTime()).isEqualTo(DEFAULT_DATE_TIME);
         assertThat(testTransaction.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testTransaction.getMemo()).isEqualTo(DEFAULT_MEMO);
         assertThat(testTransaction.getCategory()).isEqualTo(DEFAULT_CATEGORY);
+        assertThat(testTransaction.getAmount()).isEqualTo(DEFAULT_AMOUNT);
     }
 
     @Test
@@ -171,12 +171,12 @@ public class TransactionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(transaction.getId().intValue())))
-            .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].transactionType").value(hasItem(DEFAULT_TRANSACTION_TYPE.toString())))
             .andExpect(jsonPath("$.[*].dateTime").value(hasItem(DEFAULT_DATE_TIME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].memo").value(hasItem(DEFAULT_MEMO.toString())))
-            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())));
+            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
+            .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.doubleValue())));
     }
     
     @Test
@@ -190,12 +190,12 @@ public class TransactionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(transaction.getId().intValue()))
-            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
             .andExpect(jsonPath("$.transactionType").value(DEFAULT_TRANSACTION_TYPE.toString()))
             .andExpect(jsonPath("$.dateTime").value(DEFAULT_DATE_TIME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.memo").value(DEFAULT_MEMO.toString()))
-            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()));
+            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()))
+            .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.doubleValue()));
     }
 
     @Test
@@ -219,12 +219,12 @@ public class TransactionResourceIntTest {
         // Disconnect from session so that the updates on updatedTransaction are not directly saved in db
         em.detach(updatedTransaction);
         updatedTransaction
-            .amount(UPDATED_AMOUNT)
             .transactionType(UPDATED_TRANSACTION_TYPE)
             .dateTime(UPDATED_DATE_TIME)
             .description(UPDATED_DESCRIPTION)
             .memo(UPDATED_MEMO)
-            .category(UPDATED_CATEGORY);
+            .category(UPDATED_CATEGORY)
+            .amount(UPDATED_AMOUNT);
 
         restTransactionMockMvc.perform(put("/api/transactions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -235,12 +235,12 @@ public class TransactionResourceIntTest {
         List<Transaction> transactionList = transactionRepository.findAll();
         assertThat(transactionList).hasSize(databaseSizeBeforeUpdate);
         Transaction testTransaction = transactionList.get(transactionList.size() - 1);
-        assertThat(testTransaction.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testTransaction.getTransactionType()).isEqualTo(UPDATED_TRANSACTION_TYPE);
         assertThat(testTransaction.getDateTime()).isEqualTo(UPDATED_DATE_TIME);
         assertThat(testTransaction.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testTransaction.getMemo()).isEqualTo(UPDATED_MEMO);
         assertThat(testTransaction.getCategory()).isEqualTo(UPDATED_CATEGORY);
+        assertThat(testTransaction.getAmount()).isEqualTo(UPDATED_AMOUNT);
     }
 
     @Test

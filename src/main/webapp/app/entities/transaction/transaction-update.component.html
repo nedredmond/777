@@ -10,11 +10,6 @@
                         [(ngModel)]="transaction.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="App.transaction.amount" for="field_amount">Amount</label>
-                    <input type="number" class="form-control" name="amount" id="field_amount"
-                        [(ngModel)]="transaction.amount" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="App.transaction.transactionType" for="field_transactionType">Transaction Type</label>
                     <select class="form-control" name="transactionType" [(ngModel)]="transaction.transactionType" id="field_transactionType" >
                         <option value="CREDIT">{{'App.TransactionType.CREDIT' | translate}}</option>
@@ -53,6 +48,11 @@
                         <option value="AUTOMOTIVE">{{'App.Category.AUTOMOTIVE' | translate}}</option>
                         <option value="MISCELLANEOUS">{{'App.Category.MISCELLANEOUS' | translate}}</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.transaction.amount" for="field_amount">Amount</label>
+                    <input type="number" class="form-control" name="amount" id="field_amount"
+                        [(ngModel)]="transaction.amount" />
                 </div>
 
                 <div class="form-group">

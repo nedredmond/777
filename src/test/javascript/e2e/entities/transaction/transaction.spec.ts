@@ -39,18 +39,18 @@ describe('Transaction e2e test', () => {
 
         await transactionComponentsPage.clickOnCreateButton();
         await promise.all([
-            transactionUpdatePage.setAmountInput('5'),
             transactionUpdatePage.transactionTypeSelectLastOption(),
             transactionUpdatePage.setDateTimeInput('2000-12-31'),
             transactionUpdatePage.setDescriptionInput('description'),
             transactionUpdatePage.setMemoInput('memo'),
             transactionUpdatePage.categorySelectLastOption(),
+            transactionUpdatePage.setAmountInput('5'),
             transactionUpdatePage.moneyAccountSelectLastOption()
         ]);
-        expect(await transactionUpdatePage.getAmountInput()).to.eq('5');
         expect(await transactionUpdatePage.getDateTimeInput()).to.eq('2000-12-31');
         expect(await transactionUpdatePage.getDescriptionInput()).to.eq('description');
         expect(await transactionUpdatePage.getMemoInput()).to.eq('memo');
+        expect(await transactionUpdatePage.getAmountInput()).to.eq('5');
         await transactionUpdatePage.save();
         expect(await transactionUpdatePage.getSaveButton().isPresent()).to.be.false;
 
