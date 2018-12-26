@@ -116,4 +116,25 @@ public class TransactionResource {
         log.debug("REST request to get credit Transactions");
         return transactionService.getCreditTransactions();
     }
+
+    @GetMapping("/transactions/by_cat")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSortedByCategory() {
+        log.debug("REST request to sort Transactions by Category");
+        return transactionService.getSortedByCategory();
+    }
+
+    @GetMapping("/transactions/by_desc")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSortedByDescription() {
+        log.debug("REST request to sort Transactions by Description");
+        return transactionService.getSortedByDescription();
+    }
+
+    @GetMapping("/transactions/by_amount")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSortedByAmount() {
+        log.debug("REST request to sort Transactions by Amount");
+        return transactionService.getSortedByAmount();
+    }
 }
