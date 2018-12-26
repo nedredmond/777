@@ -85,6 +85,18 @@ public class TransactionService {
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
+    public ResponseEntity<Iterable<Transaction>> getSortedByCategory(){
+        return new ResponseEntity<>(sortByCategory(transactionRepository.findAll()), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Iterable<Transaction>> getSortedByDescription(){
+        return new ResponseEntity<>(sortByDescription(transactionRepository.findAll()), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Iterable<Transaction>> getSortedByAmount(){
+        return new ResponseEntity<>(sortByAmount(transactionRepository.findAll()), HttpStatus.OK);
+    }
+
     private List<Transaction> sortByDate(List<Transaction> transactionList) {
         transactionList.sort(Comparator.comparing(o -> o.getDateTime()));
         return transactionList;
@@ -97,6 +109,11 @@ public class TransactionService {
 
     private List<Transaction> sortByDescription(List<Transaction> transactionList) {
         transactionList.sort(Comparator.comparing(o -> o.getDescription()));
+        return transactionList;
+    }
+
+    private List<Transaction> sortByAmount(List<Transaction> transactionList) {
+        transactionList.sort(Comparator.comparing(o -> o.getAmount()));
         return transactionList;
     }
 
