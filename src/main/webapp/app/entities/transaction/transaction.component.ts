@@ -59,6 +59,33 @@ export class TransactionComponent implements OnInit, OnDestroy {
         );
     }
 
+    getDebit() {
+        this.transactionService.filterDebit().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    getCredit() {
+        this.transactionService.filterCredit().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    searchQuery(searchQuery: string) {
+        this.transactionService.search(searchQuery).subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     ngOnInit() {
         this.loadAll();
         this.accountService.identity().then(account => {

@@ -70,6 +70,27 @@ export class TransactionService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
+    filterDebit(req?: any): Observable<HttpResponse<any>> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ITransaction[]>(this.resourceUrl + '/debit', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    filterCredit(req?: any): Observable<HttpResponse<any>> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ITransaction[]>(this.resourceUrl + '/credit', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    search(searchQuery: string): Observable<HttpResponse<any>> {
+        const options = createRequestOption(searchQuery);
+        return this.http
+            .get<ITransaction[]>(this.resourceUrl + '/{searchQuery}', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
     protected convertDateFromClient(transaction: ITransaction): ITransaction {
         const copy: ITransaction = Object.assign({}, transaction, {
             dateTime: transaction.dateTime != null && transaction.dateTime.isValid() ? transaction.dateTime.format(DATE_FORMAT) : null
