@@ -19,24 +19,24 @@ export const enum Category {
 
 export interface ITransaction {
     id?: number;
-    amount?: number;
     transactionType?: TransactionType;
     dateTime?: Moment;
     description?: string;
     memo?: string;
     category?: Category;
+    amount?: number;
     moneyAccount?: IMoneyAccount;
 }
 
 export class Transaction implements ITransaction {
     constructor(
         public id?: number,
-        public amount?: number,
         public transactionType?: TransactionType,
         public dateTime?: Moment,
         public description?: string,
         public memo?: string,
         public category?: Category,
+        public amount?: number,
         public moneyAccount?: IMoneyAccount
     ) {}
 }

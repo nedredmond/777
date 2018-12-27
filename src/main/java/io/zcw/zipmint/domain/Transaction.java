@@ -29,9 +29,6 @@ public class Transaction implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "amount")
-    private Long amount;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")
     private TransactionType transactionType;
@@ -49,8 +46,11 @@ public class Transaction implements Serializable {
     @Column(name = "category")
     private Category category;
 
+    @Column(name = "amount")
+    private Double amount;
+
     @ManyToOne
-    @JsonIgnoreProperties("transactions")
+    @JsonIgnoreProperties("")
     private MoneyAccount moneyAccount;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -60,19 +60,6 @@ public class Transaction implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getAmount() {
-        return amount;
-    }
-
-    public Transaction amount(Long amount) {
-        this.amount = amount;
-        return this;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
     }
 
     public TransactionType getTransactionType() {
@@ -140,6 +127,19 @@ public class Transaction implements Serializable {
         this.category = category;
     }
 
+    public Double getAmount() {
+        return amount;
+    }
+
+    public Transaction amount(Double amount) {
+        this.amount = amount;
+        return this;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
     public MoneyAccount getMoneyAccount() {
         return moneyAccount;
     }
@@ -178,12 +178,12 @@ public class Transaction implements Serializable {
     public String toString() {
         return "Transaction{" +
             "id=" + getId() +
-            ", amount=" + getAmount() +
             ", transactionType='" + getTransactionType() + "'" +
             ", dateTime='" + getDateTime() + "'" +
             ", description='" + getDescription() + "'" +
             ", memo='" + getMemo() + "'" +
             ", category='" + getCategory() + "'" +
+            ", amount=" + getAmount() +
             "}";
     }
 }

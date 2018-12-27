@@ -26,24 +26,16 @@ export class TransactionUpdatePage {
     pageTitle = element(by.id('jhi-transaction-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
-    amountInput = element(by.id('field_amount'));
     transactionTypeSelect = element(by.id('field_transactionType'));
     dateTimeInput = element(by.id('field_dateTime'));
     descriptionInput = element(by.id('field_description'));
     memoInput = element(by.id('field_memo'));
     categorySelect = element(by.id('field_category'));
+    amountInput = element(by.id('field_amount'));
     moneyAccountSelect = element(by.id('field_moneyAccount'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
-    }
-
-    async setAmountInput(amount) {
-        await this.amountInput.sendKeys(amount);
-    }
-
-    async getAmountInput() {
-        return this.amountInput.getAttribute('value');
     }
 
     async setTransactionTypeSelect(transactionType) {
@@ -98,6 +90,14 @@ export class TransactionUpdatePage {
             .all(by.tagName('option'))
             .last()
             .click();
+    }
+
+    async setAmountInput(amount) {
+        await this.amountInput.sendKeys(amount);
+    }
+
+    async getAmountInput() {
+        return this.amountInput.getAttribute('value');
     }
 
     async moneyAccountSelectLastOption() {

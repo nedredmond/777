@@ -3,6 +3,7 @@ package io.zcw.zipmint.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.repository.TransactionRepository;
+import io.zcw.zipmint.service.TransactionService;
 import io.zcw.zipmint.web.rest.errors.BadRequestAlertException;
 import io.zcw.zipmint.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -26,12 +27,12 @@ public class TransactionResource {
 
     private final Logger log = LoggerFactory.getLogger(TransactionResource.class);
 
-    private static final String ENTITY_NAME = "transaction";
+    // private static final String ENTITY_NAME = "transaction";
 
-    private final TransactionRepository transactionRepository;
+    private final TransactionService transactionService;
 
-    public TransactionResource(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
+    public TransactionResource(TransactionService transactionService) {
+        this.transactionService = transactionService;
     }
 
     /**
@@ -45,13 +46,7 @@ public class TransactionResource {
     @Timed
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) throws URISyntaxException {
         log.debug("REST request to save Transaction : {}", transaction);
-        if (transaction.getId() != null) {
-            throw new BadRequestAlertException("A new transaction cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        Transaction result = transactionRepository.save(transaction);
-        return ResponseEntity.created(new URI("/api/transactions/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return transactionService.createTransaction(transaction);
     }
 
     /**
@@ -67,13 +62,7 @@ public class TransactionResource {
     @Timed
     public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction) throws URISyntaxException {
         log.debug("REST request to update Transaction : {}", transaction);
-        if (transaction.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        Transaction result = transactionRepository.save(transaction);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, transaction.getId().toString()))
-            .body(result);
+        return transactionService.updateTransaction(transaction);
     }
 
     /**
@@ -83,9 +72,9 @@ public class TransactionResource {
      */
     @GetMapping("/transactions")
     @Timed
-    public List<Transaction> getAllTransactions() {
+    public ResponseEntity<Iterable<Transaction>> getAllTransactions() {
         log.debug("REST request to get all Transactions");
-        return transactionRepository.findAll();
+        return transactionService.getAllTransactions();
     }
 
     /**
@@ -98,8 +87,7 @@ public class TransactionResource {
     @Timed
     public ResponseEntity<Transaction> getTransaction(@PathVariable Long id) {
         log.debug("REST request to get Transaction : {}", id);
-        Optional<Transaction> transaction = transactionRepository.findById(id);
-        return ResponseUtil.wrapOrNotFound(transaction);
+       return transactionService.getTransaction(id);
     }
 
     /**
@@ -112,8 +100,48 @@ public class TransactionResource {
     @Timed
     public ResponseEntity<Void> deleteTransaction(@PathVariable Long id) {
         log.debug("REST request to delete Transaction : {}", id);
+        return transactionService.deleteTransaction(id);
+    }
 
-        transactionRepository.deleteById(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    @GetMapping("/transactions/debit")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getDebitTransactions() {
+        log.debug("REST request to get debit Transactions");
+        return transactionService.getDebitTransactions();
+    }
+
+    @GetMapping("/transactions/credit")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getCreditTransactions() {
+        log.debug("REST request to get credit Transactions");
+        return transactionService.getCreditTransactions();
+    }
+
+    @GetMapping("/transactions/by_cat")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSortedByCategory() {
+        log.debug("REST request to sort Transactions by Category");
+        return transactionService.getSortedByCategory();
+    }
+
+    @GetMapping("/transactions/by_desc")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSortedByDescription() {
+        log.debug("REST request to sort Transactions by Description");
+        return transactionService.getSortedByDescription();
+    }
+
+    @GetMapping("/transactions/by_amount")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSortedByAmount() {
+        log.debug("REST request to sort Transactions by Amount");
+        return transactionService.getSortedByAmount();
+    }
+
+    @GetMapping("/transactions/{searchQuery}")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSearchResults(@PathVariable String searchQuery) {
+        log.debug("REST request to filter by search query");
+        return transactionService.searchTransaction(searchQuery);
     }
 }
