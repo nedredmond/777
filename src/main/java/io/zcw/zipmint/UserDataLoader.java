@@ -1,4 +1,9 @@
-//package io.zcw.zipmint;
+/**
+ * Implementing this User Class Loader causes an unknown conflict with the default
+ * JHipster Admin Settings.
+ */
+
+//package io.zcw.zipmint.dataLoader;
 //
 //import io.zcw.zipmint.domain.User;
 //import io.zcw.zipmint.repository.UserRepository;
@@ -19,6 +24,8 @@
 //
 //    @PostConstruct
 //    private void LoadUsers(){
+//        User
+//
 //        User user1 = new User();
 //        user1.setEmail("User1Email@gmail.com");
 //        user1.setLogin("user");
