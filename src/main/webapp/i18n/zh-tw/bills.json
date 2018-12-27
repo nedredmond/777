@@ -16,7 +16,13 @@
                 "title": "Bills"
             },
             "paymentTotal": "Payment Total",
-            "billItems": "Bill Items"
+            "companyName": "Company Name",
+            "dueDate": "Due Date",
+            "paymentDate": "Payment Date",
+            "paymentAmount": "Payment Amount",
+            "autoPay": "Auto Pay",
+            "billItems": "Bill Items",
+            "moneyAccount": "Money Account"
         }
     }
 }

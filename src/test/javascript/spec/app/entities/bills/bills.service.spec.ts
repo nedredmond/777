@@ -4,6 +4,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { BillsService } from 'app/entities/bills/bills.service';
 import { IBills, Bills } from 'app/shared/model/bills.model';
 
@@ -13,6 +15,7 @@ describe('Service Tests', () => {
         let service: BillsService;
         let httpMock: HttpTestingController;
         let elemDefault: IBills;
+        let currentDate: moment.Moment;
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [HttpClientTestingModule]
@@ -20,13 +23,20 @@ describe('Service Tests', () => {
             injector = getTestBed();
             service = injector.get(BillsService);
             httpMock = injector.get(HttpTestingController);
+            currentDate = moment();
 
-            elemDefault = new Bills(0, 0);
+            elemDefault = new Bills(0, 0, 'AAAAAAA', currentDate, currentDate, 0, false);
         });
 
         describe('Service methods', async () => {
             it('should find an element', async () => {
-                const returnedFromService = Object.assign({}, elemDefault);
+                const returnedFromService = Object.assign(
+                    {
+                        dueDate: currentDate.format(DATE_FORMAT),
+                        paymentDate: currentDate.format(DATE_FORMAT)
+                    },
+                    elemDefault
+                );
                 service
                     .find(123)
                     .pipe(take(1))
@@ -39,11 +49,19 @@ describe('Service Tests', () => {
             it('should create a Bills', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        id: 0
+                        id: 0,
+                        dueDate: currentDate.format(DATE_FORMAT),
+                        paymentDate: currentDate.format(DATE_FORMAT)
                     },
                     elemDefault
                 );
-                const expected = Object.assign({}, returnedFromService);
+                const expected = Object.assign(
+                    {
+                        dueDate: currentDate,
+                        paymentDate: currentDate
+                    },
+                    returnedFromService
+                );
                 service
                     .create(new Bills(null))
                     .pipe(take(1))
@@ -55,12 +73,23 @@ describe('Service Tests', () => {
             it('should update a Bills', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        paymentTotal: 1
+                        paymentTotal: 1,
+                        companyName: 'BBBBBB',
+                        dueDate: currentDate.format(DATE_FORMAT),
+                        paymentDate: currentDate.format(DATE_FORMAT),
+                        paymentAmount: 1,
+                        autoPay: true
                     },
                     elemDefault
                 );
 
-                const expected = Object.assign({}, returnedFromService);
+                const expected = Object.assign(
+                    {
+                        dueDate: currentDate,
+                        paymentDate: currentDate
+                    },
+                    returnedFromService
+                );
                 service
                     .update(expected)
                     .pipe(take(1))
@@ -72,11 +101,22 @@ describe('Service Tests', () => {
             it('should return a list of Bills', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        paymentTotal: 1
+                        paymentTotal: 1,
+                        companyName: 'BBBBBB',
+                        dueDate: currentDate.format(DATE_FORMAT),
+                        paymentDate: currentDate.format(DATE_FORMAT),
+                        paymentAmount: 1,
+                        autoPay: true
                     },
                     elemDefault
                 );
-                const expected = Object.assign({}, returnedFromService);
+                const expected = Object.assign(
+                    {
+                        dueDate: currentDate,
+                        paymentDate: currentDate
+                    },
+                    returnedFromService
+                );
                 service
                     .query(expected)
                     .pipe(
