@@ -1,5 +1,20 @@
 {
-    "name": "BillItem",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "moneyAccount",
+            "otherEntityName": "moneyAccount",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "bills",
+            "otherEntityName": "bills",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "companyName",
@@ -22,27 +37,11 @@
             "fieldType": "Boolean"
         }
     ],
-    "relationships": [
-        {
-            "relationshipName": "moneyAccount",
-            "otherEntityName": "moneyAccount",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipName": "bills",
-            "otherEntityName": "bills",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-    ],
     "changelogDate": "20181217143612",
-    "entityTableName": "bill_item",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "bill_item",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

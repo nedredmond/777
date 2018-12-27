@@ -34,7 +34,7 @@ export const userMgmtRoute: Routes = [
         path: 'user-management',
         component: UserMgmtComponent,
         resolve: {
-            pagingParams: JhiResolvePagingParams
+            pagingParams: JhiResolvePagingParams //  UserResolve
         },
         data: {
             pageTitle: 'userManagement.home.title',

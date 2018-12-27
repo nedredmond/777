@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 
@@ -42,6 +44,21 @@ public class BillsResourceIntTest {
 
     private static final Long DEFAULT_PAYMENT_TOTAL = 1L;
     private static final Long UPDATED_PAYMENT_TOTAL = 2L;
+
+    private static final String DEFAULT_COMPANY_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_COMPANY_NAME = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_DUE_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DUE_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_PAYMENT_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_PAYMENT_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Double DEFAULT_PAYMENT_AMOUNT = 1D;
+    private static final Double UPDATED_PAYMENT_AMOUNT = 2D;
+
+    private static final Boolean DEFAULT_AUTO_PAY = false;
+    private static final Boolean UPDATED_AUTO_PAY = true;
 
     @Autowired
     private BillsRepository billsRepository;
@@ -85,7 +102,12 @@ public class BillsResourceIntTest {
      */
     public static Bills createEntity(EntityManager em) {
         Bills bills = new Bills()
-            .paymentTotal(DEFAULT_PAYMENT_TOTAL);
+            .paymentTotal(DEFAULT_PAYMENT_TOTAL)
+            .companyName(DEFAULT_COMPANY_NAME)
+            .dueDate(DEFAULT_DUE_DATE)
+            .paymentDate(DEFAULT_PAYMENT_DATE)
+            .paymentAmount(DEFAULT_PAYMENT_AMOUNT)
+            .autoPay(DEFAULT_AUTO_PAY);
         return bills;
     }
 
@@ -110,6 +132,11 @@ public class BillsResourceIntTest {
         assertThat(billsList).hasSize(databaseSizeBeforeCreate + 1);
         Bills testBills = billsList.get(billsList.size() - 1);
         assertThat(testBills.getPaymentTotal()).isEqualTo(DEFAULT_PAYMENT_TOTAL);
+        assertThat(testBills.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
+        assertThat(testBills.getDueDate()).isEqualTo(DEFAULT_DUE_DATE);
+        assertThat(testBills.getPaymentDate()).isEqualTo(DEFAULT_PAYMENT_DATE);
+        assertThat(testBills.getPaymentAmount()).isEqualTo(DEFAULT_PAYMENT_AMOUNT);
+        assertThat(testBills.isAutoPay()).isEqualTo(DEFAULT_AUTO_PAY);
     }
 
     @Test
@@ -142,7 +169,12 @@ public class BillsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(bills.getId().intValue())))
-            .andExpect(jsonPath("$.[*].paymentTotal").value(hasItem(DEFAULT_PAYMENT_TOTAL.intValue())));
+            .andExpect(jsonPath("$.[*].paymentTotal").value(hasItem(DEFAULT_PAYMENT_TOTAL.intValue())))
+            .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
+            .andExpect(jsonPath("$.[*].dueDate").value(hasItem(DEFAULT_DUE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].paymentDate").value(hasItem(DEFAULT_PAYMENT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].paymentAmount").value(hasItem(DEFAULT_PAYMENT_AMOUNT.doubleValue())))
+            .andExpect(jsonPath("$.[*].autoPay").value(hasItem(DEFAULT_AUTO_PAY.booleanValue())));
     }
     
     @Test
@@ -156,7 +188,12 @@ public class BillsResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(bills.getId().intValue()))
-            .andExpect(jsonPath("$.paymentTotal").value(DEFAULT_PAYMENT_TOTAL.intValue()));
+            .andExpect(jsonPath("$.paymentTotal").value(DEFAULT_PAYMENT_TOTAL.intValue()))
+            .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
+            .andExpect(jsonPath("$.dueDate").value(DEFAULT_DUE_DATE.toString()))
+            .andExpect(jsonPath("$.paymentDate").value(DEFAULT_PAYMENT_DATE.toString()))
+            .andExpect(jsonPath("$.paymentAmount").value(DEFAULT_PAYMENT_AMOUNT.doubleValue()))
+            .andExpect(jsonPath("$.autoPay").value(DEFAULT_AUTO_PAY.booleanValue()));
     }
 
     @Test
@@ -180,7 +217,12 @@ public class BillsResourceIntTest {
         // Disconnect from session so that the updates on updatedBills are not directly saved in db
         em.detach(updatedBills);
         updatedBills
-            .paymentTotal(UPDATED_PAYMENT_TOTAL);
+            .paymentTotal(UPDATED_PAYMENT_TOTAL)
+            .companyName(UPDATED_COMPANY_NAME)
+            .dueDate(UPDATED_DUE_DATE)
+            .paymentDate(UPDATED_PAYMENT_DATE)
+            .paymentAmount(UPDATED_PAYMENT_AMOUNT)
+            .autoPay(UPDATED_AUTO_PAY);
 
         restBillsMockMvc.perform(put("/api/bills")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -192,6 +234,11 @@ public class BillsResourceIntTest {
         assertThat(billsList).hasSize(databaseSizeBeforeUpdate);
         Bills testBills = billsList.get(billsList.size() - 1);
         assertThat(testBills.getPaymentTotal()).isEqualTo(UPDATED_PAYMENT_TOTAL);
+        assertThat(testBills.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
+        assertThat(testBills.getDueDate()).isEqualTo(UPDATED_DUE_DATE);
+        assertThat(testBills.getPaymentDate()).isEqualTo(UPDATED_PAYMENT_DATE);
+        assertThat(testBills.getPaymentAmount()).isEqualTo(UPDATED_PAYMENT_AMOUNT);
+        assertThat(testBills.isAutoPay()).isEqualTo(UPDATED_AUTO_PAY);
     }
 
     @Test

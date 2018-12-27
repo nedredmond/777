@@ -14,7 +14,49 @@
                     <input type="number" class="form-control" name="paymentTotal" id="field_paymentTotal"
                         [(ngModel)]="bills.paymentTotal" />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.bills.companyName" for="field_companyName">Company Name</label>
+                    <input type="text" class="form-control" name="companyName" id="field_companyName"
+                        [(ngModel)]="bills.companyName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.bills.dueDate" for="field_dueDate">Due Date</label>
+                    <div class="input-group">
+                        <input id="field_dueDate" type="text" class="form-control" name="dueDate" ngbDatepicker  #dueDateDp="ngbDatepicker" [(ngModel)]="bills.dueDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.bills.paymentDate" for="field_paymentDate">Payment Date</label>
+                    <div class="input-group">
+                        <input id="field_paymentDate" type="text" class="form-control" name="paymentDate" ngbDatepicker  #paymentDateDp="ngbDatepicker" [(ngModel)]="bills.paymentDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="paymentDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.bills.paymentAmount" for="field_paymentAmount">Payment Amount</label>
+                    <input type="number" class="form-control" name="paymentAmount" id="field_paymentAmount"
+                        [(ngModel)]="bills.paymentAmount" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.bills.autoPay" for="field_autoPay">Auto Pay</label>
+                    <input type="checkbox" class="form-control" name="autoPay" id="field_autoPay"
+                        [(ngModel)]="bills.autoPay" />
+                </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="App.bills.moneyAccount" for="field_moneyAccount">Money Account</label>
+                    <select class="form-control" id="field_moneyAccount" name="moneyAccount" [(ngModel)]="bills.moneyAccount" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="moneyAccountOption.id === bills.moneyAccount?.id ? bills.moneyAccount : moneyAccountOption" *ngFor="let moneyAccountOption of moneyaccounts; trackBy: trackMoneyAccountById">{{moneyAccountOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
