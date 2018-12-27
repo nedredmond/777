@@ -9,6 +9,7 @@ import io.zcw.zipmint.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,6 +122,7 @@ public class BudgetItemResource {
     }
 
     @GetMapping("/budget-items/{category}")
+    @Timed
     public List<BudgetItem> filterByCategory(@PathVariable Category category){
         log.debug("REST request to filter BudgetItem category: {}", category);
         ArrayList<BudgetItem> filteredList = new ArrayList<>();
@@ -129,5 +132,38 @@ public class BudgetItemResource {
             }
         }
         return filteredList;
+    }
+
+    public List<BudgetItem> sortByCategory(List<BudgetItem> budgetItemList){
+        budgetItemList.sort(Comparator.comparing(o -> o.getCategory()));
+        return budgetItemList;
+    }
+
+    @GetMapping("/budget-items/by_cat")
+    @Timed
+    public ResponseEntity<Iterable<BudgetItem>> getSortedByCategory(){
+        return new ResponseEntity<>(sortByCategory(budgetItemRepository.findAll()), HttpStatus.OK);
+    }
+
+    public List<BudgetItem> sortByBudgetAmount(List<BudgetItem> budgetItemList){
+        budgetItemList.sort(Comparator.comparing(o -> o.getExpectedSpending()));
+        return budgetItemList;
+    }
+
+    @GetMapping("/budget-items/by_budget")
+    @Timed
+    public ResponseEntity<Iterable<BudgetItem>> getSortedByBudgetAmount(){
+        return new ResponseEntity<>(sortByBudgetAmount(budgetItemRepository.findAll()), HttpStatus.OK);
+    }
+
+    public List<BudgetItem> sortByAmountSpent(List<BudgetItem> budgetItemList){
+        budgetItemList.sort(Comparator.comparing(o -> o.getActualSpending()));
+        return budgetItemList;
+    }
+
+    @GetMapping("/budget-items/by_spent")
+    @Timed
+    public ResponseEntity<Iterable<BudgetItem>> getSortedByAmountSpent(){
+        return new ResponseEntity<>(sortByAmountSpent(budgetItemRepository.findAll()), HttpStatus.OK);
     }
 }

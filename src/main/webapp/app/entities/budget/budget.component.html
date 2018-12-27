@@ -28,8 +28,8 @@
             <tbody>
             <tr *ngFor="let budget of budgets ;trackBy: trackId">
                 <td><a [routerLink]="['/budget', budget.id, 'view' ]">{{budget.id}}</a></td>
-                <td>{{budget.expectedTotal | currency :"$"}}</td>
-                <td>{{budget.actualTotal | currency :"$"}}</td>
+                <td>{{budget.expectedTotal | currency}}</td>
+                <td>{{budget.actualTotal | currency}}</td>
                 <td>{{budget.startDate | date:'mediumDate'}}</td>
                 <td>{{budget.endDate | date:'mediumDate'}}</td>
                 <td class="text-right">
