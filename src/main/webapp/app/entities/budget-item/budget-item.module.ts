@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ProgressBarModule } from 'angular-progress-bar';
 
 import { AppSharedModule } from 'app/shared';
 import {
@@ -21,7 +22,8 @@ const ENTITY_STATES = [...budgetItemRoute, ...budgetItemPopupRoute];
         BudgetItemDetailComponent,
         BudgetItemUpdateComponent,
         BudgetItemDeleteDialogComponent,
-        BudgetItemDeletePopupComponent
+        BudgetItemDeletePopupComponent,
+        ProgressBarModule
     ],
     entryComponents: [BudgetItemComponent, BudgetItemUpdateComponent, BudgetItemDeleteDialogComponent, BudgetItemDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

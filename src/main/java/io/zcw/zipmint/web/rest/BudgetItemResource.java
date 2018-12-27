@@ -2,6 +2,7 @@ package io.zcw.zipmint.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import io.zcw.zipmint.domain.BudgetItem;
+import io.zcw.zipmint.domain.enumeration.Category;
 import io.zcw.zipmint.repository.BudgetItemRepository;
 import io.zcw.zipmint.web.rest.errors.BadRequestAlertException;
 import io.zcw.zipmint.web.rest.util.HeaderUtil;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +37,7 @@ public class BudgetItemResource {
     }
 
     /**
-     * POST  /budget-items : Create a new budgetItem.
+     * POST  /budget-items : Create a new budgetItem.π
      *
      * @param budgetItem the budgetItem to create
      * @return the ResponseEntity with status 201 (Created) and with body the new budgetItem, or with status 400 (Bad Request) if the budgetItem has already an ID
@@ -115,5 +117,17 @@ public class BudgetItemResource {
 
         budgetItemRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/budget-items/{category}")
+    public List<BudgetItem> filterByCategory(@PathVariable Category category){
+        log.debug("REST request to filter BudgetItem category: {}", category);
+        ArrayList<BudgetItem> filteredList = new ArrayList<>();
+        for(BudgetItem item:getAllBudgetItems()){
+            if(item.getCategory().equals(category)){
+                filteredList.add(item);
+            }
+        }
+        return filteredList;
     }
 }

@@ -1,3 +1,4 @@
+
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="App.budgetItem.home.title">Budget Items</span>
@@ -25,8 +26,10 @@
             <tbody>
             <tr *ngFor="let budgetItem of budgetItems ;trackBy: trackId">
                 <td><a [routerLink]="['/budget-item', budgetItem.id, 'view' ]">{{budgetItem.id}}</a></td>
-                <td>{{budgetItem.expectedSpending}}</td>
-                <td>{{budgetItem.actualSpending}}</td>
+                <td>{{budgetItem.expectedSpending | currency :"$"}}</td>
+                <td>{{budgetItem.actualSpending | currency :"$"}}</td>
+                <!--<progress-bar [progress]={{budgetItem.expectedSpending}} [color-degraded]="{{{budgetItem.actualSpending}}: '#00cbcb'}">-->
+                <!--</progress-bar>-->
                 <td jhiTranslate="{{'App.Category.' + budgetItem.category}}">{{budgetItem.category}}</td>
                 <td>
                     <div *ngIf="budgetItem.budget">
