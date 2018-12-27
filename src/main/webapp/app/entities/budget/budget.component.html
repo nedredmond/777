@@ -2,7 +2,7 @@
 
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="App.budget.home.title">Budgets</span>
+        <span jhiTranslate="App.budget.home.title"></span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-budget" [routerLink]="['/budget/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="App.budget.home.createLabel">
@@ -28,8 +28,8 @@
             <tbody>
             <tr *ngFor="let budget of budgets ;trackBy: trackId">
                 <td><a [routerLink]="['/budget', budget.id, 'view' ]">{{budget.id}}</a></td>
-                <td>{{budget.expectedTotal}}</td>
-                <td>{{budget.actualTotal}}</td>
+                <td>{{budget.expectedTotal | currency :"$"}}</td>
+                <td>{{budget.actualTotal | currency :"$"}}</td>
                 <td>{{budget.startDate | date:'mediumDate'}}</td>
                 <td>{{budget.endDate | date:'mediumDate'}}</td>
                 <td class="text-right">

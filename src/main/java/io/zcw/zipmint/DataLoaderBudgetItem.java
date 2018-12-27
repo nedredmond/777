@@ -34,7 +34,19 @@ public class DataLoaderBudgetItem {
         budgetItemRepository.save(shopBudget);
         budgetItemSet.add(shopBudget);
 
-        BudgetItem automotivesBudget = new BudgetItem();
+        BudgetItem autoBudget = new BudgetItem();
+        autoBudget.setExpectedSpending(175L);
+        autoBudget.setActualSpending(101L);
+        autoBudget.setCategory(Category.AUTOMOTIVE);
+        budgetItemRepository.save(autoBudget);
+        budgetItemSet.add(autoBudget);
+
+        BudgetItem utilBudget = new BudgetItem();
+        utilBudget.setExpectedSpending(150L);
+        utilBudget.setActualSpending(127L);
+        utilBudget.setCategory(Category.UTILITIES);
+        budgetItemRepository.save(utilBudget);
+        budgetItemSet.add(utilBudget);
 
     }
 
