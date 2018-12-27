@@ -21,10 +21,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="amount" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="transaction_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -42,6 +38,10 @@
             </column>
 
             <column name="category" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="amount" type="double">
                 <constraints nullable="true" />
             </column>
 

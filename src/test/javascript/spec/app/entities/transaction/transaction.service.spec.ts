@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Transaction(0, 0, TransactionType.CREDIT, currentDate, 'AAAAAAA', 'AAAAAAA', Category.RENT);
+            elemDefault = new Transaction(0, TransactionType.CREDIT, currentDate, 'AAAAAAA', 'AAAAAAA', Category.RENT, 0);
         });
 
         describe('Service methods', async () => {
@@ -70,12 +70,12 @@ describe('Service Tests', () => {
             it('should update a Transaction', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        amount: 1,
                         transactionType: 'BBBBBB',
                         dateTime: currentDate.format(DATE_FORMAT),
                         description: 'BBBBBB',
                         memo: 'BBBBBB',
-                        category: 'BBBBBB'
+                        category: 'BBBBBB',
+                        amount: 1
                     },
                     elemDefault
                 );
@@ -97,12 +97,12 @@ describe('Service Tests', () => {
             it('should return a list of Transaction', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        amount: 1,
                         transactionType: 'BBBBBB',
                         dateTime: currentDate.format(DATE_FORMAT),
                         description: 'BBBBBB',
                         memo: 'BBBBBB',
-                        category: 'BBBBBB'
+                        category: 'BBBBBB',
+                        amount: 1
                     },
                     elemDefault
                 );

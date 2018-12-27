@@ -32,6 +32,60 @@ export class TransactionComponent implements OnInit, OnDestroy {
         );
     }
 
+    sortDescription() {
+        this.transactionService.sortByDescription().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    sortCategory() {
+        this.transactionService.sortByCategory().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    sortAmount() {
+        this.transactionService.sortByAmount().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    getDebit() {
+        this.transactionService.filterDebit().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    getCredit() {
+        this.transactionService.filterCredit().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    searchQuery(searchQuery: string) {
+        this.transactionService.search(searchQuery).subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     ngOnInit() {
         this.loadAll();
         this.accountService.identity().then(account => {
