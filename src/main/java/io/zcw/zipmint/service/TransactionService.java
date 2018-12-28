@@ -35,7 +35,7 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) throws URISyntaxException {
+    public ResponseEntity<Transaction> createTransaction(Transaction transaction) throws URISyntaxException {
         if (transaction.getId() != null) {
             throw new BadRequestAlertException("A new transaction cannot already have an ID", ENTITY_NAME, "idexists");
         }
@@ -45,7 +45,7 @@ public class TransactionService {
             .body(result);
     }
 
-    public ResponseEntity<Transaction> updateTransaction(@RequestBody Transaction transaction) throws URISyntaxException {
+    public ResponseEntity<Transaction> updateTransaction(Transaction transaction) throws URISyntaxException {
         if (transaction.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
@@ -55,54 +55,54 @@ public class TransactionService {
             .body(result);
     }
 
-    public ResponseEntity<Transaction> getTransaction(@PathVariable Long id) {
+    public ResponseEntity<Transaction> getTransaction(Long id) {
         Optional<Transaction> transaction = transactionRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(transaction);
     }
 
-    public ResponseEntity<Void> deleteTransaction(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTransaction(Long id) {
         transactionRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    public ResponseEntity<Iterable<Transaction>> getAllTransactions(){
-        return new ResponseEntity<>(sortByDate(transactionRepository.findAll()), HttpStatus.OK);
+    public Iterable<Transaction> getAllTransactions(){
+        return sortByDate(transactionRepository.findAll());
     }
 
-    public ResponseEntity<Iterable<Transaction>> getDebitTransactions(){
+    public Iterable<Transaction> getDebitTransactions(){
         Iterable<Transaction> transactions = transactionRepository.findAll()
             .stream()
             .filter(this::isDebit)
             .collect(Collectors.toList());
-        return new ResponseEntity<>(transactions, HttpStatus.OK);
+        return transactions;
     }
 
-    public ResponseEntity<Iterable<Transaction>> getCreditTransactions(){
+    public Iterable<Transaction> getCreditTransactions(){
         Iterable<Transaction> transactions = transactionRepository.findAll()
             .stream()
             .filter(this::isCredit)
             .collect(Collectors.toList());
-        return new ResponseEntity<>(transactions, HttpStatus.OK);
+        return transactions;
     }
 
-    public ResponseEntity<Iterable<Transaction>> getSortedByCategory(){
-        return new ResponseEntity<>(sortByCategory(transactionRepository.findAll()), HttpStatus.OK);
+    public Iterable<Transaction> getSortedByCategory(){
+        return sortByCategory(transactionRepository.findAll());
     }
 
-    public ResponseEntity<Iterable<Transaction>> getSortedByDescription(){
-        return new ResponseEntity<>(sortByDescription(transactionRepository.findAll()), HttpStatus.OK);
+    public Iterable<Transaction> getSortedByDescription(){
+        return sortByDescription(transactionRepository.findAll());
     }
 
-    public ResponseEntity<Iterable<Transaction>> getSortedByAmount(){
-        return new ResponseEntity<>(sortByAmount(transactionRepository.findAll()), HttpStatus.OK);
+    public Iterable<Transaction> getSortedByAmount(){
+        return sortByAmount(transactionRepository.findAll());
     }
 
-    public ResponseEntity<Iterable<Transaction>> searchTransaction(String searchQuery){
+    public Iterable<Transaction> searchTransaction(String searchQuery){
         Iterable<Transaction> transactions = transactionRepository.findAll()
             .stream()
             .filter(item -> item.toString().toUpperCase().contains(searchQuery.toUpperCase()))
             .collect(Collectors.toList());
-        return new ResponseEntity<>(transactions, HttpStatus.OK);
+        return transactions;
     }
 
     private List<Transaction> sortByDate(List<Transaction> transactionList) {

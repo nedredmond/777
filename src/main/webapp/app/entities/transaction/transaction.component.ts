@@ -77,7 +77,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
         );
     }
 
-    searchQuery(searchQuery: string) {
+    search(searchQuery: string) {
         this.transactionService.search(searchQuery).subscribe(
             (res: HttpResponse<ITransaction[]>) => {
                 this.transactions = res.body;
