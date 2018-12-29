@@ -76,7 +76,7 @@ public class TransactionResource {
     @Timed
     public ResponseEntity<Iterable<Transaction>> getAllTransactions() {
         log.debug("REST request to get all Transactions");
-        return new ResponseEntity<>(transactionService.getAllTransactions(), HttpStatus.OK);
+        return new ResponseEntity<>(transactionService.getSortedByDate(), HttpStatus.OK);
     }
 
     /**
