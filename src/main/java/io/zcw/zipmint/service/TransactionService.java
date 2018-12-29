@@ -65,10 +65,6 @@ public class TransactionService {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    public Iterable<Transaction> getAllTransactions(){
-        return sortByDate(transactionRepository.findAll());
-    }
-
     public Iterable<Transaction> getDebitTransactions(){
         Iterable<Transaction> transactions = transactionRepository.findAll()
             .stream()
@@ -85,16 +81,20 @@ public class TransactionService {
         return transactions;
     }
 
+    public Iterable<Transaction> getSortedByDate(){
+        return sortByDate(getAllTransactions());
+    }
+
     public Iterable<Transaction> getSortedByCategory(){
-        return sortByCategory(transactionRepository.findAll());
+        return sortByCategory(getAllTransactions());
     }
 
     public Iterable<Transaction> getSortedByDescription(){
-        return sortByDescription(transactionRepository.findAll());
+        return sortByDescription(getAllTransactions());
     }
 
     public Iterable<Transaction> getSortedByAmount(){
-        return sortByAmount(transactionRepository.findAll());
+        return sortByAmount(getAllTransactions());
     }
 
     public Iterable<Transaction> searchTransaction(String searchQuery){
@@ -103,6 +103,10 @@ public class TransactionService {
             .filter(item -> item.toString().toUpperCase().contains(searchQuery.toUpperCase()))
             .collect(Collectors.toList());
         return transactions;
+    }
+
+    private List<Transaction> getAllTransactions(){
+        return transactionRepository.findAll();
     }
 
     private List<Transaction> sortByDate(List<Transaction> transactionList) {
