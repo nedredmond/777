@@ -52,7 +52,7 @@ export class BillItemService {
     protected convertDateFromClient(billItem: IBillItem): IBillItem {
         const copy: IBillItem = Object.assign({}, billItem, {
             dueDate: billItem.dueDate != null && billItem.dueDate.isValid() ? billItem.dueDate.format(DATE_FORMAT) : null,
-            paymentDate: billItem.paymentDate != null && billItem.paymentDate.isValid() ? billItem.paymentDate.format(DATE_FORMAT) : null
+            paidDate: billItem.paidDate != null && billItem.paidDate.isValid() ? billItem.paidDate.format(DATE_FORMAT) : null
         });
         return copy;
     }
@@ -60,7 +60,7 @@ export class BillItemService {
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
             res.body.dueDate = res.body.dueDate != null ? moment(res.body.dueDate) : null;
-            res.body.paymentDate = res.body.paymentDate != null ? moment(res.body.paymentDate) : null;
+            res.body.paidDate = res.body.paidDate != null ? moment(res.body.paidDate) : null;
         }
         return res;
     }
@@ -69,7 +69,7 @@ export class BillItemService {
         if (res.body) {
             res.body.forEach((billItem: IBillItem) => {
                 billItem.dueDate = billItem.dueDate != null ? moment(billItem.dueDate) : null;
-                billItem.paymentDate = billItem.paymentDate != null ? moment(billItem.paymentDate) : null;
+                billItem.paidDate = billItem.paidDate != null ? moment(billItem.paidDate) : null;
             });
         }
         return res;

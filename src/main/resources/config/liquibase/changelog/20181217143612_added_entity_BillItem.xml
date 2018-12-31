@@ -17,7 +17,7 @@
         Added the entity BillItem.
     -->
     <changeSet id="20181217143612-1" author="jhipster">
-        <createTable tableName="bill_item">
+        <createTable tableName="bill_history">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -29,15 +29,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="payment_date" type="date">
+            <column name="paid_date" type="date">
                 <constraints nullable="true" />
             </column>
 
             <column name="payment_amount" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="auto_pay" type="boolean">
                 <constraints nullable="true" />
             </column>
 

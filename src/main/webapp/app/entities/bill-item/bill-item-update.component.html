@@ -25,12 +25,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="App.billItem.paymentDate" for="field_paymentDate">Payment Date</label>
+                    <label class="form-control-label" jhiTranslate="App.billItem.paidDate" for="field_paidDate">Paid Date</label>
                     <div class="input-group">
-                        <input id="field_paymentDate" type="text" class="form-control" name="paymentDate" ngbDatepicker  #paymentDateDp="ngbDatepicker" [(ngModel)]="billItem.paymentDate"
+                        <input id="field_paidDate" type="text" class="form-control" name="paidDate" ngbDatepicker  #paidDateDp="ngbDatepicker" [(ngModel)]="billItem.paidDate"
                         />
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="paymentDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                            <button type="button" class="btn btn-secondary" (click)="paidDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
                     </div>
                 </div>
@@ -38,11 +38,6 @@
                     <label class="form-control-label" jhiTranslate="App.billItem.paymentAmount" for="field_paymentAmount">Payment Amount</label>
                     <input type="number" class="form-control" name="paymentAmount" id="field_paymentAmount"
                         [(ngModel)]="billItem.paymentAmount" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="App.billItem.autoPay" for="field_autoPay">Auto Pay</label>
-                    <input type="checkbox" class="form-control" name="autoPay" id="field_autoPay"
-                        [(ngModel)]="billItem.autoPay" />
                 </div>
 
                 <div class="form-group">
