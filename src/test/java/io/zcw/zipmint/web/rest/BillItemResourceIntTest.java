@@ -48,14 +48,11 @@ public class BillItemResourceIntTest {
     private static final LocalDate DEFAULT_DUE_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DUE_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_PAYMENT_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_PAYMENT_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_PAID_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_PAID_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Long DEFAULT_PAYMENT_AMOUNT = 1L;
     private static final Long UPDATED_PAYMENT_AMOUNT = 2L;
-
-    private static final Boolean DEFAULT_AUTO_PAY = false;
-    private static final Boolean UPDATED_AUTO_PAY = true;
 
     @Autowired
     private BillItemRepository billItemRepository;
@@ -101,9 +98,8 @@ public class BillItemResourceIntTest {
         BillItem billItem = new BillItem()
             .companyName(DEFAULT_COMPANY_NAME)
             .dueDate(DEFAULT_DUE_DATE)
-            .paymentDate(DEFAULT_PAYMENT_DATE)
-            .paymentAmount(DEFAULT_PAYMENT_AMOUNT)
-            .autoPay(DEFAULT_AUTO_PAY);
+            .paidDate(DEFAULT_PAID_DATE)
+            .paymentAmount(DEFAULT_PAYMENT_AMOUNT);
         return billItem;
     }
 
@@ -129,9 +125,8 @@ public class BillItemResourceIntTest {
         BillItem testBillItem = billItemList.get(billItemList.size() - 1);
         assertThat(testBillItem.getCompanyName()).isEqualTo(DEFAULT_COMPANY_NAME);
         assertThat(testBillItem.getDueDate()).isEqualTo(DEFAULT_DUE_DATE);
-        assertThat(testBillItem.getPaymentDate()).isEqualTo(DEFAULT_PAYMENT_DATE);
+        assertThat(testBillItem.getPaidDate()).isEqualTo(DEFAULT_PAID_DATE);
         assertThat(testBillItem.getPaymentAmount()).isEqualTo(DEFAULT_PAYMENT_AMOUNT);
-        assertThat(testBillItem.isAutoPay()).isEqualTo(DEFAULT_AUTO_PAY);
     }
 
     @Test
@@ -166,9 +161,8 @@ public class BillItemResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(billItem.getId().intValue())))
             .andExpect(jsonPath("$.[*].companyName").value(hasItem(DEFAULT_COMPANY_NAME.toString())))
             .andExpect(jsonPath("$.[*].dueDate").value(hasItem(DEFAULT_DUE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].paymentDate").value(hasItem(DEFAULT_PAYMENT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].paymentAmount").value(hasItem(DEFAULT_PAYMENT_AMOUNT.intValue())))
-            .andExpect(jsonPath("$.[*].autoPay").value(hasItem(DEFAULT_AUTO_PAY.booleanValue())));
+            .andExpect(jsonPath("$.[*].paidDate").value(hasItem(DEFAULT_PAID_DATE.toString())))
+            .andExpect(jsonPath("$.[*].paymentAmount").value(hasItem(DEFAULT_PAYMENT_AMOUNT.intValue())));
     }
     
     @Test
@@ -184,9 +178,8 @@ public class BillItemResourceIntTest {
             .andExpect(jsonPath("$.id").value(billItem.getId().intValue()))
             .andExpect(jsonPath("$.companyName").value(DEFAULT_COMPANY_NAME.toString()))
             .andExpect(jsonPath("$.dueDate").value(DEFAULT_DUE_DATE.toString()))
-            .andExpect(jsonPath("$.paymentDate").value(DEFAULT_PAYMENT_DATE.toString()))
-            .andExpect(jsonPath("$.paymentAmount").value(DEFAULT_PAYMENT_AMOUNT.intValue()))
-            .andExpect(jsonPath("$.autoPay").value(DEFAULT_AUTO_PAY.booleanValue()));
+            .andExpect(jsonPath("$.paidDate").value(DEFAULT_PAID_DATE.toString()))
+            .andExpect(jsonPath("$.paymentAmount").value(DEFAULT_PAYMENT_AMOUNT.intValue()));
     }
 
     @Test
@@ -212,9 +205,8 @@ public class BillItemResourceIntTest {
         updatedBillItem
             .companyName(UPDATED_COMPANY_NAME)
             .dueDate(UPDATED_DUE_DATE)
-            .paymentDate(UPDATED_PAYMENT_DATE)
-            .paymentAmount(UPDATED_PAYMENT_AMOUNT)
-            .autoPay(UPDATED_AUTO_PAY);
+            .paidDate(UPDATED_PAID_DATE)
+            .paymentAmount(UPDATED_PAYMENT_AMOUNT);
 
         restBillItemMockMvc.perform(put("/api/bill-items")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -227,9 +219,8 @@ public class BillItemResourceIntTest {
         BillItem testBillItem = billItemList.get(billItemList.size() - 1);
         assertThat(testBillItem.getCompanyName()).isEqualTo(UPDATED_COMPANY_NAME);
         assertThat(testBillItem.getDueDate()).isEqualTo(UPDATED_DUE_DATE);
-        assertThat(testBillItem.getPaymentDate()).isEqualTo(UPDATED_PAYMENT_DATE);
+        assertThat(testBillItem.getPaidDate()).isEqualTo(UPDATED_PAID_DATE);
         assertThat(testBillItem.getPaymentAmount()).isEqualTo(UPDATED_PAYMENT_AMOUNT);
-        assertThat(testBillItem.isAutoPay()).isEqualTo(UPDATED_AUTO_PAY);
     }
 
     @Test

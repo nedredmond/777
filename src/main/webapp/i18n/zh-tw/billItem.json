@@ -17,9 +17,8 @@
             },
             "companyName": "Company Name",
             "dueDate": "Due Date",
-            "paymentDate": "Payment Date",
+            "paidDate": "Paid Date",
             "paymentAmount": "Payment Amount",
-            "autoPay": "Auto Pay",
             "moneyAccount": "Money Account",
             "bills": "Bills"
         }

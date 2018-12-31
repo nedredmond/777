@@ -17,9 +17,8 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="App.billItem.companyName">Company Name</span></th>
             <th><span jhiTranslate="App.billItem.dueDate">Due Date</span></th>
-            <th><span jhiTranslate="App.billItem.paymentDate">Payment Date</span></th>
+            <th><span jhiTranslate="App.billItem.paidDate">Paid Date</span></th>
             <th><span jhiTranslate="App.billItem.paymentAmount">Payment Amount</span></th>
-            <th><span jhiTranslate="App.billItem.autoPay">Auto Pay</span></th>
             <th><span jhiTranslate="App.billItem.moneyAccount">Money Account</span></th>
             <th><span jhiTranslate="App.billItem.bills">Bills</span></th>
             <th></th>
@@ -30,9 +29,8 @@
                 <td><a [routerLink]="['/bill-item', billItem.id, 'view' ]">{{billItem.id}}</a></td>
                 <td>{{billItem.companyName}}</td>
                 <td>{{billItem.dueDate | date:'mediumDate'}}</td>
-                <td>{{billItem.paymentDate | date:'mediumDate'}}</td>
+                <td>{{billItem.paidDate | date:'mediumDate'}}</td>
                 <td>{{billItem.paymentAmount}}</td>
-                <td>{{billItem.autoPay}}</td>
                 <td>
                     <div *ngIf="billItem.moneyAccount">
                         <a [routerLink]="['../money-account', billItem.moneyAccount?.id, 'view' ]" >{{billItem.moneyAccount?.id}}</a>

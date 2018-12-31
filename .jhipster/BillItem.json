@@ -25,23 +25,19 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "paymentDate",
+            "fieldName": "paidDate",
             "fieldType": "LocalDate"
         },
         {
             "fieldName": "paymentAmount",
             "fieldType": "Long"
-        },
-        {
-            "fieldName": "autoPay",
-            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20181217143612",
     "dto": "no",
     "searchEngine": false,
     "service": "no",
-    "entityTableName": "bill_item",
+    "entityTableName": "bill_history",
     "jpaMetamodelFiltering": false,
     "pagination": "no"
 }

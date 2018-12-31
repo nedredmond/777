@@ -28,9 +28,8 @@ export class BillItemUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     companyNameInput = element(by.id('field_companyName'));
     dueDateInput = element(by.id('field_dueDate'));
-    paymentDateInput = element(by.id('field_paymentDate'));
+    paidDateInput = element(by.id('field_paidDate'));
     paymentAmountInput = element(by.id('field_paymentAmount'));
-    autoPayInput = element(by.id('field_autoPay'));
     moneyAccountSelect = element(by.id('field_moneyAccount'));
     billsSelect = element(by.id('field_bills'));
 
@@ -54,12 +53,12 @@ export class BillItemUpdatePage {
         return this.dueDateInput.getAttribute('value');
     }
 
-    async setPaymentDateInput(paymentDate) {
-        await this.paymentDateInput.sendKeys(paymentDate);
+    async setPaidDateInput(paidDate) {
+        await this.paidDateInput.sendKeys(paidDate);
     }
 
-    async getPaymentDateInput() {
-        return this.paymentDateInput.getAttribute('value');
+    async getPaidDateInput() {
+        return this.paidDateInput.getAttribute('value');
     }
 
     async setPaymentAmountInput(paymentAmount) {
@@ -68,10 +67,6 @@ export class BillItemUpdatePage {
 
     async getPaymentAmountInput() {
         return this.paymentAmountInput.getAttribute('value');
-    }
-
-    getAutoPayInput() {
-        return this.autoPayInput;
     }
 
     async moneyAccountSelectLastOption() {

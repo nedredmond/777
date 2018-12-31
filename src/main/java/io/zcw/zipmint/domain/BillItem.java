@@ -14,7 +14,7 @@ import java.util.Objects;
  * A BillItem.
  */
 @Entity
-@Table(name = "bill_item")
+@Table(name = "bill_history")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class BillItem implements Serializable {
 
@@ -31,14 +31,11 @@ public class BillItem implements Serializable {
     @Column(name = "due_date")
     private LocalDate dueDate;
 
-    @Column(name = "payment_date")
-    private LocalDate paymentDate;
+    @Column(name = "paid_date")
+    private LocalDate paidDate;
 
     @Column(name = "payment_amount")
     private Long paymentAmount;
-
-    @Column(name = "auto_pay")
-    private Boolean autoPay;
 
     @ManyToOne
     @JsonIgnoreProperties("billItems")
@@ -83,17 +80,17 @@ public class BillItem implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public LocalDate getPaymentDate() {
-        return paymentDate;
+    public LocalDate getPaidDate() {
+        return paidDate;
     }
 
-    public BillItem paymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
+    public BillItem paidDate(LocalDate paidDate) {
+        this.paidDate = paidDate;
         return this;
     }
 
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
+    public void setPaidDate(LocalDate paidDate) {
+        this.paidDate = paidDate;
     }
 
     public Long getPaymentAmount() {
@@ -107,19 +104,6 @@ public class BillItem implements Serializable {
 
     public void setPaymentAmount(Long paymentAmount) {
         this.paymentAmount = paymentAmount;
-    }
-
-    public Boolean isAutoPay() {
-        return autoPay;
-    }
-
-    public BillItem autoPay(Boolean autoPay) {
-        this.autoPay = autoPay;
-        return this;
-    }
-
-    public void setAutoPay(Boolean autoPay) {
-        this.autoPay = autoPay;
     }
 
     public MoneyAccount getMoneyAccount() {
@@ -175,9 +159,8 @@ public class BillItem implements Serializable {
             "id=" + getId() +
             ", companyName='" + getCompanyName() + "'" +
             ", dueDate='" + getDueDate() + "'" +
-            ", paymentDate='" + getPaymentDate() + "'" +
+            ", paidDate='" + getPaidDate() + "'" +
             ", paymentAmount=" + getPaymentAmount() +
-            ", autoPay='" + isAutoPay() + "'" +
             "}";
     }
 }

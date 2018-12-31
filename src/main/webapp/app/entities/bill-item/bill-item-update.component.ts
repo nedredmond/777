@@ -24,7 +24,7 @@ export class BillItemUpdateComponent implements OnInit {
 
     bills: IBills[];
     dueDateDp: any;
-    paymentDateDp: any;
+    paidDateDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
