@@ -1,7 +1,7 @@
-
+<h1>November</h1>
 <div>
     <h2 id="page-heading">
-        <span>December Budget</span>
+        <span>November Budget</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-budget-item" [routerLink]="['/budget-item/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span>
@@ -16,8 +16,8 @@
             <thead>
             <tr>
             <!--<th><span jhiTranslate="global.field.id">ID</span></th>-->
-            <th><span jhiTranslate="App.budgetItem.category">Category</span></th>
-            <th><span>Amount Budgeted</span></th>
+            <th><a (click) = "sortByCategory()"><span jhiTranslate="App.budgetItem.category">Category</span></a></th>
+            <th><a (click) = "sortByBudget()"><span>Amount Budgeted</span></a></th>
             <th><span>Amount Remaining</span></th>
             <!--<th><span>Amount Spent</span></th>-->
             <th><span>Percent Spent</span></th>

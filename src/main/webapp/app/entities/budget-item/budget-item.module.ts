@@ -25,6 +25,8 @@ const ENTITY_STATES = [...budgetItemRoute, ...budgetItemPopupRoute];
         BudgetItemDeleteDialogComponent,
         BudgetItemDeletePopupComponent
     ],
+    providers: [BudgetItemComponent],
+    bootstrap: [BudgetItemComponent],
     entryComponents: [BudgetItemComponent, BudgetItemUpdateComponent, BudgetItemDeleteDialogComponent, BudgetItemDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

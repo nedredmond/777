@@ -6,6 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IBudgetItem } from 'app/shared/model/budget-item.model';
 import { AccountService } from 'app/core';
 import { BudgetItemService } from './budget-item.service';
+// import 'rxjs/add/operator/map';
 
 @Component({
     selector: 'jhi-budget-item',
@@ -24,6 +25,7 @@ export class BudgetItemComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
+        this.budgetItemService.getCurrentMonthBudget().subscribe(console.log);
         this.budgetItemService.query().subscribe(
             (res: HttpResponse<IBudgetItem[]>) => {
                 this.budgetItems = res.body;
@@ -54,5 +56,32 @@ export class BudgetItemComponent implements OnInit, OnDestroy {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    filter(category: string) {
+        this.budgetItemService.filter(category).subscribe(
+            (res: HttpResponse<IBudgetItem[]>) => {
+                this.budgetItems = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    sortByCategory() {
+        this.budgetItemService.sortByCategory().subscribe(
+            (res: HttpResponse<IBudgetItem[]>) => {
+                this.budgetItems = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    sortByBudget() {
+        this.budgetItemService.sortByBudget().subscribe(
+            (res: HttpResponse<IBudgetItem[]>) => {
+                this.budgetItems = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 }

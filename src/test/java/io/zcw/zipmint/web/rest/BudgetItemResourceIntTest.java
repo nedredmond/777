@@ -4,6 +4,7 @@ import io.zcw.zipmint.Application;
 
 import io.zcw.zipmint.domain.BudgetItem;
 import io.zcw.zipmint.repository.BudgetItemRepository;
+import io.zcw.zipmint.repository.TransactionRepository;
 import io.zcw.zipmint.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -54,6 +55,9 @@ public class BudgetItemResourceIntTest {
     private BudgetItemRepository budgetItemRepository;
 
     @Autowired
+    private TransactionRepository transactionRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -66,7 +70,7 @@ public class BudgetItemResourceIntTest {
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
+    private Validator defaultValidator;
 
     private MockMvc restBudgetItemMockMvc;
 
@@ -75,13 +79,13 @@ public class BudgetItemResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BudgetItemResource budgetItemResource = new BudgetItemResource(budgetItemRepository);
+        final BudgetItemResource budgetItemResource = new BudgetItemResource(budgetItemRepository,transactionRepository);
         this.restBudgetItemMockMvc = MockMvcBuilders.standaloneSetup(budgetItemResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
+            .setValidator(defaultValidator).build();
     }
 
     /**
@@ -263,4 +267,5 @@ public class BudgetItemResourceIntTest {
         budgetItem1.setId(null);
         assertThat(budgetItem1).isNotEqualTo(budgetItem2);
     }
+
 }

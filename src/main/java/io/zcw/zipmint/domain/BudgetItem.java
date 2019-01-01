@@ -27,10 +27,10 @@ public class BudgetItem implements Serializable {
     private Long id;
 
     @Column(name = "expected_spending")
-    private Long expectedSpending;
+    private Double expectedSpending;
 
     @Column(name = "actual_spending")
-    private Long actualSpending;
+    private Double actualSpending;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
@@ -49,29 +49,29 @@ public class BudgetItem implements Serializable {
         this.id = id;
     }
 
-    public Long getExpectedSpending() {
+    public Double getExpectedSpending() {
         return expectedSpending;
     }
 
-    public BudgetItem expectedSpending(Long expectedSpending) {
+    public BudgetItem expectedSpending(Double expectedSpending) {
         this.expectedSpending = expectedSpending;
         return this;
     }
 
-    public void setExpectedSpending(Long expectedSpending) {
+    public void setExpectedSpending(Double expectedSpending) {
         this.expectedSpending = expectedSpending;
     }
 
-    public Long getActualSpending() {
+    public Double getActualSpending() {
         return actualSpending;
     }
 
-    public BudgetItem actualSpending(Long actualSpending) {
+    public BudgetItem actualSpending(Double actualSpending) {
         this.actualSpending = actualSpending;
         return this;
     }
 
-    public void setActualSpending(Long actualSpending) {
+    public void setActualSpending(Double actualSpending) {
         this.actualSpending = actualSpending;
     }
 

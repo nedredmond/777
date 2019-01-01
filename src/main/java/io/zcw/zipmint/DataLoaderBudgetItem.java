@@ -22,28 +22,28 @@ public class DataLoaderBudgetItem {
     private void LoadBillItems(){
         BudgetItem foodBudget = new BudgetItem();
         foodBudget.setExpectedSpending(300L);
-        foodBudget.setActualSpending(159L);
+        foodBudget.setActualSpending(159.0);
         foodBudget.setCategory(Category.FOOD);
         budgetItemRepository.save(foodBudget);
         budgetItemSet.add(foodBudget);
 
         BudgetItem shopBudget = new BudgetItem();
         shopBudget.setExpectedSpending(350L);
-        shopBudget.setActualSpending(400L);
+        shopBudget.setActualSpending(400.0);
         shopBudget.setCategory(Category.SHOPPING);
         budgetItemRepository.save(shopBudget);
         budgetItemSet.add(shopBudget);
 
         BudgetItem autoBudget = new BudgetItem();
         autoBudget.setExpectedSpending(175L);
-        autoBudget.setActualSpending(101L);
+        autoBudget.setActualSpending(101.0);
         autoBudget.setCategory(Category.AUTOMOTIVE);
         budgetItemRepository.save(autoBudget);
         budgetItemSet.add(autoBudget);
 
         BudgetItem utilBudget = new BudgetItem();
         utilBudget.setExpectedSpending(150L);
-        utilBudget.setActualSpending(127L);
+        utilBudget.setActualSpending(127.0);
         utilBudget.setCategory(Category.UTILITIES);
         budgetItemRepository.save(utilBudget);
         budgetItemSet.add(utilBudget);
