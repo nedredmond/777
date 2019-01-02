@@ -13,28 +13,24 @@
                 <dd>
                     <span>{{billItem.dueDate}}</span>
                 </dd>
-                <dt><span jhiTranslate="App.billItem.paymentDate">Payment Date</span></dt>
+                <dt><span jhiTranslate="App.billItem.paidDate">Paid Date</span></dt>
                 <dd>
-                    <span>{{billItem.paymentDate}}</span>
+                    <span>{{billItem.paidDate}}</span>
                 </dd>
                 <dt><span jhiTranslate="App.billItem.paymentAmount">Payment Amount</span></dt>
                 <dd>
                     <span>{{billItem.paymentAmount}}</span>
                 </dd>
-                <dt><span jhiTranslate="App.billItem.autoPay">Auto Pay</span></dt>
+                <dt><span jhiTranslate="App.billItem.moneyAccount">Money Account</span></dt>
                 <dd>
-                    <span>{{billItem.autoPay}}</span>
+                    <div *ngIf="billItem.moneyAccount">
+                        <a [routerLink]="['/money-account', billItem.moneyAccount?.id, 'view']">{{billItem.moneyAccount?.id}}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="App.billItem.bills">Bills</span></dt>
                 <dd>
                     <div *ngIf="billItem.bills">
                         <a [routerLink]="['/bills', billItem.bills?.id, 'view']">{{billItem.bills?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="App.billItem.account">Account</span></dt>
-                <dd>
-                    <div *ngIf="billItem.account">
-                        <a [routerLink]="['/money-account', billItem.account?.id, 'view']">{{billItem.account?.id}}</a>
                     </div>
                 </dd>
             </dl>

@@ -1,6 +1,7 @@
 package io.zcw.zipmint.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.netflix.ribbon.proxy.annotation.Http;
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.repository.TransactionRepository;
 import io.zcw.zipmint.service.TransactionService;
@@ -9,6 +10,7 @@ import io.zcw.zipmint.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,7 +76,7 @@ public class TransactionResource {
     @Timed
     public ResponseEntity<Iterable<Transaction>> getAllTransactions() {
         log.debug("REST request to get all Transactions");
-        return transactionService.getAllTransactions();
+        return new ResponseEntity<>(transactionService.getSortedByDate(), HttpStatus.OK);
     }
 
     /**
@@ -107,41 +109,41 @@ public class TransactionResource {
     @Timed
     public ResponseEntity<Iterable<Transaction>> getDebitTransactions() {
         log.debug("REST request to get debit Transactions");
-        return transactionService.getDebitTransactions();
+        return new ResponseEntity<>(transactionService.getDebitTransactions(), HttpStatus.OK);
     }
 
     @GetMapping("/transactions/credit")
     @Timed
     public ResponseEntity<Iterable<Transaction>> getCreditTransactions() {
         log.debug("REST request to get credit Transactions");
-        return transactionService.getCreditTransactions();
+        return new ResponseEntity<>(transactionService.getCreditTransactions(), HttpStatus.OK);
     }
 
     @GetMapping("/transactions/by_cat")
     @Timed
     public ResponseEntity<Iterable<Transaction>> getSortedByCategory() {
         log.debug("REST request to sort Transactions by Category");
-        return transactionService.getSortedByCategory();
+        return new ResponseEntity<>(transactionService.getSortedByCategory(), HttpStatus.OK);
     }
 
     @GetMapping("/transactions/by_desc")
     @Timed
     public ResponseEntity<Iterable<Transaction>> getSortedByDescription() {
         log.debug("REST request to sort Transactions by Description");
-        return transactionService.getSortedByDescription();
+        return new ResponseEntity<>(transactionService.getSortedByDescription(), HttpStatus.OK);
     }
 
     @GetMapping("/transactions/by_amount")
     @Timed
     public ResponseEntity<Iterable<Transaction>> getSortedByAmount() {
         log.debug("REST request to sort Transactions by Amount");
-        return transactionService.getSortedByAmount();
+        return new ResponseEntity<>(transactionService.getSortedByAmount(), HttpStatus.OK);
     }
 
-    @GetMapping("/transactions/{searchQuery}")
+    @GetMapping("/transactions/searchQuery")
     @Timed
-    public ResponseEntity<Iterable<Transaction>> getSearchResults(@PathVariable String searchQuery) {
+    public ResponseEntity<Iterable<Transaction>> getSearchResults(String searchQuery) {
         log.debug("REST request to filter by search query");
-        return transactionService.searchTransaction(searchQuery);
+        return new ResponseEntity<>(transactionService.searchTransaction(searchQuery), HttpStatus.OK);
     }
 }

@@ -4,21 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <!--
-        Added the constraints for entity BillItem.
+        Added the constraints for entity Bills.
     -->
-    <changeSet id="20181217143612-2" author="jhipster">
+    <changeSet id="20181217143611-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="money_account_id"
-                                 baseTableName="bill_history"
-                                 constraintName="fk_bill_item_money_account_id"
+                                 baseTableName="bills"
+                                 constraintName="fk_bills_money_account_id"
                                  referencedColumnNames="id"
                                  referencedTableName="money_account"/>
-
-        <addForeignKeyConstraint baseColumnNames="bills_id"
-                                 baseTableName="bill_history"
-                                 constraintName="fk_bill_item_bills_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="bills"/>
 
     </changeSet>
 </databaseChangeLog>

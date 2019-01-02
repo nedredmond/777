@@ -9,6 +9,32 @@
                 <dd>
                     <span>{{bills.paymentTotal}}</span>
                 </dd>
+                <dt><span jhiTranslate="App.bills.companyName">Company Name</span></dt>
+                <dd>
+                    <span>{{bills.companyName}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.bills.dueDate">Due Date</span></dt>
+                <dd>
+                    <span>{{bills.dueDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.bills.paymentDate">Payment Date</span></dt>
+                <dd>
+                    <span>{{bills.paymentDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.bills.paymentAmount">Payment Amount</span></dt>
+                <dd>
+                    <span>{{bills.paymentAmount}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.bills.autoPay">Auto Pay</span></dt>
+                <dd>
+                    <span>{{bills.autoPay}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.bills.moneyAccount">Money Account</span></dt>
+                <dd>
+                    <div *ngIf="bills.moneyAccount">
+                        <a [routerLink]="['/money-account', bills.moneyAccount?.id, 'view']">{{bills.moneyAccount?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
