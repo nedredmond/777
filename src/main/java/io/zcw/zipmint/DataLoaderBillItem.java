@@ -23,18 +23,18 @@ public class DataLoaderBillItem {
     @PostConstruct
     private void LoadBillItems(){
         BillItem billItem = new BillItem();
-        billItem.setCompanyName("Utility Company");
-        billItem.setDueDate(LocalDate.of(2019, 1, 30));
+        billItem.setCompanyName("Utility Company Nov");
+        billItem.setDueDate(LocalDate.of(2018, 11, 15));
         billItem.setPaymentAmount(100L);
-        billItem.setAutoPay(Boolean.TRUE);
+        // billItem.setAutoPay(Boolean.TRUE);
         billItemRepository.save(billItem);
         billItemSet.add(billItem);
 
         BillItem billItem2 = new BillItem();
-        billItem2.setCompanyName("Water Company");
-        billItem2.setDueDate(LocalDate.of(2019, 1, 15));
+        billItem2.setCompanyName("Utility Company Dec");
+        billItem2.setDueDate(LocalDate.of(2018, 12, 15));
         billItem2.setPaymentAmount(50L);
-        billItem2.setAutoPay(Boolean.FALSE);
+        // billItem2.setAutoPay(Boolean.FALSE);
         billItemRepository.save(billItem2);
         billItemSet.add(billItem2);
     }

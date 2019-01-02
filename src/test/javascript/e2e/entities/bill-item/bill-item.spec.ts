@@ -41,23 +41,15 @@ describe('BillItem e2e test', () => {
         await promise.all([
             billItemUpdatePage.setCompanyNameInput('companyName'),
             billItemUpdatePage.setDueDateInput('2000-12-31'),
-            billItemUpdatePage.setPaymentDateInput('2000-12-31'),
+            billItemUpdatePage.setPaidDateInput('2000-12-31'),
             billItemUpdatePage.setPaymentAmountInput('5'),
-            billItemUpdatePage.billsSelectLastOption(),
-            billItemUpdatePage.accountSelectLastOption()
+            billItemUpdatePage.moneyAccountSelectLastOption(),
+            billItemUpdatePage.billsSelectLastOption()
         ]);
         expect(await billItemUpdatePage.getCompanyNameInput()).to.eq('companyName');
         expect(await billItemUpdatePage.getDueDateInput()).to.eq('2000-12-31');
-        expect(await billItemUpdatePage.getPaymentDateInput()).to.eq('2000-12-31');
+        expect(await billItemUpdatePage.getPaidDateInput()).to.eq('2000-12-31');
         expect(await billItemUpdatePage.getPaymentAmountInput()).to.eq('5');
-        const selectedAutoPay = billItemUpdatePage.getAutoPayInput();
-        if (await selectedAutoPay.isSelected()) {
-            await billItemUpdatePage.getAutoPayInput().click();
-            expect(await billItemUpdatePage.getAutoPayInput().isSelected()).to.be.false;
-        } else {
-            await billItemUpdatePage.getAutoPayInput().click();
-            expect(await billItemUpdatePage.getAutoPayInput().isSelected()).to.be.true;
-        }
         await billItemUpdatePage.save();
         expect(await billItemUpdatePage.getSaveButton().isPresent()).to.be.false;
 

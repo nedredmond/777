@@ -1,16 +1,15 @@
 import { Moment } from 'moment';
-import { IBills } from 'app/shared/model//bills.model';
 import { IMoneyAccount } from 'app/shared/model//money-account.model';
+import { IBills } from 'app/shared/model//bills.model';
 
 export interface IBillItem {
     id?: number;
     companyName?: string;
     dueDate?: Moment;
-    paymentDate?: Moment;
+    paidDate?: Moment;
     paymentAmount?: number;
-    autoPay?: boolean;
+    moneyAccount?: IMoneyAccount;
     bills?: IBills;
-    account?: IMoneyAccount;
 }
 
 export class BillItem implements IBillItem {
@@ -18,12 +17,9 @@ export class BillItem implements IBillItem {
         public id?: number,
         public companyName?: string,
         public dueDate?: Moment,
-        public paymentDate?: Moment,
+        public paidDate?: Moment,
         public paymentAmount?: number,
-        public autoPay?: boolean,
-        public bills?: IBills,
-        public account?: IMoneyAccount
-    ) {
-        this.autoPay = this.autoPay || false;
-    }
+        public moneyAccount?: IMoneyAccount,
+        public bills?: IBills
+    ) {}
 }

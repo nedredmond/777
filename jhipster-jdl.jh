@@ -1,8 +1,3 @@
-entity UserDetails {
-    netWorth Long,
-    totalCash Long
-}
-
 entity MoneyAccount {
 	type AccountType,
     accountTotal Long,
@@ -72,11 +67,11 @@ enum AccountType {
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
 	MoneyAccount{transactions} to Transaction,
-	UserDetails{accounts} to MoneyAccount,
     Budget{budgetItems} to BudgetItem,
-    Bills{billItems} to BillItem
+    Bills{billItems} to BillItem,
+MoneyAccount{billItems} to BillItem
 }
 
 relationship ManyToOne {
-    BillItem{account} to MoneyAccount
+	MoneyAccount{user} to User
 }

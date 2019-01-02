@@ -1,5 +1,20 @@
 {
-    "name": "BillItem",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "moneyAccount",
+            "otherEntityName": "moneyAccount",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "bills",
+            "otherEntityName": "bills",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "companyName",
@@ -10,39 +25,19 @@
             "fieldType": "LocalDate"
         },
         {
-            "fieldName": "paymentDate",
+            "fieldName": "paidDate",
             "fieldType": "LocalDate"
         },
         {
             "fieldName": "paymentAmount",
             "fieldType": "Long"
-        },
-        {
-            "fieldName": "autoPay",
-            "fieldType": "Boolean"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipName": "bills",
-            "otherEntityName": "bills",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "account",
-            "otherEntityName": "moneyAccount",
-            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20181217143612",
-    "entityTableName": "bill_item",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "bill_history",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }
