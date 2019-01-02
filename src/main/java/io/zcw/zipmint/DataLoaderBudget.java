@@ -24,8 +24,8 @@ public class DataLoaderBudget {
     public void loadBudget(){
         Budget budget = new Budget();
         budget.setBudgetItems(dataLoaderBudgetItem.getBudgetItemSet());
-        budget.setExpectedTotal(1500L);
-        budget.setActualTotal(1225L);
+        budget.setExpectedTotal(1500.0);
+        budget.setActualTotal(1225.0);
         budget.setStartDate(LocalDate.of(2018,12,01));
         budget.setEndDate(LocalDate.of(2018,12,31));
         budgetRepository.save(budget);
