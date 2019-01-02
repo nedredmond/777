@@ -39,13 +39,12 @@ public class BudgetItemResource {
 
     private final BudgetItemRepository budgetItemRepository;
 
-    private TransactionService transactionService;
+
     private BudgetItemService budgetItemService;
 
-    public BudgetItemResource(BudgetItemRepository budgetItemRepository,
-                              TransactionService transactionService) {
+    public BudgetItemResource(BudgetItemRepository budgetItemRepository) {
         this.budgetItemRepository = budgetItemRepository;
-        this.transactionService = transactionService;
+
     }
 
     /**

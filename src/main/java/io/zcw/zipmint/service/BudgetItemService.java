@@ -93,7 +93,6 @@ public class BudgetItemService {
         return sortByCategory(budgetItemRepository.findAll());
     }
 
-
     public List<Transaction> filterByCategory(Category category, int month){
         ArrayList<Transaction> filteredList = new ArrayList<>();
         for(Transaction t: filterByMonth(month)){

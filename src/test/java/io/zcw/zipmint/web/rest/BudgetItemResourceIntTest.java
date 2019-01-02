@@ -42,20 +42,17 @@ import io.zcw.zipmint.domain.enumeration.Category;
 @SpringBootTest(classes = Application.class)
 public class BudgetItemResourceIntTest {
 
-    private static final Long DEFAULT_EXPECTED_SPENDING = 1L;
-    private static final Long UPDATED_EXPECTED_SPENDING = 2L;
+    private static final Double DEFAULT_EXPECTED_SPENDING = 1.0;
+    private static final Double UPDATED_EXPECTED_SPENDING = 2.0;
 
-    private static final Long DEFAULT_ACTUAL_SPENDING = 1L;
-    private static final Long UPDATED_ACTUAL_SPENDING = 2L;
+    private static final Double DEFAULT_ACTUAL_SPENDING = 1.0;
+    private static final Double UPDATED_ACTUAL_SPENDING = 2.0;
 
     private static final Category DEFAULT_CATEGORY = Category.RENT;
     private static final Category UPDATED_CATEGORY = Category.FOOD;
 
     @Autowired
     private BudgetItemRepository budgetItemRepository;
-
-    @Autowired
-    private TransactionRepository transactionRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -79,7 +76,7 @@ public class BudgetItemResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BudgetItemResource budgetItemResource = new BudgetItemResource(budgetItemRepository,transactionRepository);
+        final BudgetItemResource budgetItemResource = new BudgetItemResource(budgetItemRepository);
         this.restBudgetItemMockMvc = MockMvcBuilders.standaloneSetup(budgetItemResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

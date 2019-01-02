@@ -28,10 +28,10 @@ public class Budget implements Serializable {
     private Long id;
 
     @Column(name = "expected_total")
-    private Long expectedTotal;
+    private Double expectedTotal;
 
     @Column(name = "actual_total")
-    private Long actualTotal;
+    private Double actualTotal;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -51,29 +51,29 @@ public class Budget implements Serializable {
         this.id = id;
     }
 
-    public Long getExpectedTotal() {
+    public Double getExpectedTotal() {
         return expectedTotal;
     }
 
-    public Budget expectedTotal(Long expectedTotal) {
+    public Budget expectedTotal(Double expectedTotal) {
         this.expectedTotal = expectedTotal;
         return this;
     }
 
-    public void setExpectedTotal(Long expectedTotal) {
+    public void setExpectedTotal(Double expectedTotal) {
         this.expectedTotal = expectedTotal;
     }
 
-    public Long getActualTotal() {
+    public Double getActualTotal() {
         return actualTotal;
     }
 
-    public Budget actualTotal(Long actualTotal) {
+    public Budget actualTotal(Double actualTotal) {
         this.actualTotal = actualTotal;
         return this;
     }
 
-    public void setActualTotal(Long actualTotal) {
+    public void setActualTotal(Double actualTotal) {
         this.actualTotal = actualTotal;
     }
 
