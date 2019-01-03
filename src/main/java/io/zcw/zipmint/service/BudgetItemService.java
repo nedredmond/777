@@ -19,12 +19,10 @@ public class BudgetItemService {
 
     private final BudgetItemRepository budgetItemRepository;
     private final TransactionRepository transactionRepository;
-    private final TransactionService transactionService;
 
-    public BudgetItemService(BudgetItemRepository budgetItemRepository, TransactionRepository transactionRepository, TransactionService transactionService) {
+    public BudgetItemService(BudgetItemRepository budgetItemRepository, TransactionRepository transactionRepository) {
         this.budgetItemRepository = budgetItemRepository;
         this.transactionRepository = transactionRepository;
-        this.transactionService = transactionService;
     }
 
     public List<Transaction> filterByMonth(int month) {
