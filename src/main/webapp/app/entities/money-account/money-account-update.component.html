@@ -4,7 +4,6 @@
             <h2 id="jhi-money-account-heading" jhiTranslate="App.moneyAccount.home.createOrEditLabel">Create or edit a Money Account</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-
                 <div class="form-group" [hidden]="!moneyAccount.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
@@ -36,10 +35,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="App.moneyAccount.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" [(ngModel)]="moneyAccount.user" >
+                    <label class="form-control-label" jhiTranslate="App.moneyAccount.userDetails" for="field_userDetails">User Details</label>
+                    <select class="form-control" id="field_userDetails" name="userDetails" [(ngModel)]="moneyAccount.userDetails" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === moneyAccount.user?.id ? moneyAccount.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                        <option [ngValue]="userDetailsOption.id === moneyAccount.userDetails?.id ? moneyAccount.userDetails : userDetailsOption" *ngFor="let userDetailsOption of userdetails; trackBy: trackUserDetailsById">{{userDetailsOption.id}}</option>
                     </select>
                 </div>
             </div>
