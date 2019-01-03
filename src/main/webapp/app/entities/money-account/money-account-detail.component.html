@@ -21,9 +21,11 @@
                 <dd>
                     <span>{{moneyAccount.pw}}</span>
                 </dd>
-                <dt><span jhiTranslate="App.moneyAccount.user">User</span></dt>
+                <dt><span jhiTranslate="App.moneyAccount.userDetails">User Details</span></dt>
                 <dd>
-                    {{moneyAccount.user?.id}}
+                    <div *ngIf="moneyAccount.userDetails">
+                        <a [routerLink]="['/user-details', moneyAccount.userDetails?.id, 'view']">{{moneyAccount.userDetails?.id}}</a>
+                    </div>
                 </dd>
             </dl>
 

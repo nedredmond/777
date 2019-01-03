@@ -30,7 +30,7 @@ export class MoneyAccountUpdatePage {
     accountTotalInput = element(by.id('field_accountTotal'));
     signInInput = element(by.id('field_signIn'));
     pwInput = element(by.id('field_pw'));
-    userSelect = element(by.id('field_user'));
+    userDetailsSelect = element(by.id('field_userDetails'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -75,23 +75,23 @@ export class MoneyAccountUpdatePage {
         return this.pwInput.getAttribute('value');
     }
 
-    async userSelectLastOption() {
-        await this.userSelect
+    async userDetailsSelectLastOption() {
+        await this.userDetailsSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async userSelectOption(option) {
-        await this.userSelect.sendKeys(option);
+    async userDetailsSelectOption(option) {
+        await this.userDetailsSelect.sendKeys(option);
     }
 
-    getUserSelect(): ElementFinder {
-        return this.userSelect;
+    getUserDetailsSelect(): ElementFinder {
+        return this.userDetailsSelect;
     }
 
-    async getUserSelectedOption() {
-        return this.userSelect.element(by.css('option:checked')).getText();
+    async getUserDetailsSelectedOption() {
+        return this.userDetailsSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

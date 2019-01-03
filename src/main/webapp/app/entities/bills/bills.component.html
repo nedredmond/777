@@ -16,12 +16,6 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="App.bills.paymentTotal">Payment Total</span></th>
-            <th><span jhiTranslate="App.bills.companyName">Company Name</span></th>
-            <th><span jhiTranslate="App.bills.dueDate">Due Date</span></th>
-            <th><span jhiTranslate="App.bills.paymentDate">Payment Date</span></th>
-            <th><span jhiTranslate="App.bills.paymentAmount">Payment Amount</span></th>
-            <th><span jhiTranslate="App.bills.autoPay">Auto Pay</span></th>
-            <th><span jhiTranslate="App.bills.moneyAccount">Money Account</span></th>
             <th></th>
             </tr>
             </thead>
@@ -29,16 +23,6 @@
             <tr *ngFor="let bills of bills ;trackBy: trackId">
                 <td><a [routerLink]="['/bills', bills.id, 'view' ]">{{bills.id}}</a></td>
                 <td>{{bills.paymentTotal}}</td>
-                <td>{{bills.companyName}}</td>
-                <td>{{bills.dueDate | date:'mediumDate'}}</td>
-                <td>{{bills.paymentDate | date:'mediumDate'}}</td>
-                <td>{{bills.paymentAmount}}</td>
-                <td>{{bills.autoPay}}</td>
-                <td>
-                    <div *ngIf="bills.moneyAccount">
-                        <a [routerLink]="['../money-account', bills.moneyAccount?.id, 'view' ]" >{{bills.moneyAccount?.id}}</a>
-                    </div>
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

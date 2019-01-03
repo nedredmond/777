@@ -19,9 +19,8 @@
             "accountTotal": "Account Total",
             "signIn": "Sign In",
             "pw": "Pw",
-            "transactions": "Transactions",
-            "billItems": "Bill Items",
-            "user": "User"
+            "userDetails": "User Details",
+            "transactions": "Transactions"
         }
     }
 }

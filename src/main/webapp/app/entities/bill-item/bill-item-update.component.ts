@@ -7,10 +7,10 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IBillItem } from 'app/shared/model/bill-item.model';
 import { BillItemService } from './bill-item.service';
-import { IMoneyAccount } from 'app/shared/model/money-account.model';
-import { MoneyAccountService } from 'app/entities/money-account';
 import { IBills } from 'app/shared/model/bills.model';
 import { BillsService } from 'app/entities/bills';
+import { IMoneyAccount } from 'app/shared/model/money-account.model';
+import { MoneyAccountService } from 'app/entities/money-account';
 
 @Component({
     selector: 'jhi-bill-item-update',
@@ -20,17 +20,17 @@ export class BillItemUpdateComponent implements OnInit {
     billItem: IBillItem;
     isSaving: boolean;
 
-    moneyaccounts: IMoneyAccount[];
-
     bills: IBills[];
+
+    moneyaccounts: IMoneyAccount[];
     dueDateDp: any;
-    paidDateDp: any;
+    paymentDateDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected billItemService: BillItemService,
-        protected moneyAccountService: MoneyAccountService,
         protected billsService: BillsService,
+        protected moneyAccountService: MoneyAccountService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -39,15 +39,15 @@ export class BillItemUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ billItem }) => {
             this.billItem = billItem;
         });
-        this.moneyAccountService.query().subscribe(
-            (res: HttpResponse<IMoneyAccount[]>) => {
-                this.moneyaccounts = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
         this.billsService.query().subscribe(
             (res: HttpResponse<IBills[]>) => {
                 this.bills = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.moneyAccountService.query().subscribe(
+            (res: HttpResponse<IMoneyAccount[]>) => {
+                this.moneyaccounts = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -83,11 +83,11 @@ export class BillItemUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackMoneyAccountById(index: number, item: IMoneyAccount) {
+    trackBillsById(index: number, item: IBills) {
         return item.id;
     }
 
-    trackBillsById(index: number, item: IBills) {
+    trackMoneyAccountById(index: number, item: IMoneyAccount) {
         return item.id;
     }
 }
