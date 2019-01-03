@@ -8,17 +8,17 @@
     -->
     <changeSet id="20181217143612-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="money_account_id"
-                                 baseTableName="bill_history"
-                                 constraintName="fk_bill_item_money_account_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="money_account"/>
-
         <addForeignKeyConstraint baseColumnNames="bills_id"
-                                 baseTableName="bill_history"
+                                 baseTableName="bill_item"
                                  constraintName="fk_bill_item_bills_id"
                                  referencedColumnNames="id"
                                  referencedTableName="bills"/>
+
+        <addForeignKeyConstraint baseColumnNames="account_id"
+                                 baseTableName="bill_item"
+                                 constraintName="fk_bill_item_account_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="money_account"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -21,22 +21,16 @@
     ],
     "relationships": [
         {
+            "relationshipName": "userDetails",
+            "otherEntityName": "userDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
             "relationshipType": "one-to-many",
             "relationshipName": "transactions",
             "otherEntityName": "transaction",
             "otherEntityRelationshipName": "moneyAccount"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "billItems",
-            "otherEntityName": "billItem",
-            "otherEntityRelationshipName": "moneyAccount"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "relationshipName": "user",
-            "otherEntityName": "user",
-            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20181217143607",

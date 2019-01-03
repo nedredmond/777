@@ -25,30 +25,6 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="company_name" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="due_date" type="date">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="payment_date" type="date">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="payment_amount" type="double">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="auto_pay" type="boolean">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="money_account_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

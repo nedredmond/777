@@ -14,7 +14,7 @@ import java.util.Objects;
  * A BillItem.
  */
 @Entity
-@Table(name = "bill_history")
+@Table(name = "bill_item")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class BillItem implements Serializable {
 
@@ -31,19 +31,22 @@ public class BillItem implements Serializable {
     @Column(name = "due_date")
     private LocalDate dueDate;
 
-    @Column(name = "paid_date")
-    private LocalDate paidDate;
+    @Column(name = "payment_date")
+    private LocalDate paymentDate;
 
     @Column(name = "payment_amount")
     private Long paymentAmount;
 
-    @ManyToOne
-    @JsonIgnoreProperties("billItems")
-    private MoneyAccount moneyAccount;
+    @Column(name = "auto_pay")
+    private Boolean autoPay;
 
     @ManyToOne
     @JsonIgnoreProperties("billItems")
     private Bills bills;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private MoneyAccount account;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -80,17 +83,17 @@ public class BillItem implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public LocalDate getPaidDate() {
-        return paidDate;
+    public LocalDate getPaymentDate() {
+        return paymentDate;
     }
 
-    public BillItem paidDate(LocalDate paidDate) {
-        this.paidDate = paidDate;
+    public BillItem paymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
         return this;
     }
 
-    public void setPaidDate(LocalDate paidDate) {
-        this.paidDate = paidDate;
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
     public Long getPaymentAmount() {
@@ -106,17 +109,17 @@ public class BillItem implements Serializable {
         this.paymentAmount = paymentAmount;
     }
 
-    public MoneyAccount getMoneyAccount() {
-        return moneyAccount;
+    public Boolean isAutoPay() {
+        return autoPay;
     }
 
-    public BillItem moneyAccount(MoneyAccount moneyAccount) {
-        this.moneyAccount = moneyAccount;
+    public BillItem autoPay(Boolean autoPay) {
+        this.autoPay = autoPay;
         return this;
     }
 
-    public void setMoneyAccount(MoneyAccount moneyAccount) {
-        this.moneyAccount = moneyAccount;
+    public void setAutoPay(Boolean autoPay) {
+        this.autoPay = autoPay;
     }
 
     public Bills getBills() {
@@ -130,6 +133,19 @@ public class BillItem implements Serializable {
 
     public void setBills(Bills bills) {
         this.bills = bills;
+    }
+
+    public MoneyAccount getAccount() {
+        return account;
+    }
+
+    public BillItem account(MoneyAccount moneyAccount) {
+        this.account = moneyAccount;
+        return this;
+    }
+
+    public void setAccount(MoneyAccount moneyAccount) {
+        this.account = moneyAccount;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -159,8 +175,9 @@ public class BillItem implements Serializable {
             "id=" + getId() +
             ", companyName='" + getCompanyName() + "'" +
             ", dueDate='" + getDueDate() + "'" +
-            ", paidDate='" + getPaidDate() + "'" +
+            ", paymentDate='" + getPaymentDate() + "'" +
             ", paymentAmount=" + getPaymentAmount() +
+            ", autoPay='" + isAutoPay() + "'" +
             "}";
     }
 }

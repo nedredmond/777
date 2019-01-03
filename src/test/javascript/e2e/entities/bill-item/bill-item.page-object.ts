@@ -28,10 +28,11 @@ export class BillItemUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     companyNameInput = element(by.id('field_companyName'));
     dueDateInput = element(by.id('field_dueDate'));
-    paidDateInput = element(by.id('field_paidDate'));
+    paymentDateInput = element(by.id('field_paymentDate'));
     paymentAmountInput = element(by.id('field_paymentAmount'));
-    moneyAccountSelect = element(by.id('field_moneyAccount'));
+    autoPayInput = element(by.id('field_autoPay'));
     billsSelect = element(by.id('field_bills'));
+    accountSelect = element(by.id('field_account'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -53,12 +54,12 @@ export class BillItemUpdatePage {
         return this.dueDateInput.getAttribute('value');
     }
 
-    async setPaidDateInput(paidDate) {
-        await this.paidDateInput.sendKeys(paidDate);
+    async setPaymentDateInput(paymentDate) {
+        await this.paymentDateInput.sendKeys(paymentDate);
     }
 
-    async getPaidDateInput() {
-        return this.paidDateInput.getAttribute('value');
+    async getPaymentDateInput() {
+        return this.paymentDateInput.getAttribute('value');
     }
 
     async setPaymentAmountInput(paymentAmount) {
@@ -69,23 +70,8 @@ export class BillItemUpdatePage {
         return this.paymentAmountInput.getAttribute('value');
     }
 
-    async moneyAccountSelectLastOption() {
-        await this.moneyAccountSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async moneyAccountSelectOption(option) {
-        await this.moneyAccountSelect.sendKeys(option);
-    }
-
-    getMoneyAccountSelect(): ElementFinder {
-        return this.moneyAccountSelect;
-    }
-
-    async getMoneyAccountSelectedOption() {
-        return this.moneyAccountSelect.element(by.css('option:checked')).getText();
+    getAutoPayInput() {
+        return this.autoPayInput;
     }
 
     async billsSelectLastOption() {
@@ -105,6 +91,25 @@ export class BillItemUpdatePage {
 
     async getBillsSelectedOption() {
         return this.billsSelect.element(by.css('option:checked')).getText();
+    }
+
+    async accountSelectLastOption() {
+        await this.accountSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async accountSelectOption(option) {
+        await this.accountSelect.sendKeys(option);
+    }
+
+    getAccountSelect(): ElementFinder {
+        return this.accountSelect;
+    }
+
+    async getAccountSelectedOption() {
+        return this.accountSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {
