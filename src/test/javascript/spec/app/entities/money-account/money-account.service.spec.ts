@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(MoneyAccountService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new MoneyAccount(0, AccountType.CREDIT, 0, 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new MoneyAccount(0, AccountType.CREDIT, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -58,7 +58,8 @@ describe('Service Tests', () => {
                         type: 'BBBBBB',
                         accountTotal: 1,
                         signIn: 'BBBBBB',
-                        pw: 'BBBBBB'
+                        pw: 'BBBBBB',
+                        bankName: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -78,7 +79,8 @@ describe('Service Tests', () => {
                         type: 'BBBBBB',
                         accountTotal: 1,
                         signIn: 'BBBBBB',
-                        pw: 'BBBBBB'
+                        pw: 'BBBBBB',
+                        bankName: 'BBBBBB'
                     },
                     elemDefault
                 );

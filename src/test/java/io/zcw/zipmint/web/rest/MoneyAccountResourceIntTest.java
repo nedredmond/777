@@ -53,6 +53,9 @@ public class MoneyAccountResourceIntTest {
     private static final String DEFAULT_PW = "AAAAAAAAAA";
     private static final String UPDATED_PW = "BBBBBBBBBB";
 
+    private static final String DEFAULT_BANK_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_BANK_NAME = "BBBBBBBBBB";
+
     @Autowired
     private MoneyAccountRepository moneyAccountRepository;
 
@@ -98,7 +101,8 @@ public class MoneyAccountResourceIntTest {
             .type(DEFAULT_TYPE)
             .accountTotal(DEFAULT_ACCOUNT_TOTAL)
             .signIn(DEFAULT_SIGN_IN)
-            .pw(DEFAULT_PW);
+            .pw(DEFAULT_PW)
+            .bankName(DEFAULT_BANK_NAME);
         return moneyAccount;
     }
 
@@ -126,6 +130,7 @@ public class MoneyAccountResourceIntTest {
         assertThat(testMoneyAccount.getAccountTotal()).isEqualTo(DEFAULT_ACCOUNT_TOTAL);
         assertThat(testMoneyAccount.getSignIn()).isEqualTo(DEFAULT_SIGN_IN);
         assertThat(testMoneyAccount.getPw()).isEqualTo(DEFAULT_PW);
+        assertThat(testMoneyAccount.getBankName()).isEqualTo(DEFAULT_BANK_NAME);
     }
 
     @Test
@@ -161,7 +166,8 @@ public class MoneyAccountResourceIntTest {
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].accountTotal").value(hasItem(DEFAULT_ACCOUNT_TOTAL.intValue())))
             .andExpect(jsonPath("$.[*].signIn").value(hasItem(DEFAULT_SIGN_IN.toString())))
-            .andExpect(jsonPath("$.[*].pw").value(hasItem(DEFAULT_PW.toString())));
+            .andExpect(jsonPath("$.[*].pw").value(hasItem(DEFAULT_PW.toString())))
+            .andExpect(jsonPath("$.[*].bankName").value(hasItem(DEFAULT_BANK_NAME.toString())));
     }
     
     @Test
@@ -178,7 +184,8 @@ public class MoneyAccountResourceIntTest {
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.accountTotal").value(DEFAULT_ACCOUNT_TOTAL.intValue()))
             .andExpect(jsonPath("$.signIn").value(DEFAULT_SIGN_IN.toString()))
-            .andExpect(jsonPath("$.pw").value(DEFAULT_PW.toString()));
+            .andExpect(jsonPath("$.pw").value(DEFAULT_PW.toString()))
+            .andExpect(jsonPath("$.bankName").value(DEFAULT_BANK_NAME.toString()));
     }
 
     @Test
@@ -205,7 +212,8 @@ public class MoneyAccountResourceIntTest {
             .type(UPDATED_TYPE)
             .accountTotal(UPDATED_ACCOUNT_TOTAL)
             .signIn(UPDATED_SIGN_IN)
-            .pw(UPDATED_PW);
+            .pw(UPDATED_PW)
+            .bankName(UPDATED_BANK_NAME);
 
         restMoneyAccountMockMvc.perform(put("/api/money-accounts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -220,6 +228,7 @@ public class MoneyAccountResourceIntTest {
         assertThat(testMoneyAccount.getAccountTotal()).isEqualTo(UPDATED_ACCOUNT_TOTAL);
         assertThat(testMoneyAccount.getSignIn()).isEqualTo(UPDATED_SIGN_IN);
         assertThat(testMoneyAccount.getPw()).isEqualTo(UPDATED_PW);
+        assertThat(testMoneyAccount.getBankName()).isEqualTo(UPDATED_BANK_NAME);
     }
 
     @Test
