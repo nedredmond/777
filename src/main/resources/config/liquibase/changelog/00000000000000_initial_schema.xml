@@ -61,19 +61,6 @@
             </column>
         </createTable>
 
-        <createTable tableName="transaction">
-            <column name="amount" type="long"/>
-            <column name="category" type="varchar(50)"/>
-            <column name="date_time" type="date"/>
-            <column name="description" type="varchar(50)"/>
-            <column name="memo" type="varchar(254)"/>
-            <column name="money_account_id" type="int"/>
-            <column name="transaction_type" type="varchar(50)"/>
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-        </createTable>
-
         <addPrimaryKey columnNames="user_id, authority_name" tableName="jhi_user_authority"/>
 
         <addForeignKeyConstraint baseColumnNames="authority_name"
@@ -103,11 +90,6 @@
                   file="config/liquibase/authorities.csv"
                   separator=";"
                   tableName="jhi_authority"/>
-
-        <loadData encoding="UTF-8"
-                  file="config/liquibase/transactions.csv"
-                  separator=";"
-                  tableName="transaction"/>
 
         <loadData encoding="UTF-8"
                   file="config/liquibase/users_authorities.csv"
