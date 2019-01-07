@@ -10,10 +10,12 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <button (click)="loadAll()">See All</button>
-    <button (click)="getDebit()">See Debit</button>
-    <button (click)="getCredit()">See Credit</button>
-    <button (click)="searchQuery(searchText)" class="float-right">Search</button><input [(ngModel)]="searchText" placeholder="search text goes here" class="float-right">
+    <div class="btn-group flex-btn-group-container float-left">
+        <button (click)="loadAll()">See All</button>
+        <button (click)="getDebit()">See Debit</button>
+        <button (click)="getCredit()">See Credit</button>
+    </div>
+    <button (click)="search()" class="float-right">Search</button><input [(ngModel)]="searchText" placeholder="search text goes here" class="float-right">
     <br/><br/>
     <div class="table-responsive" *ngIf="transactions">
         <table class="table table-striped">
