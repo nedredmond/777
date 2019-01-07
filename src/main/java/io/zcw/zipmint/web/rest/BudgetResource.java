@@ -132,5 +132,11 @@ public class BudgetResource {
         return budget;
     }
 
+    @GetMapping("/budgets/totalspent")
+    @Timed
+    public ResponseEntity<Budget> getTotalSpent(){
+        log.debug("REST request to get total spent");
+        return new ResponseEntity<>(calculateTotalSpent(),HttpStatus.OK);
+    }
 
 }

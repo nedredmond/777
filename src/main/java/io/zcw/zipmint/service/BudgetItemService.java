@@ -1,21 +1,28 @@
 package io.zcw.zipmint.service;
 
-import com.codahale.metrics.annotation.Timed;
+import io.github.jhipster.web.util.ResponseUtil;
 import io.zcw.zipmint.domain.BudgetItem;
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.domain.enumeration.Category;
 import io.zcw.zipmint.repository.BudgetItemRepository;
 import io.zcw.zipmint.repository.TransactionRepository;
-import org.springframework.web.bind.annotation.GetMapping;
+import io.zcw.zipmint.web.rest.errors.BadRequestAlertException;
+import io.zcw.zipmint.web.rest.util.HeaderUtil;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 public class BudgetItemService {
+
+    private static final String ENTITY_NAME = "budgetItem";
 
     private final BudgetItemRepository budgetItemRepository;
     private final TransactionRepository transactionRepository;
@@ -23,6 +30,36 @@ public class BudgetItemService {
     public BudgetItemService(BudgetItemRepository budgetItemRepository, TransactionRepository transactionRepository) {
         this.budgetItemRepository = budgetItemRepository;
         this.transactionRepository = transactionRepository;
+    }
+
+    public ResponseEntity<BudgetItem> createBudgetItem(@RequestBody BudgetItem budgetItem) throws URISyntaxException {
+        if (budgetItem.getId() != null) {
+            throw new BadRequestAlertException("A new budgetItem cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        BudgetItem result = budgetItemRepository.save(budgetItem);
+        return ResponseEntity.created(new URI("/api/budget-items/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    public ResponseEntity<BudgetItem> updateBudgetItem(@RequestBody BudgetItem budgetItem) throws URISyntaxException {
+        if (budgetItem.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        BudgetItem result = budgetItemRepository.save(budgetItem);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, budgetItem.getId().toString()))
+            .body(result);
+    }
+
+    public ResponseEntity<BudgetItem> getBudgetItem(@PathVariable Long id) {
+        Optional<BudgetItem> budgetItem = budgetItemRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(budgetItem);
+    }
+
+    public ResponseEntity<Void> deleteBudgetItem(@PathVariable Long id) {
+        budgetItemRepository.deleteById(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
     public List<Transaction> filterByMonth(int month) {
@@ -41,8 +78,6 @@ public class BudgetItemService {
 //        return transactionsList;
     }
 
-    @GetMapping("/budget-items/current")
-    @Timed
     public List<BudgetItem> getBudgetItemForCurrentMonth(){
         int currentMonth = LocalDate.now().getMonthValue();
 

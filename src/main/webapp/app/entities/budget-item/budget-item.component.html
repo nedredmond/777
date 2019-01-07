@@ -1,6 +1,6 @@
 <div>
     <h2 id="page-heading">
-        <span>December Budget</span>
+        <span jhiTranslate="App.budgetItem.home.title">December Budget</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-budget-item" [routerLink]="['/budget-item/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span>
@@ -16,9 +16,10 @@
             <tr>
             <!--<th><span jhiTranslate="global.field.id">ID</span></th>-->
             <th><a (click) = "sortByCategory()"><span jhiTranslate="App.budgetItem.category">Category</span></a></th>
-            <th><a (click) = "sortByBudget()"><span>Amount Budgeted</span></a></th>
+            <th><a (click)="sortByBudget()"><span jhiTranslate="App.budgetItem.expectedSpending">Amount Budgeted</a></th>
             <th><span>Amount Remaining</span></th>
             <!--<th><span>Amount Spent</span></th>-->
+                <th><span>Current Month's Budget</span></th>
             <th><span>Percent Spent</span></th>
             <!--<th><span jhiTranslate="App.budgetItem.budget">Budget</span></th>-->
             <th></th>
@@ -31,6 +32,7 @@
                 <td>{{budgetItem.expectedSpending | currency}}</td>
                 <td>{{budgetItem.expectedSpending - budgetItem.actualSpending| currency}}</td>
                 <!--<td>{{budgetItem.actualSpending | currency}}</td>-->
+                <td>{{budgetItem.}}</td>
                 <progress-bar [progress]= budgetItem.actualSpending/budgetItem.expectedSpending*100 [color-degraded]="{'0': '#488aff',  '100': '#FF0000'}">
                 </progress-bar>
                 <td>

@@ -84,4 +84,13 @@ export class BudgetItemComponent implements OnInit, OnDestroy {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
+    getCurrentMonthBudget() {
+        this.budgetItemService.getCurrentMonthBudget().subscribe(
+            (res: HttpResponse<IBudgetItem[]>) => {
+                this.budgetItems = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
 }

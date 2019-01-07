@@ -5,6 +5,7 @@ import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.domain.enumeration.Category;
 import io.zcw.zipmint.domain.enumeration.TransactionType;
 import io.zcw.zipmint.repository.BudgetItemRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,6 +61,44 @@ public class BudgetItemServiceTest {
 
     @Test
     public void testSortedByCategory(){
+        budgetItemList.add(shoppingBudget);
+
+        budgetItemService.sortByCategory(budgetItemList);
+        Assert.assertEquals(foodBudget,budgetItemList.get(0));
+    }
+
+    @Test
+    public void testSortedByBudget(){
+        budgetItemList.add(foodBudget);
+
+        budgetItemService.sortByBudgetAmount(budgetItemList);
+        Assert.assertEquals(foodBudget, budgetItemList.get(0));
+        Assert.assertEquals(shoppingBudget,budgetItemList.get(1));
+    }
+
+    @Test
+    public void testSortByAmountSpent(){
+        budgetItemList.add(foodBudget);
+
+        budgetItemService.sortByAmountSpent(budgetItemList);
+        Assert.assertEquals(foodBudget,budgetItemList.get(0));
+    }
+
+    @Test
+    public void testGetCurrentMonthBudget(){
 
     }
+
+    @Test
+    public void testFilterBudgetByCategory(){
+        budgetItemService.getBudgetItemForCurrentMonth();
+        Category category = Category.FOOD;
+
+        List<Transaction> expected =  budgetItemService.filterByCategory(category,12);
+
+        Assert.assertTrue(expected.contains(lunchTransaction));
+    }
+
+
+
 }
