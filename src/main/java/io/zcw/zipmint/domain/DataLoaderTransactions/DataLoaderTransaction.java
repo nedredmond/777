@@ -1,5 +1,6 @@
 package io.zcw.zipmint.domain.DataLoaderTransactions;
 
+import io.zcw.zipmint.domain.DataLoaderMoneyAccount.DataLoaderMoneyAccount;
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.domain.enumeration.Category;
 import io.zcw.zipmint.domain.enumeration.TransactionType;
@@ -31,7 +32,6 @@ public class DataLoaderTransaction {
         transaction.setDescription("ACME");
         transaction.setMemo("Groceries");
         transaction.setCategory(Category.FOOD);
-        // transaction.setMoneyAccount(new MoneyAccount());
         transactionRepository.save(transaction);
         transactionSet.add(transaction);
 
