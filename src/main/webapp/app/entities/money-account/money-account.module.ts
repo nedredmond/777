@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AppSharedModule } from 'app/shared';
+import { AppAdminModule } from 'app/admin/admin.module';
 import {
     MoneyAccountComponent,
     MoneyAccountDetailComponent,
@@ -15,7 +16,7 @@ import {
 const ENTITY_STATES = [...moneyAccountRoute, ...moneyAccountPopupRoute];
 
 @NgModule({
-    imports: [AppSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [AppSharedModule, AppAdminModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         MoneyAccountComponent,
         MoneyAccountDetailComponent,

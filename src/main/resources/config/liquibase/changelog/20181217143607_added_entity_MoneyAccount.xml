@@ -37,7 +37,15 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="bank_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="user_details_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

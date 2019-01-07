@@ -1,5 +1,28 @@
 {
-    "name": "MoneyAccount",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "userDetails",
+            "otherEntityName": "userDetails",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "transactions",
+            "otherEntityName": "transaction",
+            "otherEntityRelationshipName": "moneyAccount"
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "moneyAccount"
+        }
+    ],
     "fields": [
         {
             "fieldName": "type",
@@ -17,29 +40,17 @@
         {
             "fieldName": "pw",
             "fieldType": "String"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipName": "userDetails",
-            "otherEntityName": "userDetails",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "transactions",
-            "otherEntityName": "transaction",
-            "otherEntityRelationshipName": "moneyAccount"
+            "fieldName": "bankName",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20181217143607",
-    "entityTableName": "money_account",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "no",
+    "entityTableName": "money_account",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }
