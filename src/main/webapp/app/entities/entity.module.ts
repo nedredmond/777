@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { AppUserDetailsModule } from './user-details/user-details.module';
 import { AppMoneyAccountModule } from './money-account/money-account.module';
 import { AppTransactionModule } from './transaction/transaction.module';
 import { AppBudgetModule } from './budget/budget.module';
@@ -11,6 +12,7 @@ import { AppBillItemModule } from './bill-item/bill-item.module';
 @NgModule({
     // prettier-ignore
     imports: [
+        AppUserDetailsModule,
         AppMoneyAccountModule,
         AppTransactionModule,
         AppBudgetModule,

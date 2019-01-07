@@ -43,11 +43,14 @@ describe('MoneyAccount e2e test', () => {
             moneyAccountUpdatePage.setAccountTotalInput('5'),
             moneyAccountUpdatePage.setSignInInput('signIn'),
             moneyAccountUpdatePage.setPwInput('pw'),
+            moneyAccountUpdatePage.setBankNameInput('bankName'),
+            moneyAccountUpdatePage.userDetailsSelectLastOption(),
             moneyAccountUpdatePage.userSelectLastOption()
         ]);
         expect(await moneyAccountUpdatePage.getAccountTotalInput()).to.eq('5');
         expect(await moneyAccountUpdatePage.getSignInInput()).to.eq('signIn');
         expect(await moneyAccountUpdatePage.getPwInput()).to.eq('pw');
+        expect(await moneyAccountUpdatePage.getBankNameInput()).to.eq('bankName');
         await moneyAccountUpdatePage.save();
         expect(await moneyAccountUpdatePage.getSaveButton().isPresent()).to.be.false;
 

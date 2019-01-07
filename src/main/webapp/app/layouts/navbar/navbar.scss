@@ -8,7 +8,7 @@ Navbar
 }
 
 .jh-navbar {
-    background-color: #569599;
+    background-color: white;
     padding: 0.2em 1em;
     .profile-image {
         margin: -10px 0px;
@@ -67,11 +67,11 @@ Logo styles
     &.logo {
         padding: 5px 15px;
         .logo-img {
-            height: 45px;
-            width: 70px;
+            height: 60px;
+            width: 80px;
             display: inline-block;
             vertical-align: middle;
-            background: url('../../../content/images/mint.png') no-repeat center center;
+            background: url('../../../content/images/min7y-leaf.png') no-repeat center center;
             background-size: contain;
         }
     }

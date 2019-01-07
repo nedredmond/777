@@ -38,27 +38,8 @@ describe('Bills e2e test', () => {
         const nbButtonsBeforeCreate = await billsComponentsPage.countDeleteButtons();
 
         await billsComponentsPage.clickOnCreateButton();
-        await promise.all([
-            billsUpdatePage.setPaymentTotalInput('5'),
-            billsUpdatePage.setCompanyNameInput('companyName'),
-            billsUpdatePage.setDueDateInput('2000-12-31'),
-            billsUpdatePage.setPaymentDateInput('2000-12-31'),
-            billsUpdatePage.setPaymentAmountInput('5'),
-            billsUpdatePage.moneyAccountSelectLastOption()
-        ]);
+        await promise.all([billsUpdatePage.setPaymentTotalInput('5')]);
         expect(await billsUpdatePage.getPaymentTotalInput()).to.eq('5');
-        expect(await billsUpdatePage.getCompanyNameInput()).to.eq('companyName');
-        expect(await billsUpdatePage.getDueDateInput()).to.eq('2000-12-31');
-        expect(await billsUpdatePage.getPaymentDateInput()).to.eq('2000-12-31');
-        expect(await billsUpdatePage.getPaymentAmountInput()).to.eq('5');
-        const selectedAutoPay = billsUpdatePage.getAutoPayInput();
-        if (await selectedAutoPay.isSelected()) {
-            await billsUpdatePage.getAutoPayInput().click();
-            expect(await billsUpdatePage.getAutoPayInput().isSelected()).to.be.false;
-        } else {
-            await billsUpdatePage.getAutoPayInput().click();
-            expect(await billsUpdatePage.getAutoPayInput().isSelected()).to.be.true;
-        }
         await billsUpdatePage.save();
         expect(await billsUpdatePage.getSaveButton().isPresent()).to.be.false;
 

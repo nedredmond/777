@@ -6,6 +6,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IMoneyAccount } from 'app/shared/model/money-account.model';
 import { MoneyAccountService } from './money-account.service';
+import { IUserDetails } from 'app/shared/model/user-details.model';
+import { UserDetailsService } from 'app/entities/user-details';
 import { IUser, UserService } from 'app/core';
 
 @Component({
@@ -16,11 +18,14 @@ export class MoneyAccountUpdateComponent implements OnInit {
     moneyAccount: IMoneyAccount;
     isSaving: boolean;
 
+    userdetails: IUserDetails[];
+
     users: IUser[];
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected moneyAccountService: MoneyAccountService,
+        protected userDetailsService: UserDetailsService,
         protected userService: UserService,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -30,6 +35,12 @@ export class MoneyAccountUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ moneyAccount }) => {
             this.moneyAccount = moneyAccount;
         });
+        this.userDetailsService.query().subscribe(
+            (res: HttpResponse<IUserDetails[]>) => {
+                this.userdetails = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
@@ -66,6 +77,10 @@ export class MoneyAccountUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackUserDetailsById(index: number, item: IUserDetails) {
+        return item.id;
     }
 
     trackUserById(index: number, item: IUser) {

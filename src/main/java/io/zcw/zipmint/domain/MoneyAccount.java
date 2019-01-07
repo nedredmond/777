@@ -42,12 +42,16 @@ public class MoneyAccount implements Serializable {
     @Column(name = "pw")
     private String pw;
 
+    @Column(name = "bank_name")
+    private String bankName;
+
+    @ManyToOne
+    @JsonIgnoreProperties("accounts")
+    private UserDetails userDetails;
+
     @OneToMany(mappedBy = "moneyAccount")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Transaction> transactions = new HashSet<>();
-    @OneToMany(mappedBy = "moneyAccount")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<BillItem> billItems = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("")
     private User user;
@@ -113,6 +117,32 @@ public class MoneyAccount implements Serializable {
         this.pw = pw;
     }
 
+    public String getBankName() {
+        return bankName;
+    }
+
+    public MoneyAccount bankName(String bankName) {
+        this.bankName = bankName;
+        return this;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public MoneyAccount userDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
+        return this;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
+    }
+
     public Set<Transaction> getTransactions() {
         return transactions;
     }
@@ -136,31 +166,6 @@ public class MoneyAccount implements Serializable {
 
     public void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
-    }
-
-    public Set<BillItem> getBillItems() {
-        return billItems;
-    }
-
-    public MoneyAccount billItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
-        return this;
-    }
-
-    public MoneyAccount addBillItems(BillItem billItem) {
-        this.billItems.add(billItem);
-        billItem.setMoneyAccount(this);
-        return this;
-    }
-
-    public MoneyAccount removeBillItems(BillItem billItem) {
-        this.billItems.remove(billItem);
-        billItem.setMoneyAccount(null);
-        return this;
-    }
-
-    public void setBillItems(Set<BillItem> billItems) {
-        this.billItems = billItems;
     }
 
     public User getUser() {
@@ -205,6 +210,7 @@ public class MoneyAccount implements Serializable {
             ", accountTotal=" + getAccountTotal() +
             ", signIn='" + getSignIn() + "'" +
             ", pw='" + getPw() + "'" +
+            ", bankName='" + getBankName() + "'" +
             "}";
     }
 }

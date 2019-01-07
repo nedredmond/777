@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark navbar-expand-md jh-navbar">
+<nav class="navbar navbar-light navbar-expand-md jh-navbar">
     <div class="jh-logo-container float-left">
         <a class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
             <fa-icon icon="bars"></fa-icon>
@@ -10,6 +10,15 @@
     </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <span>
+                        <fa-icon icon="plus-circle"></fa-icon>
+                        <mr-ngx-plaid-link-button env="sandbox" publicKey="f815660c096befb9b5e508907c50f5" institution="" (Success)="onPlaidSuccess($event)"
+                                          (Exit)="onPlaidExit($event)" (Load)="onPlaidLoad($event)" (Event)="onPlaidEvent($event)" className="launch-plaid-link-button"
+                                          buttonText="Link Your Bank Account" (Click)="onPlaidClick($event)" [style]="{'color':'white', 'background-color':'#ffb5be', 'display':'inline-block', 'white-space':'nowrap', 'vertical-align':'middle', 'border':'1px solid transparent', 'border-radius':'2.5px', 'margin':'auto'}">
+                        </mr-ngx-plaid-link-button>
+                    </span>
+            </li>
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
@@ -17,13 +26,6 @@
                         <span jhiTranslate="global.menu.home">Home</span>
                     </span>
                 </a>
-            </li>
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-
-            <mr-ngx-plaid-link-button env="sandbox" publicKey="f815660c096befb9b5e508907c50f5" institution="" (Success)="onPlaidSuccess($event)"
-                                      (Exit)="onPlaidExit($event)" (Load)="onPlaidLoad($event)" (Event)="onPlaidEvent($event)" className="launch-plaid-link-button"
-                                      buttonText="Link Your Bank Account" (Click)="onPlaidClick($event)"></mr-ngx-plaid-link-button>
-
             </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -69,9 +71,7 @@
                     <li>
                         <a class="dropdown-item" routerLink="bill-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <!--<span jhiTranslate="global.menu.entities.billItem">Bill Item</span>-->
-                            <span>Bill History</span>
-
+                            <span jhiTranslate="global.menu.entities.billItem">Bill Item</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
