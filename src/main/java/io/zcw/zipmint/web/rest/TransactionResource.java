@@ -140,9 +140,9 @@ public class TransactionResource {
         return new ResponseEntity<>(transactionService.getSortedByAmount(), HttpStatus.OK);
     }
 
-    @GetMapping("/transactions/searchQuery")
+    @GetMapping("/transactions/{searchQuery}")
     @Timed
-    public ResponseEntity<Iterable<Transaction>> getSearchResults(String searchQuery) {
+    public ResponseEntity<Iterable<Transaction>> getSearchResults(@PathVariable String searchQuery) {
         log.debug("REST request to filter by search query");
         return new ResponseEntity<>(transactionService.searchTransaction(searchQuery), HttpStatus.OK);
     }

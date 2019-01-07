@@ -98,8 +98,7 @@ public class TransactionService {
     }
 
     public Iterable<Transaction> searchTransaction(String searchQuery){
-        Iterable<Transaction> transactions = transactionRepository.findAll()
-            .stream()
+        Iterable<Transaction> transactions = transactionRepository.findAll().stream()
             .filter(item -> item.toString().toUpperCase().contains(searchQuery.toUpperCase()))
             .collect(Collectors.toList());
         return transactions;
@@ -115,7 +114,7 @@ public class TransactionService {
     }
 
     private List<Transaction> sortByCategory(List<Transaction> transactionList) {
-        transactionList.sort(Comparator.comparing(o -> o.getCategory()));
+        transactionList.sort(Comparator.comparing(o -> o.getCategory().toString()));
         return transactionList;
     }
 
