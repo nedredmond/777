@@ -42,6 +42,9 @@ public class MoneyAccount implements Serializable {
     @Column(name = "pw")
     private String pw;
 
+    @Column(name = "bank_name")
+    private String bankName;
+
     @ManyToOne
     @JsonIgnoreProperties("accounts")
     private UserDetails userDetails;
@@ -49,6 +52,10 @@ public class MoneyAccount implements Serializable {
     @OneToMany(mappedBy = "moneyAccount")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Transaction> transactions = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private User user;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -110,6 +117,19 @@ public class MoneyAccount implements Serializable {
         this.pw = pw;
     }
 
+    public String getBankName() {
+        return bankName;
+    }
+
+    public MoneyAccount bankName(String bankName) {
+        this.bankName = bankName;
+        return this;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
     public UserDetails getUserDetails() {
         return userDetails;
     }
@@ -147,6 +167,19 @@ public class MoneyAccount implements Serializable {
     public void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public MoneyAccount user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -177,6 +210,7 @@ public class MoneyAccount implements Serializable {
             ", accountTotal=" + getAccountTotal() +
             ", signIn='" + getSignIn() + "'" +
             ", pw='" + getPw() + "'" +
+            ", bankName='" + getBankName() + "'" +
             "}";
     }
 }

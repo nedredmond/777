@@ -30,7 +30,9 @@ export class MoneyAccountUpdatePage {
     accountTotalInput = element(by.id('field_accountTotal'));
     signInInput = element(by.id('field_signIn'));
     pwInput = element(by.id('field_pw'));
+    bankNameInput = element(by.id('field_bankName'));
     userDetailsSelect = element(by.id('field_userDetails'));
+    userSelect = element(by.id('field_user'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -75,6 +77,14 @@ export class MoneyAccountUpdatePage {
         return this.pwInput.getAttribute('value');
     }
 
+    async setBankNameInput(bankName) {
+        await this.bankNameInput.sendKeys(bankName);
+    }
+
+    async getBankNameInput() {
+        return this.bankNameInput.getAttribute('value');
+    }
+
     async userDetailsSelectLastOption() {
         await this.userDetailsSelect
             .all(by.tagName('option'))
@@ -92,6 +102,25 @@ export class MoneyAccountUpdatePage {
 
     async getUserDetailsSelectedOption() {
         return this.userDetailsSelect.element(by.css('option:checked')).getText();
+    }
+
+    async userSelectLastOption() {
+        await this.userSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async userSelectOption(option) {
+        await this.userSelect.sendKeys(option);
+    }
+
+    getUserSelect(): ElementFinder {
+        return this.userSelect;
+    }
+
+    async getUserSelectedOption() {
+        return this.userSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {
