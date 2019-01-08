@@ -1,4 +1,5 @@
 package io.zcw.zipmint.domain.DataLoaderTransactions;
+
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.domain.enumeration.Category;
 import io.zcw.zipmint.domain.enumeration.TransactionType;
@@ -30,6 +31,7 @@ public class DataLoaderTransaction {
         transaction.setDescription("ACME");
         transaction.setMemo("Groceries");
         transaction.setCategory(Category.FOOD);
+        // transaction.setMoneyAccount(new MoneyAccount());
         transactionRepository.save(transaction);
         transactionSet.add(transaction);
 
@@ -37,29 +39,29 @@ public class DataLoaderTransaction {
         transaction2.setAmount(-100.00);
         transaction2.setTransactionType(TransactionType.DEBIT);
         transaction2.setDateTime(LocalDate.of(2018, 12, 24));
-        transaction2.setDescription("Target");
+        transaction2.setDescription("Walmart");
         transaction2.setMemo("Gifts");
-        transaction2.setCategory(Category.MISCELLANEOUS);
+        transaction2.setCategory(Category.SHOPPING);
         transactionRepository.save(transaction2);
         transactionSet.add(transaction2);
 
         Transaction transaction3 = new Transaction();
-        transaction3.setAmount(-475.75);
+        transaction3.setAmount(-12.75);
         transaction3.setTransactionType(TransactionType.DEBIT);
         transaction3.setDateTime(LocalDate.of(2018, 12, 21));
-        transaction3.setDescription("The Riverfront");
-        transaction3.setMemo("Rent");
-        transaction3.setCategory(Category.RENT);
+        transaction3.setDescription("El Diablo Burritos");
+        transaction3.setMemo("Lunch");
+        transaction3.setCategory(Category.FOOD);
         transactionRepository.save(transaction3);
         transactionSet.add(transaction);
 
         Transaction transaction4 = new Transaction();
-        transaction4.setAmount(500.00);
-        transaction4.setTransactionType(TransactionType.CREDIT);
+        transaction4.setAmount(-4.50);
+        transaction4.setTransactionType(TransactionType.DEBIT);
         transaction4.setDateTime(LocalDate.now());
-        transaction4.setDescription("Zipcode Inc.");
-        transaction4.setMemo("Guest lecture compensation");
-        transaction4.setCategory(Category.INCOME);
+        transaction4.setDescription("TBaar");
+        transaction4.setMemo("Bubble tea");
+        transaction4.setCategory(Category.FOOD);
         transactionRepository.save(transaction4);
         transactionSet.add(transaction);
 
@@ -67,7 +69,7 @@ public class DataLoaderTransaction {
         transaction5.setAmount(10.00);
         transaction5.setTransactionType(TransactionType.CREDIT);
         transaction5.setDateTime(LocalDate.of(2018, 12, 22));
-        transaction5.setDescription("Banana Republic");
+        transaction5.setDescription("Urban Outfitters");
         transaction5.setMemo("Refund");
         transaction5.setCategory(Category.SHOPPING);
         transactionRepository.save(transaction5);
