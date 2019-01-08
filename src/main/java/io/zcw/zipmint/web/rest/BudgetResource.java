@@ -2,12 +2,15 @@ package io.zcw.zipmint.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import io.zcw.zipmint.domain.Budget;
+import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.repository.BudgetRepository;
+import io.zcw.zipmint.repository.TransactionRepository;
 import io.zcw.zipmint.web.rest.errors.BadRequestAlertException;
 import io.zcw.zipmint.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +32,11 @@ public class BudgetResource {
     private static final String ENTITY_NAME = "budget";
 
     private final BudgetRepository budgetRepository;
+    private final TransactionRepository transactionRepository;
 
-    public BudgetResource(BudgetRepository budgetRepository) {
+    public BudgetResource(BudgetRepository budgetRepository, TransactionRepository transactionRepository) {
         this.budgetRepository = budgetRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     /**
@@ -116,4 +121,22 @@ public class BudgetResource {
         budgetRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    public Budget calculateTotalSpent(){
+        Budget budget = new Budget();
+        Double total = 0.0;
+        for(Transaction transaction: transactionRepository.findAll()){
+            total+=transaction.getAmount();
+        }
+        budget.setActualTotal(total);
+        return budget;
+    }
+
+    @GetMapping("/budgets/totalspent")
+    @Timed
+    public ResponseEntity<Budget> getTotalSpent(){
+        log.debug("REST request to get total spent");
+        return new ResponseEntity<>(calculateTotalSpent(),HttpStatus.OK);
+    }
+
 }

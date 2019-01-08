@@ -68,8 +68,8 @@ public class DataLoaderMoneyAccount {
         moneyAccountSet.add(moneyAccount4);
     }
 
-
     public LinkedHashSet<MoneyAccount> getMoneyAccountSet() {
         return moneyAccountSet;
     }
+
 }

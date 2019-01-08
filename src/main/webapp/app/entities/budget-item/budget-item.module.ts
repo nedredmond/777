@@ -12,10 +12,12 @@ import {
     budgetItemPopupRoute
 } from './';
 
+import { ProgressBarModule } from 'angular-progress-bar';
+
 const ENTITY_STATES = [...budgetItemRoute, ...budgetItemPopupRoute];
 
 @NgModule({
-    imports: [AppSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [AppSharedModule, RouterModule.forChild(ENTITY_STATES), ProgressBarModule],
     declarations: [
         BudgetItemComponent,
         BudgetItemDetailComponent,
@@ -23,6 +25,8 @@ const ENTITY_STATES = [...budgetItemRoute, ...budgetItemPopupRoute];
         BudgetItemDeleteDialogComponent,
         BudgetItemDeletePopupComponent
     ],
+    providers: [BudgetItemComponent],
+    bootstrap: [BudgetItemComponent],
     entryComponents: [BudgetItemComponent, BudgetItemUpdateComponent, BudgetItemDeleteDialogComponent, BudgetItemDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

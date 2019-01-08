@@ -3,7 +3,7 @@
         "transaction": {
             "home": {
                 "title": "Transactions",
-                "createLabel": "Create a new Transaction",
+                "createLabel": "Add a Transaction",
                 "createOrEditLabel": "Create or edit a Transaction"
             },
             "created": "A new Transaction is created with identifier {{ param }}",
