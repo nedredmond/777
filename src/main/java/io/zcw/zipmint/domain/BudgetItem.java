@@ -19,7 +19,7 @@ import io.zcw.zipmint.domain.enumeration.Category;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class BudgetItem implements Serializable {
 
-    private static final Long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
@@ -27,10 +27,10 @@ public class BudgetItem implements Serializable {
     private Long id;
 
     @Column(name = "expected_spending")
-    private Double expectedSpending;
+    private Long expectedSpending;
 
     @Column(name = "actual_spending")
-    private Double actualSpending;
+    private Long actualSpending;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
@@ -49,29 +49,29 @@ public class BudgetItem implements Serializable {
         this.id = id;
     }
 
-    public Double getExpectedSpending() {
+    public Long getExpectedSpending() {
         return expectedSpending;
     }
 
-    public BudgetItem expectedSpending(Double expectedSpending) {
+    public BudgetItem expectedSpending(Long expectedSpending) {
         this.expectedSpending = expectedSpending;
         return this;
     }
 
-    public void setExpectedSpending(Double expectedSpending) {
+    public void setExpectedSpending(Long expectedSpending) {
         this.expectedSpending = expectedSpending;
     }
 
-    public Double getActualSpending() {
+    public Long getActualSpending() {
         return actualSpending;
     }
 
-    public BudgetItem actualSpending(Double actualSpending) {
+    public BudgetItem actualSpending(Long actualSpending) {
         this.actualSpending = actualSpending;
         return this;
     }
 
-    public void setActualSpending(Double actualSpending) {
+    public void setActualSpending(Long actualSpending) {
         this.actualSpending = actualSpending;
     }
 
@@ -130,9 +130,5 @@ public class BudgetItem implements Serializable {
             ", actualSpending=" + getActualSpending() +
             ", category='" + getCategory() + "'" +
             "}";
-    }
-
-    public double getPercentSpent(){
-        return this.actualSpending/this.getExpectedSpending();
     }
 }

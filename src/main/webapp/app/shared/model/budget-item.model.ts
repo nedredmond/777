@@ -17,7 +17,6 @@ export interface IBudgetItem {
     actualSpending?: number;
     category?: Category;
     budget?: IBudget;
-    percentSpent?: number;
 }
 
 export class BudgetItem implements IBudgetItem {
@@ -26,7 +25,6 @@ export class BudgetItem implements IBudgetItem {
         public expectedSpending?: number,
         public actualSpending?: number,
         public category?: Category,
-        public budget?: IBudget,
-        public percentSpent?: number
+        public budget?: IBudget
     ) {}
 }
