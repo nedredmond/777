@@ -35,24 +35,4 @@ export class BudgetItemService {
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
-
-    filter(category: string): Observable<EntityArrayResponseType> {
-        const options = createRequestOption(category);
-        return this.http.get<IBudgetItem[]>(`${this.resourceUrl}/${category}`, { params: options, observe: 'response' });
-    }
-
-    sortByCategory(req?: any): Observable<HttpResponse<any>> {
-        const options = createRequestOption(req);
-        return this.http.get<IBudgetItem[]>(this.resourceUrl + '/by_cat', { params: options, observe: 'response' });
-    }
-
-    sortByBudget(req?: any): Observable<HttpResponse<any>> {
-        const options = createRequestOption(req);
-        return this.http.get<IBudgetItem[]>(this.resourceUrl + '/by_budget', { params: options, observe: 'response' });
-    }
-
-    getCurrentMonthBudget(req?: any): Observable<HttpResponse<any>> {
-        const options = createRequestOption(req);
-        return this.http.get<IBudgetItem[]>(this.resourceUrl + '/current', { params: options, observe: 'response' });
-    }
 }
