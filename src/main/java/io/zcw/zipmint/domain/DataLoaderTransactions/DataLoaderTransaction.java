@@ -1,6 +1,4 @@
 package io.zcw.zipmint.domain.DataLoaderTransactions;
-
-import io.zcw.zipmint.domain.DataLoaderMoneyAccount.DataLoaderMoneyAccount;
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.domain.enumeration.Category;
 import io.zcw.zipmint.domain.enumeration.TransactionType;
@@ -57,7 +55,7 @@ public class DataLoaderTransaction {
 
         Transaction transaction4 = new Transaction();
         transaction4.setAmount(500.00);
-        transaction4.setTransactionType(TransactionType.DEBIT);
+        transaction4.setTransactionType(TransactionType.CREDIT);
         transaction4.setDateTime(LocalDate.now());
         transaction4.setDescription("Zipcode Inc.");
         transaction4.setMemo("Guest lecture compensation");

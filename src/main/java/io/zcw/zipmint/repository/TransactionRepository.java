@@ -14,5 +14,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+
     List<Transaction> findByDateTimeGreaterThanAndDateTimeLessThan(LocalDate start, LocalDate end);
+
 }

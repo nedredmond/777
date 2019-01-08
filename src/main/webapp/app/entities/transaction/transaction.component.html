@@ -15,9 +15,7 @@
         <button (click)="getDebit()">See Debit</button>
         <button (click)="getCredit()">See Credit</button>
     </div>
-    <input [(ngModel)]="searchText" placeholder="search text goes here" class="float-right" name="searchBar" [value]="searchText">
-    <button (click)="search(searchBar.value)" class="float-right">Search</button>
-
+    <button (click)="search()" class="float-right">Search</button><input [(ngModel)]="searchText" placeholder="search text goes here" class="float-right">
     <br/><br/>
     <div class="table-responsive" *ngIf="transactions">
         <table class="table table-striped">

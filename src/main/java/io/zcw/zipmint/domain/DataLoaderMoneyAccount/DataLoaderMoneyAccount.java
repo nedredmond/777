@@ -17,9 +17,6 @@ import java.util.LinkedHashSet;
 public class DataLoaderMoneyAccount {
 
     private MoneyAccountRepository moneyAccountRepository;
-    private static MoneyAccount moneyAccount;
-    private static MoneyAccount moneyAccount2;
-    private static MoneyAccount moneyAccount3;
     private LinkedHashSet<MoneyAccount> moneyAccountSet = new LinkedHashSet<>();
 
     @Autowired
@@ -29,7 +26,7 @@ public class DataLoaderMoneyAccount {
 
     @PostConstruct
     private void loadMoneyAccount(){
-        moneyAccount= new MoneyAccount();
+        MoneyAccount moneyAccount= new MoneyAccount();
         moneyAccount.setId(1L);
         moneyAccount.setType(AccountType.CREDIT);
         moneyAccount.setAccountTotal(1000L);
@@ -39,7 +36,7 @@ public class DataLoaderMoneyAccount {
         moneyAccountSet.add(moneyAccount);
 
 
-        moneyAccount2= new MoneyAccount();
+        MoneyAccount moneyAccount2= new MoneyAccount();
         moneyAccount2.setId(2L);
         moneyAccount2.setType(AccountType.CHECKING);
         moneyAccount2.setAccountTotal(500L);
@@ -50,7 +47,7 @@ public class DataLoaderMoneyAccount {
 
 
 
-        moneyAccount3= new MoneyAccount();
+        MoneyAccount moneyAccount3= new MoneyAccount();
         moneyAccount3.setId(3L);
         moneyAccount3.setType(AccountType.SAVINGS);
         moneyAccount3.setAccountTotal(1500L);
@@ -75,15 +72,4 @@ public class DataLoaderMoneyAccount {
         return moneyAccountSet;
     }
 
-    public static MoneyAccount getMoneyAccount() {
-        return moneyAccount;
-    }
-
-    public static MoneyAccount getMoneyAccount2() {
-        return moneyAccount2;
-    }
-
-    public static MoneyAccount getMoneyAccount3() {
-        return moneyAccount3;
-    }
 }

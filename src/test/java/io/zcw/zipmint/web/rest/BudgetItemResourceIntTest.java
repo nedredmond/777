@@ -52,10 +52,10 @@ public class BudgetItemResourceIntTest {
     private static final Category UPDATED_CATEGORY = Category.FOOD;
 
     @Autowired
-    private BudgetItemRepository budgetItemRepository;
+    private BudgetItemService budgetItemService;
 
     @Autowired
-    private BudgetItemService budgetItemService;
+    private BudgetItemRepository budgetItemRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -70,7 +70,7 @@ public class BudgetItemResourceIntTest {
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
+    private Validator defaultValidator;
 
     private MockMvc restBudgetItemMockMvc;
 
@@ -85,7 +85,7 @@ public class BudgetItemResourceIntTest {
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
+            .setValidator(defaultValidator).build();
     }
 
     /**
@@ -267,4 +267,5 @@ public class BudgetItemResourceIntTest {
         budgetItem1.setId(null);
         assertThat(budgetItem1).isNotEqualTo(budgetItem2);
     }
+
 }

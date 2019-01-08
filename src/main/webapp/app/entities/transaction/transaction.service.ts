@@ -84,10 +84,10 @@ export class TransactionService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
-    search(req?: any): Observable<HttpResponse<any>> {
-        const options = createRequestOption(req);
+    search(searchQuery: string): Observable<HttpResponse<any>> {
+        const options = createRequestOption(searchQuery);
         return this.http
-            .get<ITransaction[]>(this.resourceUrl + '/{req}', { params: options, observe: 'response' })
+            .get<ITransaction[]>(this.resourceUrl + '/searchQuery', { params: options, observe: 'response' })
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
