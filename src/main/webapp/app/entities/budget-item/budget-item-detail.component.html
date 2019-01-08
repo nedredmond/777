@@ -5,13 +5,13 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="App.budgetItem.expectedSpending">Expected Spending</span></dt>
+                <dt><span jhiTranslate="App.budgetItem.expectedSpending">Expected Test Spending</span></dt>
                 <dd>
-                    <span>{{budgetItem.expectedSpending}}</span>
+                    <span>{{budgetItem.expectedSpending | currency}}</span>
                 </dd>
                 <dt><span jhiTranslate="App.budgetItem.actualSpending">Actual Spending</span></dt>
                 <dd>
-                    <span>{{budgetItem.actualSpending}}</span>
+                    <span>{{budgetItem.actualSpending | currency}}</span>
                 </dd>
                 <dt><span jhiTranslate="App.budgetItem.category">Category</span></dt>
                 <dd>

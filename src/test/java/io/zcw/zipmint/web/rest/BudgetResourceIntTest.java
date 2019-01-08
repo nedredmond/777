@@ -1,9 +1,11 @@
 package io.zcw.zipmint.web.rest;
 
+import com.netflix.discovery.converters.Auto;
 import io.zcw.zipmint.Application;
 
 import io.zcw.zipmint.domain.Budget;
 import io.zcw.zipmint.repository.BudgetRepository;
+import io.zcw.zipmint.repository.TransactionRepository;
 import io.zcw.zipmint.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -42,11 +44,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = Application.class)
 public class BudgetResourceIntTest {
 
-    private static final Long DEFAULT_EXPECTED_TOTAL = 1L;
-    private static final Long UPDATED_EXPECTED_TOTAL = 2L;
+    private static final Double DEFAULT_EXPECTED_TOTAL = 1.0;
+    private static final Double UPDATED_EXPECTED_TOTAL = 2.0;
 
-    private static final Long DEFAULT_ACTUAL_TOTAL = 1L;
-    private static final Long UPDATED_ACTUAL_TOTAL = 2L;
+    private static final Double DEFAULT_ACTUAL_TOTAL = 1.0;
+    private static final Double UPDATED_ACTUAL_TOTAL = 2.0;
 
     private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -56,6 +58,9 @@ public class BudgetResourceIntTest {
 
     @Autowired
     private BudgetRepository budgetRepository;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -70,7 +75,7 @@ public class BudgetResourceIntTest {
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
+    private Validator defaultValidator;
 
     private MockMvc restBudgetMockMvc;
 
@@ -79,13 +84,13 @@ public class BudgetResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BudgetResource budgetResource = new BudgetResource(budgetRepository);
+        final BudgetResource budgetResource = new BudgetResource(budgetRepository,transactionRepository);
         this.restBudgetMockMvc = MockMvcBuilders.standaloneSetup(budgetResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
+            .setValidator(defaultValidator).build();
     }
 
     /**
