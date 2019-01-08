@@ -115,7 +115,7 @@ public class TransactionService {
     }
 
     private List<Transaction> sortByCategory(List<Transaction> transactionList) {
-        transactionList.sort(Comparator.comparing(o -> o.getCategory()));
+        transactionList.sort(Comparator.comparing(o -> o.getCategory().toString()));
         return transactionList;
     }
 
