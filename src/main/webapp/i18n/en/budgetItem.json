@@ -2,21 +2,21 @@
     "App": {
         "budgetItem": {
             "home": {
-                "title": "January Budget",
-                "createLabel": "Create a budget category",
-                "createOrEditLabel": "Create or edit a budget category"
+                "title": "Budget Items",
+                "createLabel": "Create a new Budget Item",
+                "createOrEditLabel": "Create or edit a Budget Item"
             },
-            "created": "A new Budget is created with identifier {{ param }}",
-            "updated": "A Budget is updated with identifier {{ param }}",
-            "deleted": "A Budget is deleted with identifier {{ param }}",
+            "created": "A new Budget Item is created with identifier {{ param }}",
+            "updated": "A Budget Item is updated with identifier {{ param }}",
+            "deleted": "A Budget Item is deleted with identifier {{ param }}",
             "delete": {
                 "question": "Are you sure you want to delete Budget Item {{ id }}?"
             },
             "detail": {
                 "title": "Budget Item"
             },
-            "expectedSpending": "Amount Budgeted",
-            "actualSpending": "Amount Spent",
+            "expectedSpending": "Expected Spending",
+            "actualSpending": "Actual Spending",
             "category": "Category",
             "budget": "Budget"
         }

@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="App.budgetItem.home.title">December Budget</span>
+        <span jhiTranslate="App.budgetItem.home.title">Budget Items</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-budget-item" [routerLink]="['/budget-item/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span>
-            Create a budget category
+            <span  jhiTranslate="App.budgetItem.home.createLabel">
+            Create new Budget Item
             </span>
         </button>
     </h2>
@@ -27,7 +27,9 @@
             </thead>
             <tbody>
             <tr *ngFor="let budgetItem of budgetItems ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/budget-item', budgetItem.id, 'view' ]">{{budgetItem.id}}</a></td>-->
+                <td><a [routerLink]="['/budget-item', budgetItem.id, 'view' ]">{{budgetItem.id}}</a></td>
+                <td>{{budgetItem.expectedSpending}}</td>
+                <td>{{budgetItem.actualSpending}}</td>
                 <td jhiTranslate="{{'App.Category.' + budgetItem.category}}">{{budgetItem.category}}</td>
                 <td>{{budgetItem.expectedSpending | currency}}</td>
                 <td>{{budgetItem.expectedSpending - budgetItem.actualSpending| currency}}</td>
@@ -46,7 +48,7 @@
                                 [routerLink]="['/budget-item', budgetItem.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Details</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/budget-item', budgetItem.id, 'edit']"

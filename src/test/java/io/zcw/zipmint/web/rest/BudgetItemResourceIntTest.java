@@ -4,7 +4,6 @@ import io.zcw.zipmint.Application;
 
 import io.zcw.zipmint.domain.BudgetItem;
 import io.zcw.zipmint.repository.BudgetItemRepository;
-import io.zcw.zipmint.service.BudgetItemService;
 import io.zcw.zipmint.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -52,9 +51,6 @@ public class BudgetItemResourceIntTest {
     private static final Category UPDATED_CATEGORY = Category.FOOD;
 
     @Autowired
-    private BudgetItemService budgetItemService;
-
-    @Autowired
     private BudgetItemRepository budgetItemRepository;
 
     @Autowired
@@ -70,7 +66,7 @@ public class BudgetItemResourceIntTest {
     private EntityManager em;
 
     @Autowired
-    private Validator defaultValidator;
+    private Validator validator;
 
     private MockMvc restBudgetItemMockMvc;
 
@@ -79,13 +75,13 @@ public class BudgetItemResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BudgetItemResource budgetItemResource = new BudgetItemResource(budgetItemService);
+        final BudgetItemResource budgetItemResource = new BudgetItemResource(budgetItemRepository);
         this.restBudgetItemMockMvc = MockMvcBuilders.standaloneSetup(budgetItemResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter)
-            .setValidator(defaultValidator).build();
+            .setValidator(validator).build();
     }
 
     /**
@@ -267,5 +263,4 @@ public class BudgetItemResourceIntTest {
         budgetItem1.setId(null);
         assertThat(budgetItem1).isNotEqualTo(budgetItem2);
     }
-
 }

@@ -131,8 +131,4 @@ public class BudgetItem implements Serializable {
             ", category='" + getCategory() + "'" +
             "}";
     }
-
-    public double getPercentSpent(){
-        return this.actualSpending/this.getExpectedSpending();
-    }
 }
