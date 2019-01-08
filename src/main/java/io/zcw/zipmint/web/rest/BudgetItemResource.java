@@ -2,29 +2,20 @@ package io.zcw.zipmint.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import io.zcw.zipmint.domain.BudgetItem;
-import io.zcw.zipmint.domain.Transaction;
-import io.zcw.zipmint.domain.enumeration.Category;
 import io.zcw.zipmint.repository.BudgetItemRepository;
-import io.zcw.zipmint.repository.TransactionRepository;
-import io.zcw.zipmint.service.BudgetItemService;
-import io.zcw.zipmint.service.TransactionService;
 import io.zcw.zipmint.web.rest.errors.BadRequestAlertException;
 import io.zcw.zipmint.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.time.LocalDate;
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing BudgetItem.
@@ -35,15 +26,16 @@ public class BudgetItemResource {
 
     private final Logger log = LoggerFactory.getLogger(BudgetItemResource.class);
 
-    private BudgetItemService budgetItemService;
+    private static final String ENTITY_NAME = "budgetItem";
 
-    public BudgetItemResource(BudgetItemService budgetItemService) {
-        this.budgetItemService = budgetItemService;
+    private final BudgetItemRepository budgetItemRepository;
+
+    public BudgetItemResource(BudgetItemRepository budgetItemRepository) {
+        this.budgetItemRepository = budgetItemRepository;
     }
 
-
     /**
-     * POST  /budget-items : Create a new budgetItem.π
+     * POST  /budget-items : Create a new budgetItem.
      *
      * @param budgetItem the budgetItem to create
      * @return the ResponseEntity with status 201 (Created) and with body the new budgetItem, or with status 400 (Bad Request) if the budgetItem has already an ID
@@ -53,7 +45,13 @@ public class BudgetItemResource {
     @Timed
     public ResponseEntity<BudgetItem> createBudgetItem(@RequestBody BudgetItem budgetItem) throws URISyntaxException {
         log.debug("REST request to save BudgetItem : {}", budgetItem);
-        return budgetItemService.createBudgetItem(budgetItem);
+        if (budgetItem.getId() != null) {
+            throw new BadRequestAlertException("A new budgetItem cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        BudgetItem result = budgetItemRepository.save(budgetItem);
+        return ResponseEntity.created(new URI("/api/budget-items/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
     /**
@@ -69,7 +67,13 @@ public class BudgetItemResource {
     @Timed
     public ResponseEntity<BudgetItem> updateBudgetItem(@RequestBody BudgetItem budgetItem) throws URISyntaxException {
         log.debug("REST request to update BudgetItem : {}", budgetItem);
-        return budgetItemService.updateBudgetItem(budgetItem);
+        if (budgetItem.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        BudgetItem result = budgetItemRepository.save(budgetItem);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, budgetItem.getId().toString()))
+            .body(result);
     }
 
     /**
@@ -79,9 +83,9 @@ public class BudgetItemResource {
      */
     @GetMapping("/budget-items")
     @Timed
-    public ResponseEntity<Iterable<BudgetItem>> getAllBudgetItems() {
+    public List<BudgetItem> getAllBudgetItems() {
         log.debug("REST request to get all BudgetItems");
-        return new ResponseEntity<>(budgetItemService.getSortedByCategory(), HttpStatus.OK);
+        return budgetItemRepository.findAll();
     }
 
     /**
@@ -94,7 +98,8 @@ public class BudgetItemResource {
     @Timed
     public ResponseEntity<BudgetItem> getBudgetItem(@PathVariable Long id) {
         log.debug("REST request to get BudgetItem : {}", id);
-        return budgetItemService.getBudgetItem(id);
+        Optional<BudgetItem> budgetItem = budgetItemRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(budgetItem);
     }
 
     /**
@@ -107,43 +112,8 @@ public class BudgetItemResource {
     @Timed
     public ResponseEntity<Void> deleteBudgetItem(@PathVariable Long id) {
         log.debug("REST request to delete BudgetItem : {}", id);
-        return budgetItemService.deleteBudgetItem(id);
-    }
 
-    @GetMapping("/budget-items/{month}/{category}")
-    @Timed
-    public ResponseEntity<Iterable<Transaction>> budgetByCategory(@PathVariable int month, @PathVariable Category category){
-        log.debug("REST request to filter BudgetItem category: {}", category);
-        return new ResponseEntity<>(budgetItemService.filterByCategory(category, month), HttpStatus.OK);
-    }
-
-
-    @GetMapping("/budget-items/by_cat")
-    @Timed
-    public ResponseEntity<Iterable<BudgetItem>> getSortedByCategory(){
-        log.debug("REST request to sort Budget Item by Category");
-        return new ResponseEntity<>(budgetItemService.getSortedByCategory(), HttpStatus.OK);
-    }
-
-
-    @GetMapping("/budget-items/by_budget")
-    @Timed
-    public ResponseEntity<Iterable<BudgetItem>> getSortedByBudgetAmount(){
-        log.debug("REST request to sort Budget Item by Budget Amount");
-        return new ResponseEntity<>(budgetItemService.getSortedByBudgetAmount(), HttpStatus.OK);
-    }
-
-    @GetMapping("/budget-items/by_spent")
-    @Timed
-    public ResponseEntity<Iterable<BudgetItem>> getSortedByAmountSpent(){
-        log.debug("REST request to sort Transactions by Amount Spent");
-        return new ResponseEntity<>(budgetItemService.getSortedByAmountSpent(), HttpStatus.OK);
-    }
-
-    @GetMapping("/budget-items/current")
-    @Timed
-    public ResponseEntity<Iterable<BudgetItem>> getBudgetItemForCurrentMonth(){
-        log.debug("REST request to get all budget item for current month");
-        return new ResponseEntity<>(budgetItemService.getBudgetItemForCurrentMonth(), HttpStatus.OK);
+        budgetItemRepository.deleteById(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }
