@@ -32,9 +32,9 @@
                 <td>{{budgetItem.expectedSpending | currency}}</td>
                 <td>{{budgetItem.expectedSpending - budgetItem.actualSpending| currency}}</td>
                 <!--<td>{{budgetItem.actualSpending | currency}}</td>-->
-                <!-- <td>{{}}</td>
+                <!-- <td>{{}}</td> -->
                 <progress-bar [progress]= budgetItem.actualSpending/budgetItem.expectedSpending*100 [color-degraded]="{'0': '#488aff',  '100': '#FF0000'}">
-                </progress-bar> -->
+                </progress-bar>
                 <td>
                     <div *ngIf="budgetItem.budget">
                         <a [routerLink]="['../budget', budgetItem.budget?.id, 'view' ]" >{{budgetItem.budget?.id}}</a>
