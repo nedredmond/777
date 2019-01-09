@@ -32,6 +32,7 @@ public class DataLoaderMoneyAccount {
         moneyAccount.setAccountTotal(1000L);
         moneyAccount.setSignIn("Jack");
         moneyAccount.setPw("123");
+        moneyAccount.setBankName("ZipCredit");
         moneyAccountRepository.save(moneyAccount);
         moneyAccountSet.add(moneyAccount);
 
@@ -42,6 +43,7 @@ public class DataLoaderMoneyAccount {
         moneyAccount2.setAccountTotal(500L);
         moneyAccount2.setSignIn("Jack");
         moneyAccount2.setPw("456");
+        moneyAccount2.setBankName("ZipCheck");
         moneyAccountRepository.save(moneyAccount2);
         moneyAccountSet.add(moneyAccount2);
 
@@ -53,6 +55,7 @@ public class DataLoaderMoneyAccount {
         moneyAccount3.setAccountTotal(1500L);
         moneyAccount3.setSignIn("Jack");
         moneyAccount3.setPw("789");
+        moneyAccount3.setBankName("ZipSave");
         moneyAccountRepository.save(moneyAccount3);
         moneyAccountSet.add(moneyAccount3);
 
@@ -64,12 +67,13 @@ public class DataLoaderMoneyAccount {
         moneyAccount4.setAccountTotal(600L);
         moneyAccount4.setSignIn("Jack");
         moneyAccount4.setPw("789");
+        moneyAccount4.setBankName("ZipLoan");
         moneyAccountRepository.save(moneyAccount4);
         moneyAccountSet.add(moneyAccount4);
     }
 
-
     public LinkedHashSet<MoneyAccount> getMoneyAccountSet() {
         return moneyAccountSet;
     }
+
 }

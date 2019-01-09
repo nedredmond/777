@@ -27,7 +27,7 @@
             <th><a (click)="sortDescription()"><span jhiTranslate="App.transaction.description">Description</span></a></th>
             <th><a (click)="sortCategory()"><span jhiTranslate="App.transaction.category">Category</span></a></th>
             <th><a (click)="sortAmount()"><span jhiTransalte="App.transaction.amount">Amount</span></a></th>
-            <th><span jhiTranslate="App.transaction.moneyAccount">Account</span></th>
+            <th><a (click)="sortAccount()"><span jhiTranslate="App.transaction.moneyAccount">Account</span></a></th>
             <th></th>
             </tr>
             </thead>
@@ -39,7 +39,7 @@
                 <td>{{transaction.amount | number : '1.2-2'}}</td>
                 <td>
                     <div *ngIf="transaction.moneyAccount">
-                        <a [routerLink]="['../money-account', transaction.moneyAccount?.id, 'view' ]" >{{transaction.moneyAccount?.id}}</a>
+                        <a [routerLink]="['../money-account', transaction.moneyAccount?.id, 'view' ]" >{{transaction.moneyAccount.bankName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

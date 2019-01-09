@@ -43,6 +43,14 @@ Navbar
     }
 }
 
+.skinny {
+    max-height: 30px;
+    background-color: #b0cacc;
+    .nav-item {
+        padding-right: 60px;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .jh-navbar-toggler {
         display: none;
@@ -67,7 +75,7 @@ Logo styles
     &.logo {
         padding: 5px 15px;
         .logo-img {
-            height: 60px;
+            height: 50px;
             width: 80px;
             display: inline-block;
             vertical-align: middle;

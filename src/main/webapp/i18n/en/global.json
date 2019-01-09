@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "777",
+        "title": " MIN7Y",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Home",
@@ -8,10 +8,10 @@
             "entities": {
                 "main": "Entities",
                 "userDetails": "User Details",
-                "moneyAccount": "Money Account",
-                "transaction": "Transaction",
+                "moneyAccount": "Accounts",
+                "transaction": "Transactions",
                 "budget": "Budget",
-                "budgetItem": "Budget Item",
+                "budgetItem": "Budget",
                 "bills": "Bills",
                 "billItem": "Bill Item",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
@@ -59,9 +59,13 @@
                     "link": "sign in",
                     "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
                 },
+                "login": {
+                    "message": "Already feeling MIN7Y fresh?",
+                    "link": "Sign in now!"
+                },
                 "register": {
-                    "noaccount": "You don't have an account yet?",
-                    "link": "Register a new account"
+                    "noaccount": "Wanna be MIN7Y fresh?",
+                    "link": "Register today!"
                 }
             },
             "error": {
@@ -139,5 +143,5 @@
         "idexists": "A new {{ entityName }} cannot already have an ID",
         "idnull": "Invalid ID"
     },
-    "footer": "This is your footer"
+    "footer": "Developed by Jenn Chao, Ned Redmond, Nick Satinover, Sam Bhutani, Thuy Khong"
 }

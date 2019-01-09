@@ -70,6 +70,13 @@ export class TransactionService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
+    sortByAccount(req?: any): Observable<HttpResponse<any>> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ITransaction[]>(this.resourceUrl + '/by_account', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
     filterDebit(req?: any): Observable<HttpResponse<any>> {
         const options = createRequestOption(req);
         return this.http
