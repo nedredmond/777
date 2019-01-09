@@ -106,7 +106,7 @@ public class TransactionService {
     }
 
     private List<Transaction> getAllTransactions(){
-        return transactionRepository.findAll();
+        return transactionRepository.findByUserIsCurrentUser();
     }
 
     private List<Transaction> sortByDate(List<Transaction> transactionList) {
