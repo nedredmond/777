@@ -59,6 +59,15 @@ export class TransactionComponent implements OnInit, OnDestroy {
         );
     }
 
+    sortAccount() {
+        this.transactionService.sortByAccount().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     getDebit() {
         this.transactionService.filterDebit().subscribe(
             (res: HttpResponse<ITransaction[]>) => {

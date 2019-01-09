@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="transaction">
-            <h2><span jhiTranslate="App.transaction.detail.title">Transaction</span> {{transaction.id}}</h2>
+            <h2><span jhiTranslate="App.transaction.detail.title">Transaction</span></h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -11,7 +11,7 @@
                 </dd>
                 <dt><span jhiTranslate="App.transaction.dateTime">Date Time</span></dt>
                 <dd>
-                    <span>{{transaction.dateTime}}</span>
+                    <span>{{transaction.dateTime | date:'mediumDate'}}</span>
                 </dd>
                 <dt><span jhiTranslate="App.transaction.description">Description</span></dt>
                 <dd>
@@ -32,7 +32,7 @@
                 <dt><span jhiTranslate="App.transaction.moneyAccount">Money Account</span></dt>
                 <dd>
                     <div *ngIf="transaction.moneyAccount">
-                        <a [routerLink]="['/money-account', transaction.moneyAccount?.id, 'view']">{{transaction.moneyAccount?.id}}</a>
+                        <a [routerLink]="['/money-account', transaction.moneyAccount?.id, 'view']">{{transaction.moneyAccount?.bankName}}</a>
                     </div>
                 </dd>
             </dl>

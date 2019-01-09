@@ -5,12 +5,12 @@
         </a>
         <a class="navbar-brand logo float-left" routerLink="/" (click)="collapseNavbar()">
             <span class="logo-img"></span>
-            <span jhiTranslate="global.title" class="navbar-title">777</span> <span class="navbar-version">{{version}}</span>
+            <span jhiTranslate="global.title" class="navbar-title"></span> <span class="navbar-version"> stay fresh!</span>
         </a>
     </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *ngSwitchCase="true" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <span>
                         <fa-icon icon="plus-circle"></fa-icon>
                         <mr-ngx-plaid-link-button env="sandbox" publicKey="f815660c096befb9b5e508907c50f5" institution="" (Success)="onPlaidSuccess($event)"
@@ -27,8 +27,9 @@
                     </span>
                 </a>
             </li>
+
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <fa-icon icon="th-list"></fa-icon>
@@ -136,7 +137,7 @@
                     </li>
                 </ul>
             </li>
-            <li ngbDropdown class="nav-item dropdown pointer" *ngIf="languages && languages.length > 1">
+            <!-- <li ngbDropdown class="nav-item dropdown pointer" *ngIf="languages && languages.length > 1">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
                     <span>
                         <fa-icon icon="flag"></fa-icon>
@@ -148,7 +149,7 @@
                         <a class="dropdown-item" [jhiActiveMenu]="language" href="javascript:void(0);" (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
@@ -197,3 +198,45 @@
         </ul>
     </div>
 </nav>
+<nav class="navbar navbar-light navbar-expand-md jh-navbar skinny">
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
+        <ul *ngSwitchCase="true" class="navbar-nav mx-auto">
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/money-account" (click)="collapseNavbar()">
+                    <span>
+                        <!-- <fa-icon icon="asterisk"></fa-icon> -->
+                        <span jhiTranslate="global.menu.entities.moneyAccount">Accounts</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/transaction" (click)="collapseNavbar()">
+                    <span>
+                        <!-- <fa-icon icon="asterisk"></fa-icon> -->
+                        <span jhiTranslate="global.menu.entities.transaction">Transactions</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/budget-item" (click)="collapseNavbar()">
+                    <span>
+                        <!-- <fa-icon icon="asterisk"></fa-icon> -->
+                        <span jhiTranslate="global.menu.entities.budgetItem">Budget</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/bills" (click)="collapseNavbar()">
+                    <span>
+                        <!-- <fa-icon icon="asterisk"></fa-icon> -->
+                        <span jhiTranslate="global.menu.entities.bills">Bills</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+

@@ -66,7 +66,7 @@ public class TransactionService {
     }
 
     public Iterable<Transaction> getDebitTransactions(){
-        Iterable<Transaction> transactions = transactionRepository.findAll()
+        Iterable<Transaction> transactions = getAllTransactions()
             .stream()
             .filter(this::isDebit)
             .collect(Collectors.toList());
@@ -74,7 +74,7 @@ public class TransactionService {
     }
 
     public Iterable<Transaction> getCreditTransactions(){
-        Iterable<Transaction> transactions = transactionRepository.findAll()
+        Iterable<Transaction> transactions = getAllTransactions()
             .stream()
             .filter(this::isCredit)
             .collect(Collectors.toList());
@@ -97,8 +97,12 @@ public class TransactionService {
         return sortByAmount(getAllTransactions());
     }
 
+    public Iterable<Transaction> getSortedByAccount(){
+        return sortByAccount(getAllTransactions());
+    }
+
     public Iterable<Transaction> searchTransaction(String searchQuery){
-        Iterable<Transaction> transactions = transactionRepository.findAll()
+        Iterable<Transaction> transactions = getAllTransactions()
             .stream()
             .filter(item -> item.toString().toUpperCase().contains(searchQuery.toUpperCase()))
             .collect(Collectors.toList());
@@ -126,6 +130,11 @@ public class TransactionService {
 
     private List<Transaction> sortByAmount(List<Transaction> transactionList) {
         transactionList.sort(Comparator.comparing(o -> o.getAmount()));
+        return transactionList;
+    }
+
+    private List<Transaction> sortByAccount(List<Transaction> transactionList) {
+        transactionList.sort(Comparator.comparing(o -> o.getMoneyAccount().getBankName()));
         return transactionList;
     }
 

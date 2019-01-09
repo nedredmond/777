@@ -140,6 +140,13 @@ public class TransactionResource {
         return new ResponseEntity<>(transactionService.getSortedByAmount(), HttpStatus.OK);
     }
 
+    @GetMapping("/transactions/by_account")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getSortedByAccount() {
+        log.debug("REST request to sort Transactions by Account");
+        return new ResponseEntity<>(transactionService.getSortedByAccount(), HttpStatus.OK);
+    }
+
     @GetMapping("/transactions/searchQuery")
     @Timed
     public ResponseEntity<Iterable<Transaction>> getSearchResults(String searchQuery) {
