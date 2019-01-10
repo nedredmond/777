@@ -84,7 +84,7 @@ public class DataLoaderTransaction {
         transactionSet.add(transaction);
 
         Transaction transaction7 = new Transaction();
-        transaction7.setAmount(-1.00);
+        transaction7.setAmount(-100000.00);
         transaction7.setTransactionType(TransactionType.DEBIT);
         transaction7.setDateTime(LocalDate.of(2019, 1, 7));
         transaction7.setDescription("ZipMynt");
