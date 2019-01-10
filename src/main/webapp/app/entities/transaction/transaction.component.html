@@ -1,21 +1,35 @@
-<div>
-    <h2 id="page-heading">
+<div class="container">
+    <div class="row">
+    <div class="col-lg-2 sidebar">
+
+        <h3 id="page-heading" style="border-bottom: 1px dashed lightgray">Accounts</h3>
+        <div *ngFor="let transaction of accounts; trackBy: trackId">
+            <p>
+                <div *ngIf="transaction.moneyAccount">
+                    <a (click)="getTransactionsByAccount(transaction.moneyAccount.id)" ><span style="font-size: 1.1rem">{{transaction.moneyAccount.bankName}}</span></a>
+                </div>
+            </p>
+        </div>
+        
+    </div>
+    <div class="col-lg-10">
+    <h2 id="page-heading" >
         <span jhiTranslate="App.transaction.home.title">Transactions</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-transaction" [routerLink]="['/transaction/new']">
+        <button id="jh-create-entity" class="btn-transaction btn-add float-right jh-create-entity create-transaction" [routerLink]="['/transaction/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="App.transaction.home.createLabel">
-            Create new Transaction
+            Add new Transaction
             </span>
         </button>
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
     <div class="btn-group flex-btn-group-container float-left">
-        <button (click)="loadAll()">See All</button>
-        <button (click)="getDebit()">See Debit</button>
-        <button (click)="getCredit()">See Credit</button>
+        <button class="btn-transaction btn-view" (click)="loadAll()">See All</button>&nbsp;
+        <button class="btn-transaction btn-view" (click)="getDebit()">See Debit</button>&nbsp;
+        <button class="btn-transaction btn-view" (click)="getCredit()">See Credit</button>
     </div>
-    <button (click)="search()" class="float-right">Search</button><input [(ngModel)]="searchText" placeholder="search text goes here" class="float-right">
+    <a class="float-right" (click)="search()"><fa-icon [icon]="'search'"></fa-icon></a><span class="float-right" style="color: white">_</span><input [(ngModel)]="searchText" placeholder="search text goes here" class="float-right">
     <br/><br/>
     <div class="table-responsive" *ngIf="transactions">
         <table class="table table-striped">
@@ -70,4 +84,6 @@
             </tbody>
         </table>
     </div>
+    </div>
+</div>
 </div>
