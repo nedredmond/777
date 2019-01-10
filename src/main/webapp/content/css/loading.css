@@ -129,10 +129,10 @@
 }
 .app-loading .lds-pacman > div:nth-child(1) div {
     position: absolute;
-    top: 97px;
+    top: 90px;
     left: -8px;
-    width: 30px;
-    height: 10px;
+    width: 27px;
+    height: 30px;
     background-image: url('../images/LogoMakr_0ykR73.png');
     background-size: contain;
     -webkit-animation: lds-pacman-3 1s linear infinite;
