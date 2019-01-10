@@ -34,7 +34,7 @@ public class DataLoaderTransaction {
         transactionSet.add(transaction);
 
         Transaction transaction2 = new Transaction();
-        transaction2.setAmount(-100.00);
+        transaction2.setAmount(-108.82);
         transaction2.setTransactionType(TransactionType.DEBIT);
         transaction2.setDateTime(LocalDate.of(2018, 12, 24));
         transaction2.setDescription("Target");
@@ -64,13 +64,63 @@ public class DataLoaderTransaction {
         transactionSet.add(transaction);
 
         Transaction transaction5 = new Transaction();
-        transaction5.setAmount(10.00);
+        transaction5.setAmount(19.95);
         transaction5.setTransactionType(TransactionType.CREDIT);
         transaction5.setDateTime(LocalDate.of(2018, 12, 22));
         transaction5.setDescription("Banana Republic");
         transaction5.setMemo("Refund");
         transaction5.setCategory(Category.SHOPPING);
         transactionRepository.save(transaction5);
+        transactionSet.add(transaction);
+
+        Transaction transaction6 = new Transaction();
+        transaction6.setAmount(-35.50);
+        transaction6.setTransactionType(TransactionType.DEBIT);
+        transaction6.setDateTime(LocalDate.of(2019, 1, 3));
+        transaction6.setDescription("Honda");
+        transaction6.setMemo("Oil change");
+        transaction6.setCategory(Category.AUTOMOTIVE);
+        transactionRepository.save(transaction6);
+        transactionSet.add(transaction);
+
+        Transaction transaction7 = new Transaction();
+        transaction7.setAmount(-1.00);
+        transaction7.setTransactionType(TransactionType.DEBIT);
+        transaction7.setDateTime(LocalDate.of(2019, 1, 7));
+        transaction7.setDescription("ZipMynt");
+        transaction7.setMemo("Peace offering");
+        transaction7.setCategory(Category.TRANSFER);
+        transactionRepository.save(transaction7);
+        transactionSet.add(transaction);
+
+        Transaction transaction8 = new Transaction();
+        transaction8.setAmount(-205.77);
+        transaction8.setTransactionType(TransactionType.DEBIT);
+        transaction8.setDateTime(LocalDate.of(2019, 1, 1));
+        transaction8.setDescription("Delmarva Power");
+        transaction8.setMemo("Heating");
+        transaction8.setCategory(Category.UTILITIES);
+        transactionRepository.save(transaction8);
+        transactionSet.add(transaction);
+
+        Transaction transaction9 = new Transaction();
+        transaction9.setAmount(25.00);
+        transaction9.setTransactionType(TransactionType.CREDIT);
+        transaction9.setDateTime(LocalDate.of(2018, 12, 22));
+        transaction9.setDescription("Anonymous");
+        transaction9.setMemo("Commission");
+        transaction9.setCategory(Category.INCOME);
+        transactionRepository.save(transaction9);
+        transactionSet.add(transaction);
+
+        Transaction transaction10 = new Transaction();
+        transaction10.setAmount(-6.75);
+        transaction10.setTransactionType(TransactionType.DEBIT);
+        transaction10.setDateTime(LocalDate.of(2018, 12, 22));
+        transaction10.setDescription("Mimi Teriyaki");
+        transaction10.setMemo("Yummy yummy");
+        transaction10.setCategory(Category.FOOD);
+        transactionRepository.save(transaction10);
         transactionSet.add(transaction);
     }
 

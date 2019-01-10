@@ -2,6 +2,7 @@ package io.zcw.zipmint.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.netflix.ribbon.proxy.annotation.Http;
+import io.zcw.zipmint.domain.MoneyAccount;
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.repository.TransactionRepository;
 import io.zcw.zipmint.service.TransactionService;
@@ -145,6 +146,20 @@ public class TransactionResource {
     public ResponseEntity<Iterable<Transaction>> getSortedByAccount() {
         log.debug("REST request to sort Transactions by Account");
         return new ResponseEntity<>(transactionService.getSortedByAccount(), HttpStatus.OK);
+    }
+
+    @GetMapping("/transactions/accounts")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getDistinctAccounts() {
+        log.debug("REST request to get distinct Accounts");
+        return new ResponseEntity<>(transactionService.getDistinctAccounts(), HttpStatus.OK);
+    }
+
+    @GetMapping("/transactions/moneyAccount/{id}")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getTransactionsByAccount(@PathVariable Long id) {
+        log.debug("REST request to get Transactions by Account");
+        return new ResponseEntity<>(transactionService.getTransactionsByAccount(id), HttpStatus.OK);
     }
 
     @GetMapping("/transactions/searchQuery")

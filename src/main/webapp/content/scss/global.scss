@@ -24,6 +24,42 @@ a:hover {
     cursor: pointer;
 }
 
+.btn-transaction,
+.btn-transaction:hover,
+.btn-transaction:visited {
+    background-color: #ffb5be;
+    padding: 5px;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.btn-add,
+.btn-add:hover,
+.btn-add:visited {
+    border-radius: 50px 15px;
+}
+
+.btn-view,
+.btn-view:hover,
+.btn-view:visited {
+    border-radius: 15px;
+}
+
+.btn-add:active,
+.btn-transaction:active,
+.btn-view:active {
+    background-color: #df8c95;
+}
+
+.sidebar {
+    background-color: #f5fffa;
+    border: 2px solid #b0cacc;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */
