@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -122,21 +124,36 @@ public class BudgetResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
-    public Budget calculateTotalSpent(){
-        Budget budget = new Budget();
+    public Double calculateTotalSpent(int month){
         Double total = 0.0;
         for(Transaction transaction: transactionRepository.findAll()){
-            total+=transaction.getAmount();
+            if(transaction.getDateTime().getMonthValue()==month){
+                total +=transaction.getAmount();
+            }
         }
-        budget.setActualTotal(total);
-        return budget;
+        return total;
     }
 
-    @GetMapping("/budgets/totalspent")
+    @GetMapping("/budgets/currentmonth")
     @Timed
-    public ResponseEntity<Budget> getTotalSpent(){
-        log.debug("REST request to get total spent");
-        return new ResponseEntity<>(calculateTotalSpent(),HttpStatus.OK);
+    public ResponseEntity<Iterable<Budget>> getBudgetForCurrentMonth(){
+        log.debug("REST request to get all budgets for current month");
+        return new ResponseEntity<>(budgetsForCurrentMonth(),HttpStatus.OK);
     }
+
+    public List<Budget> budgetsForCurrentMonth(){
+        List<Budget> budgets = new ArrayList<>();
+        int currentMonth = LocalDate.now().getMonthValue();
+
+        for(Budget budget: budgetRepository.findAll()){
+            int month = budget.getEndDate().getMonthValue();
+            if(month>=currentMonth){
+                budget.setActualTotal(calculateTotalSpent(currentMonth));
+                budgets.add(budget);
+            }
+        }
+        return budgets;
+    }
+
 
 }
