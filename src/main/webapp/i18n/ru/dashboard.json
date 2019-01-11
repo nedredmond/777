@@ -1,0 +1,24 @@
+{
+    "App": {
+        "dashboard": {
+            "home": {
+                "title": "Dashboards",
+                "createLabel": "Создать новый Dashboard",
+                "createOrEditLabel": "Создать или отредактировать Dashboard"
+            },
+            "created": "Новый Dashboard создан с идентификатором {{ param }}",
+            "updated": "Dashboard обновлен с идентификатором {{ param }}",
+            "deleted": "Dashboard удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Dashboard {{ id }}?"
+            },
+            "detail": {
+                "title": "Dashboard"
+            },
+            "transaction": "Transaction",
+            "bills": "Bills",
+            "accounts": "Accounts",
+            "budget": "Budget"
+        }
+    }
+}

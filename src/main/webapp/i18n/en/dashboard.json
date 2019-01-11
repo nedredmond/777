@@ -1,0 +1,24 @@
+{
+    "App": {
+        "dashboard": {
+            "home": {
+                "title": "Dashboard",
+                "createLabel": "Create a new Dashboard",
+                "createOrEditLabel": "Create or edit a Dashboard"
+            },
+            "created": "A new Dashboard is created with identifier {{ param }}",
+            "updated": "A Dashboard is updated with identifier {{ param }}",
+            "deleted": "A Dashboard is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Dashboard {{ id }}?"
+            },
+            "detail": {
+                "title": "Dashboard"
+            },
+            "transaction": "Transaction",
+            "bills": "Bills",
+            "accounts": "Accounts",
+            "budget": "Budget"
+        }
+    }
+}

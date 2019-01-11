@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dashboard">
+            <h2><span jhiTranslate="App.dashboard.detail.title">Dashboard</span> {{dashboard.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="App.dashboard.transaction">Transaction</span></dt>
+                <dd>
+                    <span>{{dashboard.transaction}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.dashboard.bills">Bills</span></dt>
+                <dd>
+                    <span>{{dashboard.bills}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.dashboard.accounts">Accounts</span></dt>
+                <dd>
+                    <span>{{dashboard.accounts}}</span>
+                </dd>
+                <dt><span jhiTranslate="App.dashboard.budget">Budget</span></dt>
+                <dd>
+                    <span>{{dashboard.budget}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dashboard', dashboard.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
