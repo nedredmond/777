@@ -7,6 +7,8 @@ import { AppBudgetModule } from './budget/budget.module';
 import { AppBudgetItemModule } from './budget-item/budget-item.module';
 import { AppBillsModule } from './bills/bills.module';
 import { AppBillItemModule } from './bill-item/bill-item.module';
+import { AppDashboardModule } from 'app/entities/dashboard/dashboard.module';
+
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -19,6 +21,7 @@ import { AppBillItemModule } from './bill-item/bill-item.module';
         AppBudgetItemModule,
         AppBillsModule,
         AppBillItemModule,
+        AppDashboardModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

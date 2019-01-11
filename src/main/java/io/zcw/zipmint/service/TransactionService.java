@@ -162,4 +162,8 @@ public class TransactionService {
         return !isDebit(transaction);
     }
 
+    public List<Transaction> getRecentTransaction(){
+        List<Transaction> result = sortByDate(transactionRepository.findAll());
+        return result.subList(0,3);
+    }
 }

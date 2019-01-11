@@ -168,4 +168,11 @@ public class TransactionResource {
         log.debug("REST request to filter by search query");
         return new ResponseEntity<>(transactionService.searchTransaction(searchQuery), HttpStatus.OK);
     }
+
+    @GetMapping(value = "/transactions/recent")
+    @Timed
+    public ResponseEntity<Iterable<Transaction>> getRecentTransactions(){
+        log.debug("REST request to get recent transactions");
+        return new ResponseEntity<>(transactionService.getRecentTransaction(), HttpStatus.OK);
+    }
 }

@@ -8,12 +8,15 @@ import io.zcw.zipmint.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -115,5 +118,46 @@ public class BillItemResource {
 
         billItemRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    public List<BillItem> filterUnpaidBills(){
+        List<BillItem> unpaidBills = new ArrayList<>();
+
+
+        for(BillItem bill:billItemRepository.findAll()){
+            if(bill.getDueDate().compareTo(LocalDate.now())>=0){
+                if(bill.getPaymentAmount()>0){
+                    unpaidBills.add(bill);
+                }
+            }
+        }
+        return unpaidBills;
+    }
+
+    @GetMapping(value = "/bill-items/unpaid")
+    @Timed
+    public ResponseEntity<Iterable<BillItem>> getUnpaidBills(){
+        log.debug("REST request to get all unpaid bills");
+        return new ResponseEntity<>(filterUnpaidBills(), HttpStatus.OK);
+    }
+
+    public List<BillItem> filterLateBills(){
+        List<BillItem> lateBills = new ArrayList<>();
+
+        for(BillItem bill: billItemRepository.findAll()){
+            if(bill.getDueDate().compareTo(LocalDate.now())<0){
+                if(bill.getPaymentAmount()>0){
+                    lateBills.add(bill);
+                }
+            }
+        }
+        return lateBills;
+    }
+
+    @GetMapping(value = "/bill-items/late")
+    @Timed
+    public ResponseEntity<Iterable<BillItem>> getLateBills(){
+        log.debug("REST request to get all late bills");
+        return new ResponseEntity<>(filterLateBills(),HttpStatus.OK);
     }
 }
