@@ -15,6 +15,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
     transactions: ITransaction[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    accounts: ITransaction[];
 
     constructor(
         protected transactionService: TransactionService,
@@ -86,6 +87,24 @@ export class TransactionComponent implements OnInit, OnDestroy {
         );
     }
 
+    getDistinctAccounts() {
+        this.transactionService.getDistinctAccounts().subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.accounts = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    getTransactionsByAccount(id: number) {
+        this.transactionService.getTransactionsByAccount(id).subscribe(
+            (res: HttpResponse<ITransaction[]>) => {
+                this.transactions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     search(searchQuery: string) {
         this.transactionService.search(searchQuery).subscribe(
             (res: HttpResponse<ITransaction[]>) => {
@@ -97,6 +116,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadAll();
+        this.getDistinctAccounts();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
