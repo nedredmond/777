@@ -5,8 +5,12 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 
 import { VERSION } from 'app/app.constants';
+import { SERVER_API_URL } from 'app/app.constants';
 import { JhiLanguageHelper, AccountService, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from '../profiles/profile.service';
+import { PlaidOnSuccessArgs } from 'ngx-plaid-link/lib/interfaces';
+
+import * as $ from 'jquery';
 
 @Component({
     selector: 'jhi-navbar',
@@ -20,6 +24,7 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    private public_token: string;
 
     constructor(
         private loginService: LoginService,
@@ -75,5 +80,29 @@ export class NavbarComponent implements OnInit {
 
     getImageUrl() {
         return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
+    }
+
+    onPlaidSuccess($event: PlaidOnSuccessArgs) {
+        console.log('Token created: ' + $event.token);
+        console.log(JSON.stringify({ publicToken: $event.token }));
+
+        // $.post(SERVER_API_URL + '/api/get_access_token', {
+        //     public_token: $event.token
+        // }, function ( ) {
+        //     console.log("Token exchanged!");
+        // }, "json");
+
+        $.ajax({
+            url: SERVER_API_URL + '/api/get_access_token',
+            type: 'POST',
+            data: JSON.stringify({
+                publicToken: $event.token
+            }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function() {
+                console.log('Token exchanged!');
+            }
+        });
     }
 }
