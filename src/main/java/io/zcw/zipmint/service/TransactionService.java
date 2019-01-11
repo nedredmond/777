@@ -1,6 +1,7 @@
 package io.zcw.zipmint.service;
 
 import io.github.jhipster.web.util.ResponseUtil;
+import io.zcw.zipmint.domain.MoneyAccount;
 import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.domain.enumeration.TransactionType;
 import io.zcw.zipmint.repository.TransactionRepository;
@@ -16,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -101,6 +99,24 @@ public class TransactionService {
         return sortByAccount(getAllTransactions());
     }
 
+    public Iterable<Transaction> getDistinctAccounts(){
+        LinkedHashMap<MoneyAccount, Transaction> accounts = new LinkedHashMap<>();
+
+        for (Transaction transaction : getAllTransactions()) {
+            accounts.put(transaction.getMoneyAccount(), transaction);
+        }
+
+        return accounts.values();
+    }
+
+    public Iterable<Transaction> getTransactionsByAccount(Long id){
+        Iterable<Transaction> transactions = getAllTransactions()
+            .stream()
+            .filter(item -> item.getMoneyAccount().getId().equals(id))
+            .collect(Collectors.toList());
+        return transactions;
+    }
+
     public Iterable<Transaction> searchTransaction(String searchQuery){
         Iterable<Transaction> transactions = getAllTransactions()
             .stream()
@@ -114,7 +130,7 @@ public class TransactionService {
     }
 
     private List<Transaction> sortByDate(List<Transaction> transactionList) {
-        transactionList.sort(Comparator.comparing(o -> o.getDateTime()));
+        transactionList.sort(Comparator.comparing(Transaction::getDateTime).reversed());
         return transactionList;
     }
 
@@ -124,12 +140,12 @@ public class TransactionService {
     }
 
     private List<Transaction> sortByDescription(List<Transaction> transactionList) {
-        transactionList.sort(Comparator.comparing(o -> o.getDescription()));
+        transactionList.sort(Comparator.comparing(Transaction::getDescription));
         return transactionList;
     }
 
     private List<Transaction> sortByAmount(List<Transaction> transactionList) {
-        transactionList.sort(Comparator.comparing(o -> o.getAmount()));
+        transactionList.sort(Comparator.comparing(Transaction::getAmount));
         return transactionList;
     }
 

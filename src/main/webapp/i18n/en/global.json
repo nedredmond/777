@@ -11,7 +11,7 @@
                 "moneyAccount": "Accounts",
                 "transaction": "Transactions",
                 "budget": "Budget",
-                "budgetItem": "Budget",
+                "budgetItem": "Budget Item",
                 "bills": "Bills",
                 "billItem": "Bill Item",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
