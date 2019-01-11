@@ -1,18 +1,25 @@
 package io.zcw.zipmint.web.rest;
 
+import com.hazelcast.internal.util.ThreadLocalRandomProvider;
 import com.netflix.discovery.converters.Auto;
 import com.plaid.client.PlaidClient;
 import com.plaid.client.request.AccountsGetRequest;
 import com.plaid.client.request.ItemPublicTokenExchangeRequest;
+import com.plaid.client.request.TransactionsGetRequest;
 import com.plaid.client.response.Account;
 import com.plaid.client.response.AccountsGetResponse;
 import com.plaid.client.response.ItemPublicTokenExchangeResponse;
+import com.plaid.client.response.TransactionsGetResponse;
 import com.sun.media.jfxmedia.logging.Logger;
 import io.zcw.zipmint.domain.MoneyAccount;
 import io.zcw.zipmint.domain.PlaidRequest;
+import io.zcw.zipmint.domain.Transaction;
 import io.zcw.zipmint.domain.User;
 import io.zcw.zipmint.domain.enumeration.AccountType;
+import io.zcw.zipmint.domain.enumeration.Category;
+import io.zcw.zipmint.domain.enumeration.TransactionType;
 import io.zcw.zipmint.repository.MoneyAccountRepository;
+import io.zcw.zipmint.repository.TransactionRepository;
 import io.zcw.zipmint.repository.UserRepository;
 import io.zcw.zipmint.security.AuthoritiesConstants;
 import io.zcw.zipmint.security.SecurityUtils;
@@ -32,10 +39,10 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 
@@ -55,8 +62,8 @@ public class PlaidResource {
     private PlaidClient plaidClient;
 
     private MoneyAccountRepository moneyAccountRepository;
+    private TransactionRepository transactionRepository;
     private UserRepository userRepository;
-    private UserService userService;
     private LinkedHashSet<MoneyAccount> moneyAccountSet = new LinkedHashSet<>();
 
     public PlaidResource() {
@@ -70,10 +77,11 @@ public class PlaidResource {
     }
 
     @Autowired
-    public PlaidResource(MoneyAccountRepository moneyAccountRepository, UserRepository userRepository) {
+    public PlaidResource(MoneyAccountRepository moneyAccountRepository, UserRepository userRepository, TransactionRepository transactionRepository) {
         this();
         this.moneyAccountRepository = moneyAccountRepository;
         this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     @PostMapping(path = "get_access_token", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -96,18 +104,36 @@ public class PlaidResource {
             accessToken = "Whoops.";
         }
 
-        getAccounts(accessToken);
+        Date start = new Date();
+        Date end = new Date();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            start = sdf.parse("2000-01-01");
+            end = sdf.parse("2019-02-01");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        getAccountsAndTransactions(accessToken, start, end);
 
         return new ResponseEntity<>(accessToken, HttpStatus.OK);
     }
 
 
-    public void getAccounts(String accessToken) throws IOException {
-        Response<AccountsGetResponse> response = plaidClient.service().accountsGet(new AccountsGetRequest(accessToken)).execute();
+    private void getAccountsAndTransactions(String accessToken, Date start, Date end) throws IOException {
+        Response<AccountsGetResponse> accountResponse = plaidClient.service().accountsGet(new AccountsGetRequest(accessToken)).execute();
+        Response<TransactionsGetResponse> transactionResponse = plaidClient.service().transactionsGet(new TransactionsGetRequest(accessToken, start, end)).execute();
 
-        List<Account> accountList = response.body().getAccounts();
+        List<Account> accountList = accountResponse.body().getAccounts();
+//        List<TransactionsGetResponse.Transaction> transactionList = transactionResponse.body().getTransactions();
+
+        System.out.println(SecurityUtils.getCurrentUserLogin());
+
+//        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get();
 
         for (Account account : accountList) {
+
             String type = account.getSubtype().toUpperCase();
             if (type.equals("CREDIT CARD")) {
                 type = "CREDIT";
@@ -116,20 +142,33 @@ public class PlaidResource {
             }
 
             MoneyAccount moneyAccount = new MoneyAccount();
+
             moneyAccount.setType(AccountType.valueOf(type));
             moneyAccount.setAccountTotal(account.getBalances().getCurrent().longValue());
             moneyAccount.setSignIn("user_good");
             moneyAccount.setPw("pass_good");
             moneyAccount.setBankName(account.getName());
 
-            User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get();
-            moneyAccount.setUser(user);
+//            moneyAccount.setUser(user);
 
             moneyAccountRepository.save(moneyAccount);
             moneyAccountSet.add(moneyAccount);
         }
 
+//        for (TransactionsGetResponse.Transaction plaidTransaction : transactionList) {
+//
+//            Transaction transaction = new Transaction();
+//
+//            transaction.setCategory(Category.valueOf(plaidTransaction.getCategory().get(0)));
+//            transaction.setAmount(plaidTransaction.getAmount());
+//            transaction.setDateTime(LocalDate.parse(plaidTransaction.getDate()));
+//            transaction.setDescription(plaidTransaction.getName());
+//
+//            transactionRepository.save(transaction);
+//
+//        }
 
     }
+
 
 }
