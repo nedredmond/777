@@ -91,6 +91,19 @@ export class TransactionService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
+    getDistinctAccounts(req?: any): Observable<HttpResponse<any>> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ITransaction[]>(this.resourceUrl + '/accounts', { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
+    getTransactionsByAccount(id: number): Observable<HttpResponse<any>> {
+        return this.http
+            .get<ITransaction[]>(`${this.resourceUrl}/moneyAccount/${id}`, { observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+
     search(searchQuery: string): Observable<HttpResponse<any>> {
         const options = createRequestOption(searchQuery);
         return this.http
